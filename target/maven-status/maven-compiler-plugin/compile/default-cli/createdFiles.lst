@@ -1,3 +1,2 @@
-com\quack\App.class
-module-info.class
-com\quack\SystemInfo.class
+sample\Main.class
+sample\Controller.class
