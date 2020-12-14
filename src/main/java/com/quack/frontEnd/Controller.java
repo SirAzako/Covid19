@@ -1,4 +1,4 @@
-package com.quack;
+package com.quack.frontEnd;
 
 public class Controller {
 }

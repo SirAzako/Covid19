@@ -1,2 +1,6 @@
-com\quack\Main.class
-com\quack\Controller.class
+com\quack\backEnd\Person.class
+com\quack\db\DB.class
+com\quack\frontEnd\Controller.class
+com\quack\db\CaseDAO.class
+com\quack\backEnd\Case.class
+com\quack\frontEnd\Main.class
