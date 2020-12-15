@@ -1,12 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<GridPane alignment="center" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.quack.frontEnd.Controller">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" />
-      <Button mnemonicParsing="false" text="Button" />
+      <VBox prefHeight="1000.0" prefWidth="300.0" style="-fx-background-color: #080A1F;">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #0D102F;" text="CREATE CASE" textAlignment="CENTER" textFill="WHITE" />
+         </children></VBox>
+      <Text fill="WHITE" layoutX="470.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" textAlignment="CENTER" wrappingWidth="126.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="470.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" textAlignment="CENTER" wrappingWidth="126.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="470.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:" textAlignment="CENTER" wrappingWidth="126.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="440.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="452.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Diagnosi:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="452.0" layoutY="471.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="452.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="St. Number:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="452.0" layoutY="623.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zip Code:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="450.0" layoutY="697.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dimos ID:" textAlignment="CENTER" wrappingWidth="162.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="401.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Contacts:" textAlignment="CENTER" wrappingWidth="222.13671875">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <TextField fx:id="firstNameIn" layoutX="624.0" layoutY="75.0" />
+      <TextField fx:id="lastNameIn" layoutX="624.0" layoutY="148.0" />
+      <TextField fx:id="ageIn" layoutX="624.0" layoutY="222.0" />
+      <TextField fx:id="phoneNumberIn" layoutX="624.0" layoutY="298.0" />
+      <TextField fx:id="diagnosisIn" layoutX="624.0" layoutY="380.0" />
+      <TextField fx:id="addressIn" layoutX="624.0" layoutY="451.0" />
+      <TextField fx:id="streetNumberIn" layoutX="624.0" layoutY="525.0" />
+      <TextField fx:id="zipCodeIn" layoutX="624.0" layoutY="603.0" />
+      <TextField fx:id="dimosIDIn" layoutX="624.0" layoutY="677.0" />
+      <TextField fx:id="contactsNumberIn" layoutX="624.0" layoutY="759.0" />
+      <Button fx:id="submit" layoutX="983.0" layoutY="439.0" mnemonicParsing="false" onAction="#clicked" prefHeight="50.0" prefWidth="117.0" style="-fx-background-color: #009688;" text="SUBMIT" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
    </children>
-</GridPane>
+</AnchorPane>

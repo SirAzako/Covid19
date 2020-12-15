@@ -14,7 +14,7 @@ public class Case extends Person {
     private int contactsNumber;
 
     //Το κρούσμα ανάρρωσε 
-    public Case(int contactsNo, String Diagnosis,  String Recovery, String firstName, String lastName, int age, String phoneNumber, String dimosID, String address, String streetNumber, String zipCode) {
+    public Case(int contactsNo, String Diagnosis,  String Recovery, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
         super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Recovery = Recovery;
@@ -23,7 +23,7 @@ public class Case extends Person {
 
   
     //Το κρούσμα πέθανε
-    public Case(String Diagnosis, String Death, int contactsNo, String firstName, String lastName, int age, String phoneNumber, String dimosID, String address, String streetNumber, String zipCode) {
+    public Case(String Diagnosis, String Death, int contactsNo, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
         super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Death = Death;
@@ -31,7 +31,7 @@ public class Case extends Person {
     }
     
     //Το κρούσμα δεν ανάρρωσε ούτε και πέθανε
-    public Case(String Diagnosis, int contactsNumber, String firstName, String lastName, int age, String phoneNumber, String dimosID, String address, String streetNumber, String zipCode) {
+    public Case(String Diagnosis, int contactsNumber, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
         super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.contactsNumber = contactsNumber;
@@ -117,11 +117,11 @@ public class Case extends Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getDimosID() {
+    public int getDimosID() {
         return dimosID;
     }
 
-    public void setDimosID(String dimosID) {
+    public void setDimosID(int dimosID) {
         this.dimosID = dimosID;
     }
 

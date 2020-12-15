@@ -10,12 +10,12 @@ abstract class Person {
     protected String lastName;
     protected int age;	
     protected String phoneNumber;
-    protected String dimosID;
+    protected int dimosID;
     protected String address;
     protected String streetNumber;
     protected String zipCode;
 
-    public Person(String firstName, String lastName, int age, String phoneNumber, String dimosID, String address, String streetNumber, String zipCode) {
+    public Person(String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -48,7 +48,7 @@ abstract class Person {
         return phoneNumber;
     }
 
-    public String getDimosID() {
+    public int getDimosID() {
         return dimosID;
     }
 
@@ -80,7 +80,7 @@ abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setDimosID(String dimosID) {
+    public void setDimosID(int dimosID) {
         this.dimosID = dimosID;
     }
 

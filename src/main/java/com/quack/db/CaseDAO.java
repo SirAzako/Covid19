@@ -27,7 +27,7 @@ public class CaseDAO {
                 stmt.setInt(5, krousma.getAge());
                 stmt.setString(6, krousma.getPhoneNumber());
                 stmt.setString(7, krousma.getDiagnosis());
-                stmt.setString(8, krousma.getDimosID());
+                stmt.setInt(8, krousma.getDimosID());
                 stmt.setString(9, krousma.getAddress());
                 stmt.setString(10, krousma.getStreetNumber());
                 stmt.setString(11, krousma.getZipCode());
