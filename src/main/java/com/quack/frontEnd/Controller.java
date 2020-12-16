@@ -2,78 +2,75 @@ package com.quack.frontEnd;
 
 import com.quack.backEnd.Case;
 import com.quack.db.CaseDAO;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+    private boolean menuIsHide = true;
+    private boolean createCaseHide = true;
 
     @FXML
-    private Button submit;
+    private AnchorPane anchorPane;
 
     @FXML
-    private TextField firstNameIn;
+    private AnchorPane toolBar;
 
     @FXML
-    private TextField lastNameIn;
+    private ImageView menuButton;
 
     @FXML
-    private TextField ageIn;
+    private AnchorPane menuBar;
 
     @FXML
-    private TextField phoneNumberIn;
+    private Group create;
 
     @FXML
-    private TextField diagnosisIn;
+    private AnchorPane createCasePanel;
+
 
     @FXML
-    private TextField addressIn;
+    public void menuClick(MouseEvent event) {
+        if(menuIsHide == true){
+            menuBar.setVisible(true);
+            menuIsHide = false;
+        }else{
+            menuBar.setVisible(false);
+            menuIsHide = true;
+        }
+
+
+    }
 
     @FXML
-    private TextField streetNumberIn;
+    public void createCaseClick(MouseEvent event) {
+        if(createCaseHide == true){
+            createCasePanel.setVisible(true);
+            createCaseHide = false;
+        }else{
+            createCasePanel.setVisible(false);
+            createCaseHide = true;
+        }
 
-    @FXML
-    private TextField zipCodeIn;
-
-    @FXML
-    private TextField dimosIDIn;
-
-    @FXML
-    private TextField contactsNumberIn;
+    }
 
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
-    public void clicked(ActionEvent event) {
-        String fn = firstNameIn.getText();
-        String ln = lastNameIn.getText();
-        int ag = Integer.parseInt(ageIn.getText());
-        String pn = phoneNumberIn.getText();
-        String d = diagnosisIn.getText();
-        String add = addressIn.getText();
-        String sn = streetNumberIn.getText();
-        String zc = zipCodeIn.getText();
-        int cn = Integer.parseInt(contactsNumberIn.getText());
-        int dimos = Integer.parseInt(dimosIDIn.getText());
 
-        System.out.println("Hello");
-        Case aCase = new Case(d, cn, fn, ln, ag, pn, dimos, add, sn, zc);
-        CaseDAO caseDAO = new CaseDAO();
-        try {
-            caseDAO.createCase(aCase);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
 
