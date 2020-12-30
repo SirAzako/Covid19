@@ -1,21 +1,20 @@
 package com.quack.backEnd;
 
-import com.quack.backEnd.Person;
+
 
 /**
  *
  * @author paras
  */
 public class Case extends Person {
-    private String caseID;
     private String Diagnosis;
     private String Recovery;
     private String Death;
     private int contactsNumber;
 
     //Το κρούσμα ανάρρωσε 
-    public Case(int contactsNo, String Diagnosis,  String Recovery, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
-        super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
+    public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Recovery = Recovery;
         this.contactsNumber = contactsNo;
@@ -23,27 +22,21 @@ public class Case extends Person {
 
   
     //Το κρούσμα πέθανε
-    public Case(String Diagnosis, String Death, int contactsNo, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
-        super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
+    public Case(String Diagnosis, String Death, int contactsNo,int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Death = Death;
         this.contactsNumber = contactsNo;
     }
     
     //Το κρούσμα δεν ανάρρωσε ούτε και πέθανε
-    public Case(String Diagnosis, int contactsNumber, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
-        super(firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
+    public Case(String Diagnosis, int contactsNumber, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.contactsNumber = contactsNumber;
     }
 
-    public String getCaseID() {
-        return caseID;
-    }
 
-    public void setCaseID(String caseID) {
-        this.caseID = caseID;
-    }
 
     public String getDiagnosis() {
         return Diagnosis;
@@ -77,12 +70,12 @@ public class Case extends Person {
         this.contactsNumber = contactsNumber;
     }
 
-    public String getPersonalID() {
-        return personalID;
+    public int getAFM() {
+        return AFM;
     }
 
-    public void setPersonalID(String personalID) {
-        this.personalID = personalID;
+    public void setAFM(int AFM) {
+        this.AFM = AFM;
     }
 
     public String getFirstName() {
@@ -149,9 +142,4 @@ public class Case extends Person {
         this.zipCode = zipCode;
     }
 
-   
-    
-    
-    
-    
 }

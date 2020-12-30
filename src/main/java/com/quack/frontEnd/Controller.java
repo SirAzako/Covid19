@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -16,9 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class Controller implements Initializable {
     private boolean menuIsHide = true;
     private boolean createCaseHide = true;
+    private boolean addContactsHide = true;
 
 
     @FXML
@@ -26,6 +29,9 @@ public class Controller implements Initializable {
 
     @FXML
     private AnchorPane menuBar;
+
+    @FXML
+    private AnchorPane addContactsPanel;
 
     @FXML
     private Group menuCreateButton;
@@ -70,6 +76,36 @@ public class Controller implements Initializable {
     private TextField deathInput;
 
     @FXML
+    private TextField afmInput;
+
+    @FXML
+    private TextField firstNameCInput;
+
+    @FXML
+    private TextField lastNameCInput;
+
+    @FXML
+    private TextField ageCInput;
+
+    @FXML
+    private TextField phoneNumberCInput;
+
+    @FXML
+    private TextField munipicipalityCInput;
+
+    @FXML
+    private TextField addressCInput;
+
+    @FXML
+    private TextField streetCInput;
+
+    @FXML
+    private TextField zipCCodeInput;
+
+    @FXML
+    private TextField afmCInput;
+
+    @FXML
     private AnchorPane toolBar;
 
     @FXML
@@ -77,6 +113,13 @@ public class Controller implements Initializable {
 
     @FXML
     private Button submitCaseButton;
+
+    @FXML
+    private Button submitContactButton;
+
+    @FXML
+    private Label numberLabel;
+
 
     @FXML
     public void menuCreateClick(MouseEvent event) {
@@ -111,6 +154,7 @@ public class Controller implements Initializable {
         String dd = null;
         String rd = null;
         String dt = null;
+        int af = 0;
         int ag = 0;
         int cn = 0;
         int mun = 0;
@@ -162,20 +206,29 @@ public class Controller implements Initializable {
             dt = deathInput.getText();
             System.out.println("Empty");
         }
-
-        if ((recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
-            Case activeCase = new Case(dd, cn, fn, ln, ag, pn, mun, ad, st, zc);
-            CaseDAO caseDAO = new CaseDAO();
-            try {
-                caseDAO.createCaseActive(activeCase);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            System.out.println("to krousma ine energo");
+        if(!afmInput.getText().isEmpty()){
+            af = Integer.parseInt(afmInput.getText());
+            System.out.println("Empty");
         }
 
-        if(!(recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())){
-            Case caseRecover = new Case(cn, dd, rd, fn, ln, ag, pn, mun, ad, st, zc);
+        if ((recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
+                Case activeCase = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad, st, zc);
+                CaseDAO caseDAO = new CaseDAO();
+                try {
+                    caseDAO.createCaseActive(activeCase);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println("to krousma ine energo");
+                if (addContactsHide == true) {
+                    addContactsPanel.setVisible(true);
+                    addContactsHide = false;
+                    System.out.println("Hello");
+                }
+        }
+
+        if (!(recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
+            Case caseRecover = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun, ad, st, zc);
             CaseDAO caseDAO = new CaseDAO();
             try {
                 caseDAO.createCaseRecovery(caseRecover);
@@ -183,10 +236,15 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
             System.out.println("to krousma anarose!!");
+            if (addContactsHide == true) {
+                addContactsPanel.setVisible(true);
+                addContactsHide = false;
+                System.out.println("Hello");
+            }
         }
 
-        if ((recoveryInput.getText().isEmpty()) && !(deathInput.getText().isEmpty())){
-            Case caseDead = new Case(dd, dt, cn, fn, ln, ag, pn, mun, ad, st, zc);
+        if ((recoveryInput.getText().isEmpty()) && !(deathInput.getText().isEmpty())) {
+            Case caseDead = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad, st, zc);
             CaseDAO caseDAO = new CaseDAO();
             try {
                 caseDAO.createCaseDead(caseDead);
@@ -194,13 +252,25 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
             System.out.println("to krousma petane");
+            if (addContactsHide == true) {
+                addContactsPanel.setVisible(true);
+                addContactsHide = false;
+                System.out.println("Hello");
+            }
         }
+
+    }
+
+
+    @FXML
+    public void submitContactClick(MouseEvent event) {
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
+
 
 }
 

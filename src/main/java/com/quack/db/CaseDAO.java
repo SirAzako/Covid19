@@ -12,14 +12,16 @@ public class CaseDAO {
 
     public void createCaseActive(Case krousma) throws Exception {
         Connection con = null;
-        String querry = "INSERT INTO Persons(CaseID, ContactsNumber, FirstName, LastName," +
+        String querry = "INSERT INTO Persons(AFM, ContactsNumber, FirstName, " +
+                "LastName," +
                 "Age, PhoneNumber, Diagnosis, DimosID, Address," +
-                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?," +
+                " ?, ?, ?);";
 
         try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
-            stmt.setString(1, krousma.getCaseID());
+            stmt.setInt(1, krousma.getAFM());
             stmt.setInt(2, krousma.getContactsNumber());
             stmt.setString(3, krousma.getFirstName());
             stmt.setString(4, krousma.getLastName());
@@ -46,14 +48,16 @@ public class CaseDAO {
 
     public void createCaseRecovery(Case krousma) throws Exception {
         Connection con = null;
-        String querry = "INSERT INTO Persons(CaseID, ContactsNumber, FirstName, LastName," +
+        String querry = "INSERT INTO Persons(AFM, ContactsNumber, FirstName, " +
+                "LastName," +
                 "Age, PhoneNumber, Diagnosis, Recovery, DimosID, Address," +
-                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?," +
+                " ?, ?, ?, ?);";
 
         try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
-            stmt.setString(1, krousma.getCaseID());
+            stmt.setInt(1, krousma.getAFM());
             stmt.setInt(2, krousma.getContactsNumber());
             stmt.setString(3, krousma.getFirstName());
             stmt.setString(4, krousma.getLastName());
@@ -81,14 +85,16 @@ public class CaseDAO {
 
     public void createCaseDead(Case krousma) throws Exception {
         Connection con = null;
-        String querry = "INSERT INTO Persons(CaseID, ContactsNumber, FirstName, LastName," +
+        String querry = "INSERT INTO Persons(AFM, ContactsNumber, FirstName, " +
+                "LastName," +
                 "Age, PhoneNumber, Diagnosis, Death, DimosID, Address," +
-                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "StreetNumber, ZipCode) " + " VALUES (?, ?, ?, ?, ?, ?, ?, ?," +
+                " ?, ?, ?, ?);";
 
         try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
-            stmt.setString(1, krousma.getCaseID());
+            stmt.setInt(1, krousma.getAFM());
             stmt.setInt(2, krousma.getContactsNumber());
             stmt.setString(3, krousma.getFirstName());
             stmt.setString(4, krousma.getLastName());

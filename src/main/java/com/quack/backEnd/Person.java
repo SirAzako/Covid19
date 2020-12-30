@@ -1,21 +1,25 @@
 package com.quack.backEnd;
 
+import java.util.UUID;
+
 /**
- *
  * @author Azako
  */
 abstract class Person {
-    protected String personalID;
+    protected int AFM;
     protected String firstName;
     protected String lastName;
-    protected int age;	
+    protected int age;
     protected String phoneNumber;
     protected int dimosID;
     protected String address;
     protected String streetNumber;
     protected String zipCode;
 
-    public Person(String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+    public Person(int AFM, String firstName, String lastName, int age,
+                  String phoneNumber, int dimosID, String address,
+                  String streetNumber, String zipCode) {
+        this.AFM = AFM;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -26,10 +30,9 @@ abstract class Person {
         this.zipCode = zipCode;
     }
 
-    
 
-    public String getPersonalID() {
-        return personalID;
+    public int getAFM() {
+        return AFM;
     }
 
     public String getFirstName() {
@@ -64,6 +67,10 @@ abstract class Person {
         return zipCode;
     }
 
+    public void setAFM(int AFM) {
+        this.AFM = AFM;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -95,7 +102,5 @@ abstract class Person {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
-    
-    
-         
+
 }
