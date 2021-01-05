@@ -262,12 +262,18 @@
                </children>
             </VBox>
             <Button fx:id="submitContactButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactClick" prefHeight="45.0" prefWidth="107.0" text="Button" />
-            <Label layoutX="585.0" layoutY="76.0" text="ADD  CONTACT" textFill="WHITE">
+            <Label layoutX="113.0" layoutY="64.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="numberLabel" layoutX="590.0" layoutY="813.0" prefHeight="17.0" prefWidth="208.0" text="CONTACTS: #" />
+            <Label fx:id="numberLabel" layoutX="445.0" layoutY="78.0" prefHeight="17.0" prefWidth="88.0" text="#" />
+            <Label fx:id="counterLabel" layoutX="279.0" layoutY="78.0" text="Counter" />
+            <Label layoutX="365.0" layoutY="64.0" text="OF" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
       <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
          <children>

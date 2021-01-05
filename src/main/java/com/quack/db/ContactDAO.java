@@ -12,12 +12,12 @@ public class ContactDAO {
         Connection con = null;
         String querry = "INSERT INTO Persons(AFM, ContactID, FirstName, " +
                 "LastName, Age, PhoneNumber, DimosID, Address, StreetNumber, " +
-                "ZipCode) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                "ZipCode) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try{
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
             stmt.setInt(1, contact.getAFM());
-            stmt.setString(2, contact.getContactID());
+            stmt.setInt(2, contact.getContactID());
             stmt.setString(3, contact.getFirstName());
             stmt.setString(4, contact.getLastName());
             stmt.setInt(5, contact.getAge());
@@ -26,10 +26,34 @@ public class ContactDAO {
             stmt.setString(8, contact.getAddress());
             stmt.setString(9, contact.getStreetNumber());
             stmt.setString(10, contact.getZipCode());
+            stmt.executeUpdate();
+            stmt.close();
+            DB.close();
         }catch (Exception e){
             throw new Exception("Error while trying to create contact " + e.getMessage());
         }finally {
             if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void connectCaseContact(int afm, Contact contact) throws Exception {
+        Connection con = null;
+        String querry = "INSERT INTO Contacts(AFM, ContactID) VALUES(?, ?);";
+        try{
+            con = DB.getConnection();
+            PreparedStatement stmt = con.prepareStatement(querry);
+            stmt.setInt(1, afm);
+            stmt.setInt(2, contact.getContactID());
+            stmt.executeUpdate();
+            stmt.close();
+            DB.close();
+
+        }catch (Exception e){
+            throw new Exception("Error while trying to create contact " + e.getMessage());
+        }finally {
+            if (con != null){
                 con.close();
             }
         }

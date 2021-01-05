@@ -1,8 +1,10 @@
 package com.quack.frontEnd;
 
 import com.quack.backEnd.Case;
+import com.quack.backEnd.Contact;
 import com.quack.db.CaseDAO;
 
+import com.quack.db.ContactDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +24,9 @@ public class Controller implements Initializable {
     private boolean menuIsHide = true;
     private boolean createCaseHide = true;
     private boolean addContactsHide = true;
+    private int totalContacts = 0;
+    private int counterContacts = 1;
+    private int parseAFM = 0;
 
 
     @FXML
@@ -122,6 +127,10 @@ public class Controller implements Initializable {
 
 
     @FXML
+    private Label counterLabel;
+
+
+    @FXML
     public void menuCreateClick(MouseEvent event) {
         if (createCaseHide == true) {
             createCasePanel.setVisible(true);
@@ -160,103 +169,172 @@ public class Controller implements Initializable {
         int mun = 0;
         if (!firstNameInput.getText().isEmpty()) {
             fn = firstNameInput.getText();
-            System.out.println("Empty");
         }
         if (!lastNameInput.getText().isEmpty()) {
             ln = lastNameInput.getText();
-            System.out.println("Empty");
         }
         if (!ageInput.getText().isEmpty()) {
             ag = Integer.parseInt(ageInput.getText());
-            System.out.println("Empty");
         }
         if (!phoneNumberInput.getText().isEmpty()) {
             pn = phoneNumberInput.getText();
-            System.out.println("Empty");
         }
         if (!addressInput.getText().isEmpty()) {
             ad = addressInput.getText();
-            System.out.println("Empty");
         }
         if (!streetInput.getText().isEmpty()) {
             st = streetInput.getText();
-            System.out.println("Empty");
         }
         if (!zipCodeInput.getText().isEmpty()) {
             zc = zipCodeInput.getText();
-            System.out.println("Empty");
         }
         if (!contactsInput.getText().isEmpty()) {
             cn = Integer.parseInt(contactsInput.getText());
-            System.out.println("Empty");
         }
         if (!munipicipalityInput.getText().isEmpty()) {
             mun = Integer.parseInt(munipicipalityInput.getText());
-            System.out.println("Empty");
         }
         if (!diagnosisInput.getText().isEmpty()) {
             dd = diagnosisInput.getText();
-            System.out.println("Empty");
         }
         if (!recoveryInput.getText().isEmpty()) {
             rd = recoveryInput.getText();
-            System.out.println("Empty");
         }
         if (!deathInput.getText().isEmpty()) {
             dt = deathInput.getText();
-            System.out.println("Empty");
         }
-        if(!afmInput.getText().isEmpty()){
+        if (!afmInput.getText().isEmpty()) {
             af = Integer.parseInt(afmInput.getText());
-            System.out.println("Empty");
         }
 
         if ((recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
-                Case activeCase = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad, st, zc);
-                CaseDAO caseDAO = new CaseDAO();
-                try {
-                    caseDAO.createCaseActive(activeCase);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println("to krousma ine energo");
+            parseAFM = af;
+            Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
+                    st, zc);
+            CaseDAO caseDAO = new CaseDAO();
+            try {
+                caseDAO.createCaseActive(krousma);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("Case created successfully..");
+                System.out.println("The case is active..");
+
+                totalContacts = cn;
+                numberLabel.setText(String.valueOf(totalContacts));
+                counterLabel.setText(String.valueOf(counterContacts));
+
+                firstNameInput.clear();
+                lastNameInput.clear();
+                ageInput.clear();
+                phoneNumberInput.clear();
+                addressInput.clear();
+                streetInput.clear();
+                zipCodeInput.clear();
+                contactsInput.clear();
+                munipicipalityInput.clear();
+                diagnosisInput.clear();
+                deathInput.clear();
+                recoveryInput.clear();
+                afmInput.clear();
+
                 if (addContactsHide == true) {
                     addContactsPanel.setVisible(true);
                     addContactsHide = false;
-                    System.out.println("Hello");
                 }
+                if (createCaseHide == false) {
+                    createCasePanel.setVisible(false);
+                    createCaseHide = true;
+                }
+            }
         }
 
         if (!(recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
-            Case caseRecover = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun, ad, st, zc);
+            parseAFM = af;
+            Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
+                    ad, st, zc);
             CaseDAO caseDAO = new CaseDAO();
             try {
-                caseDAO.createCaseRecovery(caseRecover);
+                caseDAO.createCaseRecovery(krousma);
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                System.out.println("Case created successfully..");
+                System.out.println("The case is recovery..");
+
+                totalContacts = cn;
+                numberLabel.setText(String.valueOf(totalContacts));
+                counterLabel.setText(String.valueOf(counterContacts));
+
+                firstNameInput.clear();
+                lastNameInput.clear();
+                ageInput.clear();
+                phoneNumberInput.clear();
+                addressInput.clear();
+                streetInput.clear();
+                zipCodeInput.clear();
+                contactsInput.clear();
+                munipicipalityInput.clear();
+                diagnosisInput.clear();
+                deathInput.clear();
+                recoveryInput.clear();
+                afmInput.clear();
+
+                if (addContactsHide == true) {
+                    addContactsPanel.setVisible(true);
+                    addContactsHide = false;
+                }
+                if (createCaseHide == false) {
+                    createCasePanel.setVisible(false);
+                    createCaseHide = true;
+                }
             }
-            System.out.println("to krousma anarose!!");
-            if (addContactsHide == true) {
-                addContactsPanel.setVisible(true);
-                addContactsHide = false;
-                System.out.println("Hello");
-            }
+
         }
 
         if ((recoveryInput.getText().isEmpty()) && !(deathInput.getText().isEmpty())) {
-            Case caseDead = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad, st, zc);
+            parseAFM = af;
+            Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
+                    st, zc);
             CaseDAO caseDAO = new CaseDAO();
             try {
-                caseDAO.createCaseDead(caseDead);
+                caseDAO.createCaseDead(krousma);
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                System.out.println("Case created successfully..");
+                System.out.println("The case is dead..");
+
+                totalContacts = cn;
+                numberLabel.setText(String.valueOf(totalContacts));
+                counterLabel.setText(String.valueOf(counterContacts));
+
+                firstNameInput.clear();
+                lastNameInput.clear();
+                ageInput.clear();
+                phoneNumberInput.clear();
+                addressInput.clear();
+                streetInput.clear();
+                zipCodeInput.clear();
+                contactsInput.clear();
+                munipicipalityInput.clear();
+                diagnosisInput.clear();
+                deathInput.clear();
+                recoveryInput.clear();
+                afmInput.clear();
+
+                counterContacts = 1;
+
+                if (addContactsHide == true) {
+                    addContactsPanel.setVisible(true);
+                    addContactsHide = false;
+                }
+                if (createCaseHide == false) {
+                    createCasePanel.setVisible(false);
+                    createCaseHide = true;
+                }
             }
-            System.out.println("to krousma petane");
-            if (addContactsHide == true) {
-                addContactsPanel.setVisible(true);
-                addContactsHide = false;
-                System.out.println("Hello");
-            }
+
         }
 
     }
@@ -264,8 +342,91 @@ public class Controller implements Initializable {
 
     @FXML
     public void submitContactClick(MouseEvent event) {
+        String fnC = null;
+        String lnC = null;
+        int ageC = 0;
+        String pnC = null;
+        int munC = 0;
+        String addC = null;
+        String stC = null;
+        String zcC = null;
+        int afmC = 0;
+        int conID = 0;
+
+        counterContacts++;
+        counterLabel.setText(String.valueOf(counterContacts));
+
+
+        if (!firstNameCInput.getText().isEmpty()) {
+            fnC = firstNameCInput.getText();
+            System.out.println("gematon name");
+        }
+        if (!lastNameCInput.getText().isEmpty()) {
+            lnC = lastNameCInput.getText();
+            System.out.println("gemato lastname");
+        }
+        if (!ageCInput.getText().isEmpty()) {
+            ageC = Integer.parseInt(ageCInput.getText());
+            System.out.println("gemati ilikia");
+        }
+        if (!phoneNumberCInput.getText().isEmpty()) {
+            pnC = phoneNumberCInput.getText();
+            System.out.println("gemato to number");
+        }
+        if (!munipicipalityCInput.getText().isEmpty()) {
+            munC = Integer.parseInt(munipicipalityCInput.getText());
+            System.out.println("gematos o dimos");
+        }
+        if (!addressCInput.getText().isEmpty()) {
+            addC = addressCInput.getText();
+            System.out.println("addres ok");
+        }
+        if (!streetCInput.getText().isEmpty()) {
+            stC = streetCInput.getText();
+            System.out.println("street ok");
+        }
+        if (!zipCCodeInput.getText().isEmpty()) {
+            zcC = zipCCodeInput.getText();
+            System.out.println("zip ok");
+        }
+        if (!afmCInput.getText().isEmpty()) {
+            afmC = Integer.parseInt(afmCInput.getText());
+            conID = Integer.parseInt(afmCInput.getText());
+            System.out.println("afm ok");
+        }
+        if ((!firstNameCInput.getText().isEmpty()) && (!lastNameCInput.getText().isEmpty()) && (!ageCInput.getText().isEmpty()) && (!phoneNumberCInput.getText().isEmpty()) && (!munipicipalityCInput.getText().isEmpty()) && (!addressCInput.getText().isEmpty()) && (!streetCInput.getText().isEmpty()) && (!zipCCodeInput.getText().isEmpty()) && (!afmCInput.getText().isEmpty())) {
+            System.out.println("antikimeno ok");
+            Contact contact = new Contact(afmC, conID, fnC, lnC, ageC, pnC,
+                    munC,
+                    addC, stC, zcC);
+            ContactDAO contactDAO = new ContactDAO();
+            try {
+                contactDAO.createContact(contact);
+                contactDAO.connectCaseContact(parseAFM, contact);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("DIMIOURGITHIKE I EPAFI");
+                firstNameCInput.clear();
+                lastNameCInput.clear();
+                ageCInput.clear();
+                phoneNumberCInput.clear();
+                munipicipalityCInput.clear();
+                addressCInput.clear();
+                streetCInput.clear();
+                zipCCodeInput.clear();
+                afmCInput.clear();
+                if (counterContacts > totalContacts) {
+                    if (addContactsHide == false) {
+                        addContactsPanel.setVisible(false);
+                        addContactsHide = true;
+                    }
+                }
+            }
+        }
 
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

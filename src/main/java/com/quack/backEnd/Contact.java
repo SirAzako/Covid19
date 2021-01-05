@@ -1,18 +1,21 @@
 package com.quack.backEnd;
 
 public class Contact extends Person {
-    protected String contactID;
+    protected int contactID;
 
-    public Contact(int AFM, String contactID, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
-        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
+    public Contact(int AFM, int contactID, String firstName,
+                   String lastName, int age, String phoneNumber, int dimosID,
+                   String address, String streetNumber, String zipCode) {
+        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address,
+                streetNumber, zipCode);
         this.contactID = contactID;
     }
 
-    public String getContactID() {
+    public int getContactID() {
         return contactID;
     }
 
-    public void setContactID(String contactID) {
+    public void setContactID(int contactID) {
         this.contactID = contactID;
     }
 
