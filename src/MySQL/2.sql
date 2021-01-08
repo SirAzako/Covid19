@@ -6,10 +6,9 @@ CREATE TABLE Dimoi (
 );
 
 CREATE TABLE Persons (
-	PersonID INT AUTO_INCREMENT,
-    CaseID varchar(20) UNIQUE,
-    ContactID varchar(20) UNIQUE,
-    ContactsNumber INT,
+	AFM INT NOT NULL UNIQUE,
+	ContactID INT UNIQUE,
+    ContactsNumber INT UNIQUE,
     FirstName varchar(50) NOT NULL,
     LastName varchar(50) NOT NULL,
     Age INT NOT NULL,
@@ -21,7 +20,7 @@ CREATE TABLE Persons (
 	Address VARCHAR(50) NOT NULL,
     StreetNumber VARCHAR(10) NOT NULL,
     ZipCode  VARCHAR(8),
-    PRIMARY KEY (PersonID),
+    PRIMARY KEY (AFM),
     FOREIGN KEY(DimosID) REFERENCES Dimoi(DimosID)
 	ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -30,9 +29,9 @@ CREATE TABLE Persons (
 );
 
 CREATE TABLE Contacts (
-	CaseID VARCHAR(20) NOT NULL,
-    ContactID VARCHAR(20) NOT NULL,
-    FOREIGN KEY(CaseID) REFERENCES Persons(CaseID)
+	AFM INT NOT NULL,
+    ContactID INT NOT NULL,
+    FOREIGN KEY(AFM) REFERENCES Persons(AFM)
 	ON DELETE CASCADE
     ON UPDATE CASCADE,
     FOREIGN KEY(ContactID) REFERENCES Persons(ContactID)
