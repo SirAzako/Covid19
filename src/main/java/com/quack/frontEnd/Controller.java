@@ -30,18 +30,25 @@ public class Controller implements Initializable {
     private int counterContacts = 1;
     private int parseAFM = 0;
 
+/*  Here we will initialize all the fields, button, datePickers and AnchorPane
+*   that we will need in our use cases
+*/
 
+    // Main anchorPane
     @FXML
     private AnchorPane anchorPane;
 
+
+
+    // Menu bar items
     @FXML
-    private AnchorPane addContactUniquePanel;
+    private ImageView menuButton;
+
+    @FXML
+    private AnchorPane toolBar;
 
     @FXML
     private AnchorPane menuBar;
-
-    @FXML
-    private AnchorPane addContactsPanel;
 
     @FXML
     private Group menuCreateButton;
@@ -49,6 +56,9 @@ public class Controller implements Initializable {
     @FXML
     private Group menuContactButton;
 
+
+
+    // Create Case Panel (AnchorPane, Fields, DatePickers, Button)
     @FXML
     private AnchorPane createCasePanel;
 
@@ -83,37 +93,6 @@ public class Controller implements Initializable {
     private TextField afmInput;
 
     @FXML
-    private TextField firstNameCQInput;
-
-    @FXML
-    private TextField lastNameCQInput;
-
-    @FXML
-    private TextField ageCQInput;
-
-    @FXML
-    private TextField phoneNumberCQInput;
-
-    @FXML
-    private TextField munipicipalityCQInput;
-
-    @FXML
-    private TextField addressCQInput;
-
-    @FXML
-    private TextField streetCQInput;
-
-    @FXML
-    private TextField zipCQCodeInput;
-
-    @FXML
-    private TextField afmCQInput;
-
-    @FXML
-    private TextField afmCQKrousmatosInput;
-
-
-    @FXML
     private DatePicker diagnosisInput;
 
     @FXML
@@ -121,6 +100,21 @@ public class Controller implements Initializable {
 
     @FXML
     private DatePicker deathInput;
+
+    @FXML
+    private Button submitCaseButton;
+
+
+
+    // Add contacts to the created case (AnchorPane, Fields, Button, Labels)
+    @FXML
+    private AnchorPane addContactsPanel;
+
+    @FXML
+    private Label numberLabel;
+
+    @FXML
+    private Label counterLabel;
 
     @FXML
     private TextField firstNameCInput;
@@ -150,42 +144,55 @@ public class Controller implements Initializable {
     private TextField afmCInput;
 
     @FXML
-    private AnchorPane toolBar;
-
-    @FXML
-    private ImageView menuButton;
-
-    @FXML
-    private Button submitCaseButton;
-
-    @FXML
     private Button submitContactButton;
+
+
+
+    // Add a contact to a specific case (AnchorPane, Fields, Button)
+    @FXML
+    private AnchorPane addContactUniquePanel;
+
+    @FXML
+    private TextField firstNameCQInput;
+
+    @FXML
+    private TextField lastNameCQInput;
+
+    @FXML
+    private TextField ageCQInput;
+
+    @FXML
+    private TextField phoneNumberCQInput;
+
+    @FXML
+    private TextField munipicipalityCQInput;
+
+    @FXML
+    private TextField addressCQInput;
+
+    @FXML
+    private TextField streetCQInput;
+
+    @FXML
+    private TextField zipCQCodeInput;
+
+    @FXML
+    private TextField afmCQInput;
+
+    @FXML
+    private TextField afmCQKrousmatosInput;
 
     @FXML
     private Button submitContactUniqueButton;
 
-    @FXML
-    private Label numberLabel;
+
+    /* Here we will initialize all the functions and events on click */
 
 
-    @FXML
-    private Label counterLabel;
-
-
-    @FXML
-    public void menuCreateClick(MouseEvent event) {
-        if (createCaseHide == true) {
-            createCasePanel.setVisible(true);
-            createCaseHide = false;
-        } else {
-            createCasePanel.setVisible(false);
-            createCaseHide = true;
-        }
-    }
-
+    // Click event that open and close the menu bar
     @FXML
     public void menuClick(MouseEvent event) {
-        if (menuIsHide == true) {
+        if (menuIsHide) {
             menuBar.setVisible(true);
             menuIsHide = false;
         } else {
@@ -194,6 +201,21 @@ public class Controller implements Initializable {
         }
     }
 
+    // Click event that opens and close the create case panel
+    @FXML
+    public void menuCreateClick(MouseEvent event) {
+        if (createCaseHide) {
+            createCasePanel.setVisible(true);
+            createCaseHide = false;
+        } else {
+            createCasePanel.setVisible(false);
+            createCaseHide = true;
+        }
+    }
+
+
+    // Click event that will take the value from the create case panel
+    // and create the case in the database
     @FXML
     public void submitCaseClick(MouseEvent event) {
         String fn = null;
@@ -281,11 +303,11 @@ public class Controller implements Initializable {
                 recoveryInput.getEditor().clear();
                 afmInput.clear();
 
-                if (addContactsHide == true) {
+                if (addContactsHide) {
                     addContactsPanel.setVisible(true);
                     addContactsHide = false;
                 }
-                if (createCaseHide == false) {
+                if (!createCaseHide) {
                     createCasePanel.setVisible(false);
                     createCaseHide = true;
                 }
@@ -323,11 +345,11 @@ public class Controller implements Initializable {
                 recoveryInput.getEditor().clear();
                 afmInput.clear();
 
-                if (addContactsHide == true) {
+                if (addContactsHide) {
                     addContactsPanel.setVisible(true);
                     addContactsHide = false;
                 }
-                if (createCaseHide == false) {
+                if (!createCaseHide) {
                     createCasePanel.setVisible(false);
                     createCaseHide = true;
                 }
@@ -383,6 +405,9 @@ public class Controller implements Initializable {
     }
 
 
+    // Click event that will take the value from the create contact panel
+    // and create the number contacts that the user inserted on the create case panel
+    // This panel is auto open when the user finish the creation of a case
     @FXML
     public void submitContactClick(MouseEvent event) {
         String fnC = null;
@@ -460,7 +485,7 @@ public class Controller implements Initializable {
                 zipCCodeInput.clear();
                 afmCInput.clear();
                 if (counterContacts > totalContacts) {
-                    if (addContactsHide == false) {
+                    if (!addContactsHide) {
                         addContactsPanel.setVisible(false);
                         addContactsHide = true;
                     }
@@ -470,9 +495,11 @@ public class Controller implements Initializable {
 
     }
 
+
+    // Click event that opens a panel to create a contact for a specific case
     @FXML
     public void menuAddContactClick(MouseEvent event) {
-        if(addContactUniqueHide == true){
+        if(addContactUniqueHide){
             addContactUniquePanel.setVisible(true);
             addContactUniqueHide = false;
         }else{
@@ -481,6 +508,10 @@ public class Controller implements Initializable {
         }
     }
 
+
+    // Click event that take the values from the panel that creates a contact
+    // for a specific case and initialize that case-contact bond in the database,
+    // and also create the new contact
     @FXML
     public void submitContactUniqueClick(MouseEvent event) {
         String fnC = null;
@@ -559,7 +590,7 @@ public class Controller implements Initializable {
                 afmCQInput.clear();
                 afmCQKrousmatosInput.clear();
 
-                if (addContactUniqueHide == false) {
+                if (!addContactUniqueHide) {
                     addContactUniquePanel.setVisible(false);
                     addContactUniqueHide = true;
 
@@ -569,11 +600,9 @@ public class Controller implements Initializable {
 
     }
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
-
 
 }
 

@@ -307,7 +307,7 @@
                </children>
             </Group>
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
          <children>
             <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
