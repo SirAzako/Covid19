@@ -276,7 +276,7 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
+      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;">
          <children>
             <Group fx:id="menuCreateButton" layoutX="63.0" layoutY="111.0" onMouseClicked="#menuCreateClick">
                <children>
