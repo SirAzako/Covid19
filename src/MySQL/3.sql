@@ -67,30 +67,3 @@ INSERT INTO Dimoi (Name, Population) VALUES('Τροιζηνίας', 7143 );
 INSERT INTO Dimoi (Name, Population) VALUES('Ύδρας', 1966 );
 
 
-/* Kataxwrisei enws neou krousmatos */
-INSERT INTO Persons(CaseID, ContactsNumber, FirstName, Lastname, Age, PhoneNumber, DimosID, Diagnosis, Address, StreetNumber, ZipCode) VALUES ("CAPA23", 2, "Paraskevas", "Hadjigeorgiou",23,"6955831953", 1, "2020/10/02", "Kendrinou","79", "115 23");
-
-/* Kataxwrhsei enws atomou pou eixe noshsei kai to jeperase */
-INSERT INTO Persons(CaseID, ContactsNumber, FirstName, Lastname, Age, PhoneNumber, DimosID, Diagnosis, Recovery ,Address, StreetNumber, ZipCode) VALUES ("CAAM23", 1, "Adam", "Panagiotidis", 23,"6955831953", 5, "2020/10/02", "2020/10/20", "Merkouri","09", "115 12");
-
-/* Kataxwrisei kapoiou pou eixe nohsei kai pethane */
-INSERT INTO Persons(CaseID, ContactsNumber, FirstName, Lastname, Age, PhoneNumber, DimosID, Diagnosis, Death ,Address, StreetNumber, ZipCode) VALUES ("CANI19", 3, "Nikolas", "Psarautis", 19,"6947736644", 8, "2020/12/19", "2020/12/27", "Panormou", "44", "115 23");
-
-/* Kataxwrhsei enos atomou pou htan epafh */
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("COKO24", "Kwstas", "Mpouros", 24,"988827773", 1, "Larissis", "82", "115 22");
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("COGI23", "George", "Apostolides", 23, "998737774", 2, "Pireos", "100", "115 12");
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("COXI67", "Xristos", "Mina", 67, "690000000", 13, "Aleksandras", "75", "114 32");
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("COIL35", "Ilias", "Maxeridis", 35, "6911111111", 20, "Psiri", "22", "123 23");
-
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("COMA22", "Marios", "Markou", 22, "69444444444", 54, "Kolokotroni", "102", "113 22");
-INSERT INTO Persons(ContactID, FirstName, Lastname, Age, PhoneNumber, DimosID, Address, StreetNumber, ZipCode) VALUES ("CODI42", "Dimitris", "Perikli", 42, "69555555555", 32, "Matsi", "01", "111 53");
-
-/* kataxwrisei poios eixe epafh me poion */
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CAPA23', 'COKO24');
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CAPA23', 'COGI23');
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CAAM23', 'COXI67');
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CANI19', 'COIL35');
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CANI19', 'COMA22');
-INSERT INTO Contacts (CaseID, ContactID) VALUES ('CANI19', 'CODI42');
-
-

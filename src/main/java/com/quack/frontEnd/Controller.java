@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ public class Controller implements Initializable {
     private boolean menuIsHide = true;
     private boolean createCaseHide = true;
     private boolean addContactsHide = true;
+    private boolean addContactUniqueHide = true;
     private int totalContacts = 0;
     private int counterContacts = 1;
     private int parseAFM = 0;
@@ -33,6 +35,9 @@ public class Controller implements Initializable {
     private AnchorPane anchorPane;
 
     @FXML
+    private AnchorPane addContactUniquePanel;
+
+    @FXML
     private AnchorPane menuBar;
 
     @FXML
@@ -40,6 +45,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Group menuCreateButton;
+
+    @FXML
+    private Group menuContactButton;
 
     @FXML
     private AnchorPane createCasePanel;
@@ -72,16 +80,47 @@ public class Controller implements Initializable {
     private TextField contactsInput;
 
     @FXML
-    private TextField diagnosisInput;
-
-    @FXML
-    private TextField recoveryInput;
-
-    @FXML
-    private TextField deathInput;
-
-    @FXML
     private TextField afmInput;
+
+    @FXML
+    private TextField firstNameCQInput;
+
+    @FXML
+    private TextField lastNameCQInput;
+
+    @FXML
+    private TextField ageCQInput;
+
+    @FXML
+    private TextField phoneNumberCQInput;
+
+    @FXML
+    private TextField munipicipalityCQInput;
+
+    @FXML
+    private TextField addressCQInput;
+
+    @FXML
+    private TextField streetCQInput;
+
+    @FXML
+    private TextField zipCQCodeInput;
+
+    @FXML
+    private TextField afmCQInput;
+
+    @FXML
+    private TextField afmCQKrousmatosInput;
+
+
+    @FXML
+    private DatePicker diagnosisInput;
+
+    @FXML
+    private DatePicker recoveryInput;
+
+    @FXML
+    private DatePicker deathInput;
 
     @FXML
     private TextField firstNameCInput;
@@ -121,6 +160,9 @@ public class Controller implements Initializable {
 
     @FXML
     private Button submitContactButton;
+
+    @FXML
+    private Button submitContactUniqueButton;
 
     @FXML
     private Label numberLabel;
@@ -194,20 +236,21 @@ public class Controller implements Initializable {
         if (!munipicipalityInput.getText().isEmpty()) {
             mun = Integer.parseInt(munipicipalityInput.getText());
         }
-        if (!diagnosisInput.getText().isEmpty()) {
-            dd = diagnosisInput.getText();
+        if (!(diagnosisInput.getValue() == null)) {
+            dd = String.valueOf(diagnosisInput.getValue());
+            System.out.println(dd);
         }
-        if (!recoveryInput.getText().isEmpty()) {
-            rd = recoveryInput.getText();
+        if (!(recoveryInput.getValue() == null)) {
+            rd = String.valueOf(recoveryInput.getValue());
         }
-        if (!deathInput.getText().isEmpty()) {
-            dt = deathInput.getText();
+        if (!(deathInput.getValue() == null)) {
+            dt = String.valueOf(deathInput.getValue());
         }
         if (!afmInput.getText().isEmpty()) {
             af = Integer.parseInt(afmInput.getText());
         }
 
-        if ((recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
+        if (((recoveryInput.getValue() == null)) && ((deathInput.getValue() == null))) {
             parseAFM = af;
             Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
                     st, zc);
@@ -233,9 +276,9 @@ public class Controller implements Initializable {
                 zipCodeInput.clear();
                 contactsInput.clear();
                 munipicipalityInput.clear();
-                diagnosisInput.clear();
-                deathInput.clear();
-                recoveryInput.clear();
+                diagnosisInput.getEditor().clear();
+                deathInput.getEditor().clear();
+                recoveryInput.getEditor().clear();
                 afmInput.clear();
 
                 if (addContactsHide == true) {
@@ -249,7 +292,7 @@ public class Controller implements Initializable {
             }
         }
 
-        if (!(recoveryInput.getText().isEmpty()) && (deathInput.getText().isEmpty())) {
+        if (!(recoveryInput.getValue() == null) && (deathInput.getValue() == null)) {
             parseAFM = af;
             Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
                     ad, st, zc);
@@ -275,9 +318,9 @@ public class Controller implements Initializable {
                 zipCodeInput.clear();
                 contactsInput.clear();
                 munipicipalityInput.clear();
-                diagnosisInput.clear();
-                deathInput.clear();
-                recoveryInput.clear();
+                diagnosisInput.getEditor().clear();
+                deathInput.getEditor().clear();
+                recoveryInput.getEditor().clear();
                 afmInput.clear();
 
                 if (addContactsHide == true) {
@@ -292,7 +335,7 @@ public class Controller implements Initializable {
 
         }
 
-        if ((recoveryInput.getText().isEmpty()) && !(deathInput.getText().isEmpty())) {
+        if ((recoveryInput.getValue() == null) && !(deathInput.getValue() == null)) {
             parseAFM = af;
             Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
                     st, zc);
@@ -318,9 +361,9 @@ public class Controller implements Initializable {
                 zipCodeInput.clear();
                 contactsInput.clear();
                 munipicipalityInput.clear();
-                diagnosisInput.clear();
-                deathInput.clear();
-                recoveryInput.clear();
+                diagnosisInput.getEditor().clear();
+                deathInput.getEditor().clear();
+                recoveryInput.getEditor().clear();
                 afmInput.clear();
 
                 counterContacts = 1;
@@ -421,6 +464,105 @@ public class Controller implements Initializable {
                         addContactsPanel.setVisible(false);
                         addContactsHide = true;
                     }
+                }
+            }
+        }
+
+    }
+
+    @FXML
+    public void menuAddContactClick(MouseEvent event) {
+        if(addContactUniqueHide == true){
+            addContactUniquePanel.setVisible(true);
+            addContactUniqueHide = false;
+        }else{
+            addContactUniquePanel.setVisible(false);
+            addContactUniqueHide = true;
+        }
+    }
+
+    @FXML
+    public void submitContactUniqueClick(MouseEvent event) {
+        String fnC = null;
+        String lnC = null;
+        int ageC = 0;
+        String pnC = null;
+        int munC = 0;
+        String addC = null;
+        String stC = null;
+        String zcC = null;
+        int afmC = 0;
+        int conID = 0;
+        int afmK = 0;
+
+
+        if (!firstNameCQInput.getText().isEmpty()) {
+            fnC = firstNameCQInput.getText();
+            System.out.println("gematon name");
+        }
+        if (!lastNameCQInput.getText().isEmpty()) {
+            lnC = lastNameCQInput.getText();
+            System.out.println("gemato lastname");
+        }
+        if (!ageCQInput.getText().isEmpty()) {
+            ageC = Integer.parseInt(ageCQInput.getText());
+            System.out.println("gemati ilikia");
+        }
+        if (!phoneNumberCQInput.getText().isEmpty()) {
+            pnC = phoneNumberCQInput.getText();
+            System.out.println("gemato to number");
+        }
+        if (!munipicipalityCQInput.getText().isEmpty()) {
+            munC = Integer.parseInt(munipicipalityCQInput.getText());
+            System.out.println("gematos o dimos");
+        }
+        if (!addressCQInput.getText().isEmpty()) {
+            addC = addressCQInput.getText();
+            System.out.println("addres ok");
+        }
+        if (!streetCQInput.getText().isEmpty()) {
+            stC = streetCQInput.getText();
+            System.out.println("street ok");
+        }
+        if (!zipCQCodeInput.getText().isEmpty()) {
+            zcC = zipCQCodeInput.getText();
+            System.out.println("zip ok");
+        }
+        if (!afmCQInput.getText().isEmpty()) {
+            afmC = Integer.parseInt(afmCQInput.getText());
+            System.out.println("afm ok");
+        }
+        if(!afmCQKrousmatosInput.getText().isEmpty()){
+            afmK = Integer.parseInt(afmCQKrousmatosInput.getText());
+        }
+        if ((!firstNameCQInput.getText().isEmpty()) && (!lastNameCQInput.getText().isEmpty()) && (!ageCQInput.getText().isEmpty()) && (!phoneNumberCQInput.getText().isEmpty()) && (!munipicipalityCQInput.getText().isEmpty()) && (!addressCQInput.getText().isEmpty()) && (!streetCQInput.getText().isEmpty()) && (!zipCQCodeInput.getText().isEmpty()) && (!afmCQInput.getText().isEmpty()) && (!afmCQKrousmatosInput.getText().isEmpty())) {
+            System.out.println("antikimeno ok");
+            Contact contact = new Contact(afmC, afmC, fnC, lnC, ageC, pnC,
+                    munC,
+                    addC, stC, zcC);
+            ContactDAO contactDAO = new ContactDAO();
+            try {
+                contactDAO.createContact(contact);
+                contactDAO.connectCaseContact(afmK, contact);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("DIMIOURGITHIKE I EPAFI");
+                firstNameCQInput.clear();
+                lastNameCQInput.clear();
+                ageCQInput.clear();
+                phoneNumberCQInput.clear();
+                munipicipalityCQInput.clear();
+                addressCQInput.clear();
+                streetCQInput.clear();
+                zipCQCodeInput.clear();
+                afmCQInput.clear();
+                afmCQKrousmatosInput.clear();
+
+                if (addContactUniqueHide == false) {
+                    addContactUniquePanel.setVisible(false);
+                    addContactUniqueHide = true;
+
                 }
             }
         }

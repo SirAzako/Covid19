@@ -11,4 +11,6 @@ SELECT * FROM Persons;
 
 SELECT * FROM Contacts;
 
+SELECT * FROM Dimoi;
+
 describe Persons;
