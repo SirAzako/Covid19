@@ -14,37 +14,6 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
    <children>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
-         <children>
-            <Group fx:id="menuCreateButton" layoutX="63.0" layoutY="111.0" onMouseClicked="#menuCreateClick">
-               <children>
-                  <ImageView layoutX="9.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@icons/mask.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutY="68.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Group>
-            <Group fx:id="menuContactButton" layoutX="62.0" layoutY="262.0" onMouseClicked="#menuAddContactClick">
-               <children>
-                  <ImageView layoutX="13.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../src/main/resources/icons/icons8_link_50px.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutY="63.0" prefHeight="17.0" prefWidth="88.0" text="ADD CONTACT" textFill="#dcdc65">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Group>
-         </children></AnchorPane>
       <AnchorPane fx:id="createCasePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
@@ -61,7 +30,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="firstNameInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="firstNameInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
@@ -71,7 +40,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="lastNameInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="lastNameInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
@@ -81,7 +50,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="ageInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
@@ -91,7 +60,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="phoneNumberInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="phoneNumberInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
@@ -101,7 +70,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="munipicipalityInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="munipicipalityInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="580.0" prefHeight="13.0" prefWidth="134.0" spacing="94.0">
@@ -111,7 +80,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="addressInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="addressInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
@@ -121,7 +90,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="streetInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="streetInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
@@ -131,7 +100,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="zipCodeInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="zipCodeInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="595.0" prefHeight="13.0" prefWidth="134.0" spacing="83.0">
@@ -181,7 +150,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmInput" prefHeight="25.0" prefWidth="174.0" />
+                        <TextField fx:id="afmInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
@@ -197,7 +166,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="addContactsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #FF5733;" visible="false">
+      <AnchorPane fx:id="addContactsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -307,18 +276,44 @@
                </font>
             </Label>
          </children></AnchorPane>
+      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
+         <children>
+            <Group fx:id="menuCreateButton" layoutX="63.0" layoutY="111.0" onMouseClicked="#menuCreateClick">
+               <children>
+                  <ImageView layoutX="9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/mask.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutY="68.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group fx:id="menuContactButton" layoutX="59.0" layoutY="276.0">
+               <children>
+                  <ImageView layoutX="16.0" onMouseClicked="#menuAddContactClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_link_50px.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="ADD CONTACT" textAlignment="CENTER" textFill="#dcdc65">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+         </children></AnchorPane>
       <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <Label layoutX="530.0" layoutY="74.0" text="CONTACT" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="414.0" spacing="30.0">
+            <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="141.0" text="FIRST NAME *" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="102.0" text="FIRST NAME *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -328,7 +323,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="145.0" text="LAST NAME *" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="107.0" text="LAST NAME *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -338,17 +333,17 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="94.0" text="AGE *" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="54.0" text="AGE *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageCQInput" />
+                        <TextField fx:id="ageCQInput1" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="155.0" text="PHONE NUMBER *" textFill="WHITE">
+                        <Label text="PHONE NUMBER *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -358,7 +353,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="140.0" text="MUNICIPALITY *" textFill="WHITE">
+                        <Label text="MUNICIPALITY *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -368,7 +363,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="580.0" prefHeight="13.0" prefWidth="134.0" spacing="94.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="107.0" text="ADDRESS *" textFill="WHITE">
+                        <Label text="ADDRESS *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -378,7 +373,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="126.0" text="ST. NUMBER *" textFill="WHITE">
+                        <Label text="ST. NUMBER *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -388,7 +383,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="107.0" text="ZIP CODE *" textFill="WHITE">
+                        <Label text="ZIP CODE *" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -398,7 +393,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="60.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="140.0" text="ΑΦΜ*" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="102.0" text="ΑΦΜ*" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -408,17 +403,22 @@
                   </HBox>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="140.0" text="ΑΦΜ ΚΡΟΥΣΜΑΤΟΣ *" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="102.0" text="ΑΦΜ CASE*" textFill="WHITE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQKrousmatosInput" />
+                        <TextField fx:id="afmCQInput" />
                      </children>
                   </HBox>
                </children>
             </VBox>
             <Button fx:id="submitContactUniqueButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" text="Button" />
+            <Label layoutX="569.0" layoutY="85.0" text="CONTACT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </children>
