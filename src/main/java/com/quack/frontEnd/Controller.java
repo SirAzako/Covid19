@@ -5,19 +5,22 @@ import com.quack.backEnd.Contact;
 import com.quack.db.CaseDAO;
 
 import com.quack.db.ContactDAO;
-import javafx.event.ActionEvent;
+import com.quack.db.DB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 
@@ -26,18 +29,19 @@ public class Controller implements Initializable {
     private boolean createCaseHide = true;
     private boolean addContactsHide = true;
     private boolean addContactUniqueHide = true;
+    private boolean findPersonHide = true;
     private int totalContacts = 0;
     private int counterContacts = 1;
     private int parseAFM = 0;
+    private int contactsNumberSQL = 0;
 
-/*  Here we will initialize all the fields, button, datePickers and AnchorPane
-*   that we will need in our use cases
-*/
+    /*  Here we will initialize all the fields, button, datePickers and AnchorPane
+     *   that we will need in our use cases
+     */
 
     // Main anchorPane
     @FXML
     private AnchorPane anchorPane;
-
 
 
     // Menu bar items
@@ -56,9 +60,10 @@ public class Controller implements Initializable {
     @FXML
     private Group menuContactButton;
 
+    @FXML
+    private Group menuFindPersonButton;
 
-
-    // Create Case Panel (AnchorPane, Fields, DatePickers, Button)
+    // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button)
     @FXML
     private AnchorPane createCasePanel;
 
@@ -73,9 +78,6 @@ public class Controller implements Initializable {
 
     @FXML
     private TextField phoneNumberInput;
-
-    @FXML
-    private TextField munipicipalityInput;
 
     @FXML
     private TextField addressInput;
@@ -93,6 +95,10 @@ public class Controller implements Initializable {
     private TextField afmInput;
 
     @FXML
+    private ComboBox<String> municipalityInput;
+
+
+    @FXML
     private DatePicker diagnosisInput;
 
     @FXML
@@ -103,7 +109,6 @@ public class Controller implements Initializable {
 
     @FXML
     private Button submitCaseButton;
-
 
 
     // Add contacts to the created case (AnchorPane, Fields, Button, Labels)
@@ -129,7 +134,7 @@ public class Controller implements Initializable {
     private TextField phoneNumberCInput;
 
     @FXML
-    private TextField munipicipalityCInput;
+    private ComboBox<String> municipalityCInput;
 
     @FXML
     private TextField addressCInput;
@@ -145,7 +150,6 @@ public class Controller implements Initializable {
 
     @FXML
     private Button submitContactButton;
-
 
 
     // Add a contact to a specific case (AnchorPane, Fields, Button)
@@ -185,6 +189,54 @@ public class Controller implements Initializable {
     @FXML
     private Button submitContactUniqueButton;
 
+    //Find persons (AnchorPane, Fields, Button)
+    @FXML
+    private AnchorPane findPersonPanel;
+
+    @FXML
+    private TableView<Case> personsTable;
+
+    @FXML
+    private TableColumn<Case, Integer> afmTable;
+
+    @FXML
+    private TableColumn<Case, Integer> numberOfContactsTable;
+
+    @FXML
+    private TableColumn<Case, String> firstNameTable;
+
+    @FXML
+    private TableColumn<Case, String> lastNameTable;
+
+    @FXML
+    private TableColumn<Case, Integer> ageTable;
+
+    @FXML
+    private TableColumn<Case, String> phoneNumberTable;
+
+    @FXML
+    private TableColumn<Case, Integer> dimosTable;
+
+    @FXML
+    private TableColumn<Case, String> addressTable;
+
+    @FXML
+    private TableColumn<Case, String> stNumberTable;
+
+    @FXML
+    private TableColumn<Case, String> zipCodeTable;
+
+    @FXML
+    private TableColumn<Case, String> diagnosisTable;
+
+    @FXML
+    private TableColumn<Case, String> recoveryTable;
+
+    @FXML
+    private TableColumn<Case, String> deathTable;
+
+
+
 
     /* Here we will initialize all the functions and events on click */
 
@@ -199,6 +251,9 @@ public class Controller implements Initializable {
             menuBar.setVisible(false);
             menuIsHide = true;
         }
+
+
+
     }
 
     // Click event that opens and close the create case panel
@@ -213,6 +268,17 @@ public class Controller implements Initializable {
         }
     }
 
+    // Click event that opens and close the find persons panel
+    @FXML
+    public void menuFindPersonClick(MouseEvent event) {
+        if (findPersonHide) {
+            findPersonPanel.setVisible(true);
+            findPersonHide = false;
+        } else {
+            findPersonPanel.setVisible(false);
+            findPersonHide = true;
+        }
+    }
 
     // Click event that will take the value from the create case panel
     // and create the case in the database
@@ -231,6 +297,12 @@ public class Controller implements Initializable {
         int ag = 0;
         int cn = 0;
         int mun = 0;
+
+        if(municipalityInput.getValue() != null){
+
+          mun = municipalityInput.getSelectionModel().getSelectedIndex();
+          mun++;
+        }
         if (!firstNameInput.getText().isEmpty()) {
             fn = firstNameInput.getText();
         }
@@ -254,9 +326,6 @@ public class Controller implements Initializable {
         }
         if (!contactsInput.getText().isEmpty()) {
             cn = Integer.parseInt(contactsInput.getText());
-        }
-        if (!munipicipalityInput.getText().isEmpty()) {
-            mun = Integer.parseInt(munipicipalityInput.getText());
         }
         if (!(diagnosisInput.getValue() == null)) {
             dd = String.valueOf(diagnosisInput.getValue());
@@ -297,11 +366,11 @@ public class Controller implements Initializable {
                 streetInput.clear();
                 zipCodeInput.clear();
                 contactsInput.clear();
-                munipicipalityInput.clear();
                 diagnosisInput.getEditor().clear();
                 deathInput.getEditor().clear();
                 recoveryInput.getEditor().clear();
                 afmInput.clear();
+
 
                 if (addContactsHide) {
                     addContactsPanel.setVisible(true);
@@ -339,11 +408,11 @@ public class Controller implements Initializable {
                 streetInput.clear();
                 zipCodeInput.clear();
                 contactsInput.clear();
-                munipicipalityInput.clear();
                 diagnosisInput.getEditor().clear();
                 deathInput.getEditor().clear();
                 recoveryInput.getEditor().clear();
                 afmInput.clear();
+                municipalityInput.getSelectionModel().clearSelection();
 
                 if (addContactsHide) {
                     addContactsPanel.setVisible(true);
@@ -382,11 +451,11 @@ public class Controller implements Initializable {
                 streetInput.clear();
                 zipCodeInput.clear();
                 contactsInput.clear();
-                munipicipalityInput.clear();
                 diagnosisInput.getEditor().clear();
                 deathInput.getEditor().clear();
                 recoveryInput.getEditor().clear();
                 afmInput.clear();
+                municipalityInput.getSelectionModel().clearSelection();
 
                 counterContacts = 1;
 
@@ -427,43 +496,34 @@ public class Controller implements Initializable {
 
         if (!firstNameCInput.getText().isEmpty()) {
             fnC = firstNameCInput.getText();
-            System.out.println("gematon name");
         }
         if (!lastNameCInput.getText().isEmpty()) {
             lnC = lastNameCInput.getText();
-            System.out.println("gemato lastname");
         }
         if (!ageCInput.getText().isEmpty()) {
             ageC = Integer.parseInt(ageCInput.getText());
-            System.out.println("gemati ilikia");
         }
         if (!phoneNumberCInput.getText().isEmpty()) {
             pnC = phoneNumberCInput.getText();
-            System.out.println("gemato to number");
         }
-        if (!munipicipalityCInput.getText().isEmpty()) {
-            munC = Integer.parseInt(munipicipalityCInput.getText());
-            System.out.println("gematos o dimos");
+        if (municipalityCInput.getValue() != null) {
+            munC = municipalityCInput.getSelectionModel().getSelectedIndex();
+            munC++;
         }
         if (!addressCInput.getText().isEmpty()) {
             addC = addressCInput.getText();
-            System.out.println("addres ok");
         }
         if (!streetCInput.getText().isEmpty()) {
             stC = streetCInput.getText();
-            System.out.println("street ok");
         }
         if (!zipCCodeInput.getText().isEmpty()) {
             zcC = zipCCodeInput.getText();
-            System.out.println("zip ok");
         }
         if (!afmCInput.getText().isEmpty()) {
             afmC = Integer.parseInt(afmCInput.getText());
             conID = Integer.parseInt(afmCInput.getText());
-            System.out.println("afm ok");
         }
-        if ((!firstNameCInput.getText().isEmpty()) && (!lastNameCInput.getText().isEmpty()) && (!ageCInput.getText().isEmpty()) && (!phoneNumberCInput.getText().isEmpty()) && (!munipicipalityCInput.getText().isEmpty()) && (!addressCInput.getText().isEmpty()) && (!streetCInput.getText().isEmpty()) && (!zipCCodeInput.getText().isEmpty()) && (!afmCInput.getText().isEmpty())) {
-            System.out.println("antikimeno ok");
+        if ((!firstNameCInput.getText().isEmpty()) && (!lastNameCInput.getText().isEmpty()) && (!ageCInput.getText().isEmpty()) && (!phoneNumberCInput.getText().isEmpty()) && (municipalityCInput.getValue() != null) && (!addressCInput.getText().isEmpty()) && (!streetCInput.getText().isEmpty()) && (!zipCCodeInput.getText().isEmpty()) && (!afmCInput.getText().isEmpty())) {
             Contact contact = new Contact(afmC, conID, fnC, lnC, ageC, pnC,
                     munC,
                     addC, stC, zcC);
@@ -479,7 +539,7 @@ public class Controller implements Initializable {
                 lastNameCInput.clear();
                 ageCInput.clear();
                 phoneNumberCInput.clear();
-                munipicipalityCInput.clear();
+                municipalityCInput.getSelectionModel().clearSelection();
                 addressCInput.clear();
                 streetCInput.clear();
                 zipCCodeInput.clear();
@@ -499,10 +559,10 @@ public class Controller implements Initializable {
     // Click event that opens a panel to create a contact for a specific case
     @FXML
     public void menuAddContactClick(MouseEvent event) {
-        if(addContactUniqueHide){
+        if (addContactUniqueHide) {
             addContactUniquePanel.setVisible(true);
             addContactUniqueHide = false;
-        }else{
+        } else {
             addContactUniquePanel.setVisible(false);
             addContactUniqueHide = true;
         }
@@ -563,7 +623,7 @@ public class Controller implements Initializable {
             afmC = Integer.parseInt(afmCQInput.getText());
             System.out.println("afm ok");
         }
-        if(!afmCQKrousmatosInput.getText().isEmpty()){
+        if (!afmCQKrousmatosInput.getText().isEmpty()) {
             afmK = Integer.parseInt(afmCQKrousmatosInput.getText());
         }
         if ((!firstNameCQInput.getText().isEmpty()) && (!lastNameCQInput.getText().isEmpty()) && (!ageCQInput.getText().isEmpty()) && (!phoneNumberCQInput.getText().isEmpty()) && (!munipicipalityCQInput.getText().isEmpty()) && (!addressCQInput.getText().isEmpty()) && (!streetCQInput.getText().isEmpty()) && (!zipCQCodeInput.getText().isEmpty()) && (!afmCQInput.getText().isEmpty()) && (!afmCQKrousmatosInput.getText().isEmpty())) {
@@ -600,9 +660,80 @@ public class Controller implements Initializable {
 
     }
 
+    ObservableList<Case> oblist = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
+                "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
+                "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
+                "Φιλοθέης – Ψυχικού", "Χαλανδρίου", "Περιστερίου", "Αγίας Βαρβάρας", "Αγίων Αναργύρων – Καματερού", "Αιγάλεω",
+                "Ιλίου", "Πετρουπόλεως", "Χαϊδαρίου", "Καλλιθέας", "Αγίου Δημητρίου", "Αλίμου", "Γλυφάδας", "Ελληνικού – Αργυρούπολης",
+                "Μοσχάτου – Ταύρου", "Νέας Σμύρνης", "Παλαιού Φαλήρου", "Αχαρνών", "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
+                "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας", "Παιανίας", "Παλλήνης"
+                , "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού", "Ελευσίνας", "Ασπροπύργου", "Μάνδρας – Ειδυλλίας",
+                "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
+                "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
+
+        municipalityCInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
+                "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
+                "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
+                "Φιλοθέης – Ψυχικού", "Χαλανδρίου", "Περιστερίου", "Αγίας Βαρβάρας", "Αγίων Αναργύρων – Καματερού", "Αιγάλεω",
+                "Ιλίου", "Πετρουπόλεως", "Χαϊδαρίου", "Καλλιθέας", "Αγίου Δημητρίου", "Αλίμου", "Γλυφάδας", "Ελληνικού – Αργυρούπολης",
+                "Μοσχάτου – Ταύρου", "Νέας Σμύρνης", "Παλαιού Φαλήρου", "Αχαρνών", "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
+                "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας", "Παιανίας", "Παλλήνης"
+                , "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού", "Ελευσίνας", "Ασπροπύργου", "Μάνδρας – Ειδυλλίας",
+                "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
+                "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
+
+
+        System.out.println("1");
+        try{
+            System.out.println("2");
+            Connection con = DB.getConnection();
+            String querry = "SELECT * FROM Persons;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString("contactsNumber") != null){
+                    contactsNumberSQL = Integer.parseInt(rs.getString("contactsNumber"));
+                }else{
+                    contactsNumberSQL = 0;
+                }
+                System.out.println("3");
+                oblist.add(new Case(
+                        (contactsNumberSQL), (rs.getString("Diagnosis")),
+                        (rs.getString("Recovery")), (Integer.parseInt(rs.getString("AFM"))),
+                        (rs.getString("firstName")), (rs.getString("lastName")), (Integer.parseInt(rs.getString("age"))),
+                        (rs.getString("phoneNumber")), (Integer.parseInt(rs.getString("dimosID"))), (rs.getString("address")),
+                        (rs.getString("streetNumber")), (rs.getString("zipCode"))));
+            }
+
+        }catch (Exception e){
+
+        }
+        firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
+        phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        dimosTable.setCellValueFactory(new PropertyValueFactory<>("dimosID"));
+        addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
+        stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
+        zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        diagnosisTable.setCellValueFactory(new PropertyValueFactory<>("Diagnosis"));
+        recoveryTable.setCellValueFactory(new PropertyValueFactory<>("Recovery"));
+        deathTable.setCellValueFactory(new PropertyValueFactory<>("Death"));
+        numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
+        afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
+        personsTable.setItems(oblist);
+
+
+
     }
+
+
 
 }
 

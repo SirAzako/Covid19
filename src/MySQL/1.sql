@@ -7,7 +7,7 @@ DROP TABLE Contacts;
 DROP TABLE Dimoi;
 DROP TABLE Persons;
 
-SELECT * FROM Persons;
+SELECT * FROM Person1;
 
 SELECT * FROM Contacts;
 

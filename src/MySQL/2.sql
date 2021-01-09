@@ -8,7 +8,7 @@ CREATE TABLE Dimoi (
 CREATE TABLE Persons (
 	AFM INT NOT NULL UNIQUE,
 	ContactID INT UNIQUE,
-    ContactsNumber INT UNIQUE,
+    ContactsNumber INT,
     FirstName varchar(50) NOT NULL,
     LastName varchar(50) NOT NULL,
     Age INT NOT NULL,
@@ -38,3 +38,10 @@ CREATE TABLE Contacts (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+CREATE TABLE Contacts (
+	name varchar(20),
+    username varchar(20)
+);
+
+

@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * @author Azako
  */
-abstract class Person {
+public abstract class Person {
     protected int AFM;
     protected String firstName;
     protected String lastName;
