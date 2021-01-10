@@ -349,7 +349,7 @@
                </rotationAxis>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactUniquePanel" layoutX="174.0" layoutY="-7.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -466,25 +466,32 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: DCDC65;" visible="false">
+      <AnchorPane fx:id="findPersonPanel" layoutX="265.0" layoutY="3.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <TableView fx:id="personsTable" prefHeight="961.0" prefWidth="1343.0">
+            <TableView fx:id="personsTable" layoutX="158.0" layoutY="-2.0" prefHeight="1001.0" prefWidth="1183.0">
               <columns>
                 <TableColumn fx:id="afmTable" prefWidth="75.0" text="ΑΦΜ" />
                   <TableColumn fx:id="numberOfContactsTable" prefWidth="136.33334350585938" text="Number of Contacts" />
                   <TableColumn fx:id="firstNameTable" prefWidth="68.66668701171875" text="First Name" />
-                  <TableColumn fx:id="lastNameTable" prefWidth="70.33331298828125" text="Last Name" />
-                  <TableColumn fx:id="ageTable" prefWidth="80.66668701171875" text="Age" />
-                  <TableColumn fx:id="phoneNumberTable" prefWidth="94.66668701171875" text="Phone Number" />
-                  <TableColumn fx:id="dimosTable" prefWidth="80.66668701171875" text="Dimos" />
+                  <TableColumn fx:id="lastNameTable" prefWidth="99.0" text="Last Name" />
+                  <TableColumn fx:id="ageTable" prefWidth="53.0" text="Age" />
+                  <TableColumn fx:id="phoneNumberTable" prefWidth="117.0" text="Phone Number" />
+                  <TableColumn fx:id="dimosTable" prefWidth="59.0" text="Dimos" />
                   <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="89.66668701171875" text="Address" />
                   <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="89.66668701171875" text="St. Number" />
                   <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="89.66668701171875" text="Zip Code" />
                   <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="89.66668701171875" text="Diagnosis Date" />
                   <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="89.66668701171875" text="Recovery Date" />
-                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="89.66668701171875" text="Death Date" />
+                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="123.0" text="Death Date" />
               </columns>
             </TableView>
+            <VBox layoutX="13.0" layoutY="18.0" prefHeight="873.0" prefWidth="135.0" spacing="50.0">
+               <children>
+                  <Button fx:id="allPersonsButton" mnemonicParsing="false" onMouseClicked="#allPersonsClick" prefHeight="25.0" prefWidth="136.0" text="ALL PERSONS" />
+                  <Button fx:id="allCasesButton" mnemonicParsing="false" onMouseClicked="#allCasesClick" prefHeight="25.0" prefWidth="138.0" text="CASES" />
+                  <Button fx:id="allContactButton" mnemonicParsing="false" onMouseClicked="#allContactsClick" prefHeight="25.0" prefWidth="138.0" text="CONTACTS" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

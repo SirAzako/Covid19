@@ -237,6 +237,16 @@ public class Controller implements Initializable {
     private TableColumn<Case, String> deathTable;
 
 
+    @FXML
+    private Button allPersonsButton;
+
+    @FXML
+    private Button allCasesButton;
+
+    @FXML
+    private Button allContactButton;
+
+
 
 
     /* Here we will initialize all the functions and events on click */
@@ -631,32 +641,20 @@ public class Controller implements Initializable {
 
     }
 
-    ObservableList<Case> oblist = FXCollections.observableArrayList();
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    public void allCasesClick(MouseEvent event) {
 
-        // Initialize in all comboBox that the use choose a municipality to have a default value
-        municipalityInput.getSelectionModel().select("Select municipality");
-        municipalityCInput.getSelectionModel().select("Select municipality");
-        municipalityCQInput.getSelectionModel().select("Select municipality");
+    }
 
-        // Initialize the chooses that the comboBox will have
-        municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
-                "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
-                "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
-                "Φιλοθέης – Ψυχικού", "Χαλανδρίου", "Περιστερίου", "Αγίας Βαρβάρας", "Αγίων Αναργύρων – Καματερού", "Αιγάλεω",
-                "Ιλίου", "Πετρουπόλεως", "Χαϊδαρίου", "Καλλιθέας", "Αγίου Δημητρίου", "Αλίμου", "Γλυφάδας", "Ελληνικού – Αργυρούπολης",
-                "Μοσχάτου – Ταύρου", "Νέας Σμύρνης", "Παλαιού Φαλήρου", "Αχαρνών", "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
-                "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας", "Παιανίας", "Παλλήνης"
-                , "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού", "Ελευσίνας", "Ασπροπύργου", "Μάνδρας – Ειδυλλίας",
-                "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
-                "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
+    @FXML
+    public void allContactsClick(MouseEvent event) {
 
-        municipalityCInput.setItems(municipalityInput.getItems());
-        municipalityCQInput.setItems(municipalityInput.getItems());
+    }
 
-
+    @FXML
+    public void allPersonsClick(MouseEvent event) {
+        ObservableList<Case> oblist = FXCollections.observableArrayList();
         try{
             Connection con = DB.getConnection();
             String querry = "SELECT * FROM Persons;";
@@ -696,7 +694,32 @@ public class Controller implements Initializable {
         afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
         personsTable.setItems(oblist);
 
+    }
 
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        // Initialize in all comboBox that the use choose a municipality to have a default value
+        municipalityInput.getSelectionModel().select("Select municipality");
+        municipalityCInput.getSelectionModel().select("Select municipality");
+        municipalityCQInput.getSelectionModel().select("Select municipality");
+
+        // Initialize the chooses that the comboBox will have
+        municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
+                "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
+                "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
+                "Φιλοθέης – Ψυχικού", "Χαλανδρίου", "Περιστερίου", "Αγίας Βαρβάρας", "Αγίων Αναργύρων – Καματερού", "Αιγάλεω",
+                "Ιλίου", "Πετρουπόλεως", "Χαϊδαρίου", "Καλλιθέας", "Αγίου Δημητρίου", "Αλίμου", "Γλυφάδας", "Ελληνικού – Αργυρούπολης",
+                "Μοσχάτου – Ταύρου", "Νέας Σμύρνης", "Παλαιού Φαλήρου", "Αχαρνών", "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
+                "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας", "Παιανίας", "Παλλήνης"
+                , "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού", "Ελευσίνας", "Ασπροπύργου", "Μάνδρας – Ειδυλλίας",
+                "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
+                "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
+
+        municipalityCInput.setItems(municipalityInput.getItems());
+        municipalityCQInput.setItems(municipalityInput.getItems());
 
     }
     
