@@ -39,9 +39,5 @@ CREATE TABLE Contacts (
     ON UPDATE CASCADE
 );
 
-CREATE TABLE Contacts (
-	name varchar(20),
-    username varchar(20)
-);
 
 

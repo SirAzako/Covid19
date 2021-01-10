@@ -17,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -63,6 +64,7 @@ public class Controller implements Initializable {
     @FXML
     private Group menuFindPersonButton;
 
+
     // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button)
     @FXML
     private AnchorPane createCasePanel;
@@ -96,7 +98,6 @@ public class Controller implements Initializable {
 
     @FXML
     private ComboBox<String> municipalityInput;
-
 
     @FXML
     private DatePicker diagnosisInput;
@@ -169,7 +170,7 @@ public class Controller implements Initializable {
     private TextField phoneNumberCQInput;
 
     @FXML
-    private TextField munipicipalityCQInput;
+    private ComboBox<String> municipalityCQInput;
 
     @FXML
     private TextField addressCQInput;
@@ -251,9 +252,6 @@ public class Controller implements Initializable {
             menuBar.setVisible(false);
             menuIsHide = true;
         }
-
-
-
     }
 
     // Click event that opens and close the create case panel
@@ -298,178 +296,136 @@ public class Controller implements Initializable {
         int cn = 0;
         int mun = 0;
 
-        if(municipalityInput.getValue() != null){
+        if (municipalityInput.getValue().isEmpty() || firstNameInput.getText().isEmpty() ||
+            lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty() ||
+            phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty() ||
+            streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
+            contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
 
-          mun = municipalityInput.getSelectionModel().getSelectedIndex();
-          mun++;
-        }
-        if (!firstNameInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill all the field with *");
+        } else {
+            // Initialize all the values we will need to create and insert the case in database
+            // Municipality index must be +1 in order to match the case with the right municipality in database
+            mun = municipalityInput.getSelectionModel().getSelectedIndex() + 1;
             fn = firstNameInput.getText();
-        }
-        if (!lastNameInput.getText().isEmpty()) {
             ln = lastNameInput.getText();
-        }
-        if (!ageInput.getText().isEmpty()) {
             ag = Integer.parseInt(ageInput.getText());
-        }
-        if (!phoneNumberInput.getText().isEmpty()) {
             pn = phoneNumberInput.getText();
-        }
-        if (!addressInput.getText().isEmpty()) {
             ad = addressInput.getText();
-        }
-        if (!streetInput.getText().isEmpty()) {
             st = streetInput.getText();
-        }
-        if (!zipCodeInput.getText().isEmpty()) {
             zc = zipCodeInput.getText();
-        }
-        if (!contactsInput.getText().isEmpty()) {
             cn = Integer.parseInt(contactsInput.getText());
-        }
-        if (!(diagnosisInput.getValue() == null)) {
             dd = String.valueOf(diagnosisInput.getValue());
-            System.out.println(dd);
-        }
-        if (!(recoveryInput.getValue() == null)) {
-            rd = String.valueOf(recoveryInput.getValue());
-        }
-        if (!(deathInput.getValue() == null)) {
-            dt = String.valueOf(deathInput.getValue());
-        }
-        if (!afmInput.getText().isEmpty()) {
             af = Integer.parseInt(afmInput.getText());
-        }
 
-        if (((recoveryInput.getValue() == null)) && ((deathInput.getValue() == null))) {
-            parseAFM = af;
-            Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
-                    st, zc);
+            // Recovered data and death date
+            rd = String.valueOf(recoveryInput.getValue());
+            dt = String.valueOf(deathInput.getValue());
+
+            // Creating a instance of CaseDAO in order to insert the case in database
             CaseDAO caseDAO = new CaseDAO();
-            try {
-                caseDAO.createCaseActive(krousma);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                System.out.println("Case created successfully..");
-                System.out.println("The case is active..");
 
-                totalContacts = cn;
-                numberLabel.setText(String.valueOf(totalContacts));
-                counterLabel.setText(String.valueOf(counterContacts));
+            // There are 3 chances (new Case, new Recovered Case or new Dead Case)
+            if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
+                parseAFM = af;
+                Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
+                        st, zc);
 
-                firstNameInput.clear();
-                lastNameInput.clear();
-                ageInput.clear();
-                phoneNumberInput.clear();
-                addressInput.clear();
-                streetInput.clear();
-                zipCodeInput.clear();
-                contactsInput.clear();
-                diagnosisInput.getEditor().clear();
-                deathInput.getEditor().clear();
-                recoveryInput.getEditor().clear();
-                afmInput.clear();
+                try {
+                    caseDAO.createCaseActive(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
 
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
 
-                if (addContactsHide) {
-                    addContactsPanel.setVisible(true);
-                    addContactsHide = false;
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
+                    }
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
+                    }
                 }
-                if (!createCaseHide) {
-                    createCasePanel.setVisible(false);
-                    createCaseHide = true;
+
+            } else if (recoveryInput.getValue() != null && deathInput.getValue() == null) {
+                parseAFM = af;
+                Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
+                        ad, st, zc);
+                try {
+                    caseDAO.createCaseRecovery(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    System.out.println("Case created successfully..");
+                    System.out.println("The case is recovery..");
+
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
+
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
+                    }
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
+                    }
                 }
-            }
-        }
 
-        if (!(recoveryInput.getValue() == null) && (deathInput.getValue() == null)) {
-            parseAFM = af;
-            Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
-                    ad, st, zc);
-            CaseDAO caseDAO = new CaseDAO();
-            try {
-                caseDAO.createCaseRecovery(krousma);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                System.out.println("Case created successfully..");
-                System.out.println("The case is recovery..");
+            }else {
+                parseAFM = af;
+                Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
+                        st, zc);
+                try {
+                    caseDAO.createCaseDead(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    System.out.println("Case created successfully..");
+                    System.out.println("The case is dead..");
 
-                totalContacts = cn;
-                numberLabel.setText(String.valueOf(totalContacts));
-                counterLabel.setText(String.valueOf(counterContacts));
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
+                    counterContacts = 1;
 
-                firstNameInput.clear();
-                lastNameInput.clear();
-                ageInput.clear();
-                phoneNumberInput.clear();
-                addressInput.clear();
-                streetInput.clear();
-                zipCodeInput.clear();
-                contactsInput.clear();
-                diagnosisInput.getEditor().clear();
-                deathInput.getEditor().clear();
-                recoveryInput.getEditor().clear();
-                afmInput.clear();
-                municipalityInput.getSelectionModel().clearSelection();
-
-                if (addContactsHide) {
-                    addContactsPanel.setVisible(true);
-                    addContactsHide = false;
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
+                    }
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
+                    }
                 }
-                if (!createCaseHide) {
-                    createCasePanel.setVisible(false);
-                    createCaseHide = true;
-                }
-            }
 
-        }
-
-        if ((recoveryInput.getValue() == null) && !(deathInput.getValue() == null)) {
-            parseAFM = af;
-            Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
-                    st, zc);
-            CaseDAO caseDAO = new CaseDAO();
-            try {
-                caseDAO.createCaseDead(krousma);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                System.out.println("Case created successfully..");
-                System.out.println("The case is dead..");
-
-                totalContacts = cn;
-                numberLabel.setText(String.valueOf(totalContacts));
-                counterLabel.setText(String.valueOf(counterContacts));
-
-                firstNameInput.clear();
-                lastNameInput.clear();
-                ageInput.clear();
-                phoneNumberInput.clear();
-                addressInput.clear();
-                streetInput.clear();
-                zipCodeInput.clear();
-                contactsInput.clear();
-                diagnosisInput.getEditor().clear();
-                deathInput.getEditor().clear();
-                recoveryInput.getEditor().clear();
-                afmInput.clear();
-                municipalityInput.getSelectionModel().clearSelection();
-
-                counterContacts = 1;
-
-                if (addContactsHide == true) {
-                    addContactsPanel.setVisible(true);
-                    addContactsHide = false;
-                }
-                if (createCaseHide == false) {
-                    createCasePanel.setVisible(false);
-                    createCaseHide = true;
-                }
             }
 
+            // Clear all the fields
+            firstNameInput.clear();
+            lastNameInput.clear();
+            ageInput.clear();
+            phoneNumberInput.clear();
+            addressInput.clear();
+            streetInput.clear();
+            zipCodeInput.clear();
+            contactsInput.clear();
+            diagnosisInput.getEditor().clear();
+            deathInput.getEditor().clear();
+            recoveryInput.getEditor().clear();
+            afmInput.clear();
+            municipalityInput.getSelectionModel().clearSelection();
         }
+
+
 
     }
 
@@ -603,8 +559,8 @@ public class Controller implements Initializable {
             pnC = phoneNumberCQInput.getText();
             System.out.println("gemato to number");
         }
-        if (!munipicipalityCQInput.getText().isEmpty()) {
-            munC = Integer.parseInt(munipicipalityCQInput.getText());
+        if (!municipalityCQInput.getValue().isEmpty()) {
+            munC = municipalityCQInput.getSelectionModel().getSelectedIndex() + 1;
             System.out.println("gematos o dimos");
         }
         if (!addressCQInput.getText().isEmpty()) {
@@ -626,7 +582,7 @@ public class Controller implements Initializable {
         if (!afmCQKrousmatosInput.getText().isEmpty()) {
             afmK = Integer.parseInt(afmCQKrousmatosInput.getText());
         }
-        if ((!firstNameCQInput.getText().isEmpty()) && (!lastNameCQInput.getText().isEmpty()) && (!ageCQInput.getText().isEmpty()) && (!phoneNumberCQInput.getText().isEmpty()) && (!munipicipalityCQInput.getText().isEmpty()) && (!addressCQInput.getText().isEmpty()) && (!streetCQInput.getText().isEmpty()) && (!zipCQCodeInput.getText().isEmpty()) && (!afmCQInput.getText().isEmpty()) && (!afmCQKrousmatosInput.getText().isEmpty())) {
+        if ((!firstNameCQInput.getText().isEmpty()) && (!lastNameCQInput.getText().isEmpty()) && (!ageCQInput.getText().isEmpty()) && (!phoneNumberCQInput.getText().isEmpty()) && (!municipalityCQInput.getValue().isEmpty()) && (!addressCQInput.getText().isEmpty()) && (!streetCQInput.getText().isEmpty()) && (!zipCQCodeInput.getText().isEmpty()) && (!afmCQInput.getText().isEmpty()) && (!afmCQKrousmatosInput.getText().isEmpty())) {
             System.out.println("antikimeno ok");
             Contact contact = new Contact(afmC, afmC, fnC, lnC, ageC, pnC,
                     munC,
@@ -643,7 +599,7 @@ public class Controller implements Initializable {
                 lastNameCQInput.clear();
                 ageCQInput.clear();
                 phoneNumberCQInput.clear();
-                munipicipalityCQInput.clear();
+                municipalityCQInput.getSelectionModel().clearSelection();
                 addressCQInput.clear();
                 streetCQInput.clear();
                 zipCQCodeInput.clear();
@@ -665,6 +621,12 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // Initialize in all comboBox that the use choose a municipality to have a default value
+        municipalityInput.getSelectionModel().select("Select municipality");
+        municipalityCInput.getSelectionModel().select("Select municipality");
+        municipalityCQInput.getSelectionModel().select("Select municipality");
+
+        // Initialize the chooses that the comboBox will have
         municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
                 "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
                 "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
@@ -676,21 +638,11 @@ public class Controller implements Initializable {
                 "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
                 "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
 
-        municipalityCInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου", "Δάφνης – Υμηττού", "Ζωγράφου",
-                "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου", "Βριλησσίων",
-                "Ηρακλείου", "Κηφισιάς", "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας", "Παπάγου – Χολαργού", "Πεντέλης",
-                "Φιλοθέης – Ψυχικού", "Χαλανδρίου", "Περιστερίου", "Αγίας Βαρβάρας", "Αγίων Αναργύρων – Καματερού", "Αιγάλεω",
-                "Ιλίου", "Πετρουπόλεως", "Χαϊδαρίου", "Καλλιθέας", "Αγίου Δημητρίου", "Αλίμου", "Γλυφάδας", "Ελληνικού – Αργυρούπολης",
-                "Μοσχάτου – Ταύρου", "Νέας Σμύρνης", "Παλαιού Φαλήρου", "Αχαρνών", "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
-                "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας", "Παιανίας", "Παλλήνης"
-                , "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού", "Ελευσίνας", "Ασπροπύργου", "Μάνδρας – Ειδυλλίας",
-                "Μεγαρέων", "Φυλής", "Πειραιώς", "Κερατσινίου – Δραπετσώνας", "Κορυδαλλού", "Νίκαιας – Αγίου Ιωάννη Ρέντη",
-                "Περάματος", "Σαλαμίνος", "Αγκιστρίου", "Αίγινας", "Κυθήρων", "Πόρου", "Σπετσών", "Τροιζηνίας", "Ύδρας");
+        municipalityCInput.setItems(municipalityInput.getItems());
+        municipalityCQInput.setItems(municipalityInput.getItems());
 
 
-        System.out.println("1");
         try{
-            System.out.println("2");
             Connection con = DB.getConnection();
             String querry = "SELECT * FROM Persons;";
             PreparedStatement stmt = con.prepareStatement(querry);
@@ -702,17 +654,17 @@ public class Controller implements Initializable {
                 }else{
                     contactsNumberSQL = 0;
                 }
-                System.out.println("3");
                 oblist.add(new Case(
-                        (contactsNumberSQL), (rs.getString("Diagnosis")),
-                        (rs.getString("Recovery")), (Integer.parseInt(rs.getString("AFM"))),
-                        (rs.getString("firstName")), (rs.getString("lastName")), (Integer.parseInt(rs.getString("age"))),
-                        (rs.getString("phoneNumber")), (Integer.parseInt(rs.getString("dimosID"))), (rs.getString("address")),
-                        (rs.getString("streetNumber")), (rs.getString("zipCode"))));
+                        contactsNumberSQL, rs.getString("Diagnosis"),
+                        rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                        rs.getString("firstName"), rs.getString("lastName"),
+                        Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                        Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                        rs.getString("streetNumber"), rs.getString("zipCode")));
             }
 
-        }catch (Exception e){
-
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
