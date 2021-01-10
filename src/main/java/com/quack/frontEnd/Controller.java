@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
-    private boolean menuIsHide = true;
+    private boolean menuHide = true;
     private boolean createCaseHide = true;
     private boolean addContactsHide = true;
     private boolean addContactUniqueHide = true;
@@ -260,44 +260,35 @@ public class Controller implements Initializable {
 
 
 
+
     /* Here we will initialize all the functions and events on click */
 
 
     // Click event that open and close the menu bar
     @FXML
     public void menuClick(MouseEvent event) {
-        if (menuIsHide) {
-            menuBar.setVisible(true);
-            menuIsHide = false;
-        } else {
-            menuBar.setVisible(false);
-            menuIsHide = true;
-        }
+        openPanels(menuBar);
     }
 
     // Click event that opens and close the create case panel
     @FXML
     public void menuCreateClick(MouseEvent event) {
-        if (createCaseHide) {
-            createCasePanel.setVisible(true);
-            createCaseHide = false;
-        } else {
-            createCasePanel.setVisible(false);
-            createCaseHide = true;
-        }
+        openPanels(createCasePanel);
     }
 
     // Click event that opens and close the find persons panel
     @FXML
     public void menuFindPersonClick(MouseEvent event) {
-        if (findPersonHide) {
-            findPersonPanel.setVisible(true);
-            findPersonHide = false;
-        } else {
-            findPersonPanel.setVisible(false);
-            findPersonHide = true;
-        }
+        openPanels(findPersonPanel);
+
     }
+
+    // Click event that opens a panel to create a contact for a specific case
+    @FXML
+    public void menuAddContactClick(MouseEvent event) {
+        openPanels(addContactUniquePanel);
+    }
+
     // Click event that will take the value from the create case panel
     // and create the case in the database
     @FXML
@@ -316,77 +307,120 @@ public class Controller implements Initializable {
         int cn = 0;
         int mun = 0;
 
-        // If at least one of the "must fill" fields is empty then show a message else continue the process
-        if (municipalityInput.getSelectionModel().getSelectedIndex() == -1 || firstNameInput.getText().isEmpty() ||
-                lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty() ||
-                phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty() ||
-                streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
-                contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
+        if (municipalityInput.getValue().isEmpty() || firstNameInput.getText().isEmpty() ||
+            lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty() ||
+            phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty() ||
+            streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
+            contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
 
             JOptionPane.showMessageDialog(null, "Please fill all the field with *", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            try {
-                // Initialize all the values we will need to create and insert the case in database
-                // Municipality index must be +1 in order to match the case with the right municipality in database
+            // Initialize all the values we will need to create and insert the case in database
+            // Municipality index must be +1 in order to match the case with the right municipality in database
+            mun = municipalityInput.getSelectionModel().getSelectedIndex() + 1;
+            fn = firstNameInput.getText();
+            ln = lastNameInput.getText();
+            ag = Integer.parseInt(ageInput.getText());
+            pn = phoneNumberInput.getText();
+            ad = addressInput.getText();
+            st = streetInput.getText();
+            zc = zipCodeInput.getText();
+            cn = Integer.parseInt(contactsInput.getText());
+            dd = String.valueOf(diagnosisInput.getValue());
+            af = Integer.parseInt(afmInput.getText());
 
-                mun = municipalityInput.getSelectionModel().getSelectedIndex() + 1;
-                fn = firstNameInput.getText();
-                ln = lastNameInput.getText();
-                ag = Integer.parseInt(ageInput.getText());
-                pn = phoneNumberInput.getText();
-                ad = addressInput.getText();
-                st = streetInput.getText();
-                zc = zipCodeInput.getText();
-                cn = Integer.parseInt(contactsInput.getText());
-                dd = String.valueOf(diagnosisInput.getValue());
-                af = Integer.parseInt(afmInput.getText());
+            // Recovered data and death date
+            rd = String.valueOf(recoveryInput.getValue());
+            dt = String.valueOf(deathInput.getValue());
 
-                // Recovered data and death date
-                rd = String.valueOf(recoveryInput.getValue());
-                dt = String.valueOf(deathInput.getValue());
+            // Creating a instance of CaseDAO in order to insert the case in database
+            CaseDAO caseDAO = new CaseDAO();
 
-                // There are 3 chances (new Case, new Recovered Case or new Dead Case)
-                if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
-                    parseAFM = af;
-                    Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
-                            st, zc);
+            // There are 3 chances (new Case, new Recovered Case or new Dead Case)
+            if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
+                parseAFM = af;
+                Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
+                        st, zc);
 
-                    try {
-                        insert_Case(krousma);
-                        clear_newCasePane(event);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                try {
+                    caseDAO.createCaseActive(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
+
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
                     }
-
-                } else if (recoveryInput.getValue() != null && deathInput.getValue() == null) {
-                    parseAFM = af;
-                    Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
-                            ad, st, zc);
-                    try {
-                        insert_Case(krousma);
-                        clear_newCasePane(event);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
                     }
-
-                } else if (recoveryInput.getValue() == null && deathInput.getValue() != null) {
-                    parseAFM = af;
-                    Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
-                            st, zc);
-                    try {
-                        insert_Case(krousma);
-                        clear_newCasePane(event);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "You cant enter both recovery date and death date", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } else if (recoveryInput.getValue() != null && deathInput.getValue() == null) {
+                parseAFM = af;
+                Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
+                        ad, st, zc);
+                try {
+                    caseDAO.createCaseRecovery(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    System.out.println("Case created successfully..");
+                    System.out.println("The case is recovery..");
+
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
+
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
+                    }
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
+                    }
+                }
+
+            }else if (recoveryInput.getValue() == null && deathInput.getValue() != null){
+                parseAFM = af;
+                Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
+                        st, zc);
+                try {
+                    caseDAO.createCaseDead(krousma);
+                    JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    totalContacts = cn;
+                    numberLabel.setText(String.valueOf(totalContacts));
+                    counterLabel.setText(String.valueOf(counterContacts));
+                    counterContacts = 1;
+
+                    if (addContactsHide) {
+                        addContactsPanel.setVisible(true);
+                        addContactsHide = false;
+                    }
+                    if (!createCaseHide) {
+                        createCasePanel.setVisible(false);
+                        createCaseHide = true;
+                    }
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "You cant enter both recovery date and death date", "Warning", JOptionPane.WARNING_MESSAGE);
             }
 
 
@@ -414,57 +448,11 @@ public class Controller implements Initializable {
 
     // Cancel button. It cancels the creation of a case in new case pane
     @FXML
-    void cancel_newCase(MouseEvent event) {
+    void cancelB_newCase(MouseEvent event) {
         clear_newCasePane(event);
-        createCasePanel.setVisible(false);
-        createCaseHide = true;
-    }
-
-    // In this method we give the case object and it automatically insert it
-    // Also depend to the contactNumber it goes to the next Panel or not
-    public void insert_Case(Case krousma) throws Exception {
-        // Creating a instance of CaseDAO in order to insert the case in database
-        CaseDAO caseDAO = new CaseDAO();
-
-        if (krousma.getContactsNumber() == 0) {
-            // If the case didnt had contacts then just create the case and close the pane
-
-            try {
-                // Insert the case
-                caseDAO.createCaseActive(krousma);
-                JOptionPane.showMessageDialog(null, "Case has been created successfully!");
-
-                // Close the createCasePanel
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } else if (krousma.getContactsNumber() > 0){
-            // If the case had contacts then create the case and open the addContactsPanel
-            try {
-                // Insert the case
-                caseDAO.createCaseActive(krousma);
-                JOptionPane.showMessageDialog(null, "Case has been created successfully!");
-
-                // Update the variables that count how many contacts you will add
-                totalContacts = krousma.getContactsNumber();
-                numberLabel.setText(String.valueOf(totalContacts));
-                counterLabel.setText(String.valueOf(counterContacts));
-
-                // Close the createCasePanel and open addContactPanel
-                // in order to add the number of contacts the user said
-                addContactsPanel.setVisible(true);
-                addContactsHide = false;
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        } else {
-            throw new Exception("What do you mean you contacted with " + krousma.getContactsNumber() + " people??");
+        if (!createCaseHide) {
+            createCasePanel.setVisible(false);
+            createCaseHide = true;
         }
     }
 
@@ -487,85 +475,66 @@ public class Controller implements Initializable {
         counterContacts++;
         counterLabel.setText(String.valueOf(counterContacts));
 
-        if (firstNameCInput.getText().isEmpty() || lastNameCInput.getText().isEmpty() ||
-                ageCInput.getText().isEmpty() || phoneNumberCInput.getText().isEmpty() ||
-                municipalityCInput.getSelectionModel().getSelectedIndex() == -1 ||
-                addressCInput.getText().isEmpty() || streetCInput.getText().isEmpty() ||
-                zipCCodeInput.getText().isEmpty() || afmCInput.getText().isEmpty()) {
 
-            JOptionPane.showMessageDialog(null, "Please fill all the fields with *", "Warning", JOptionPane.WARNING_MESSAGE);
-        } else {
+        if (!firstNameCInput.getText().isEmpty()) {
             fnC = firstNameCInput.getText();
+        }
+        if (!lastNameCInput.getText().isEmpty()) {
             lnC = lastNameCInput.getText();
+        }
+        if (!ageCInput.getText().isEmpty()) {
             ageC = Integer.parseInt(ageCInput.getText());
+        }
+        if (!phoneNumberCInput.getText().isEmpty()) {
             pnC = phoneNumberCInput.getText();
-            munC = municipalityCInput.getSelectionModel().getSelectedIndex() + 1;
+        }
+        if (municipalityCInput.getValue() != null) {
+            munC = municipalityCInput.getSelectionModel().getSelectedIndex();
+            munC++;
+        }
+        if (!addressCInput.getText().isEmpty()) {
             addC = addressCInput.getText();
+        }
+        if (!streetCInput.getText().isEmpty()) {
             stC = streetCInput.getText();
+        }
+        if (!zipCCodeInput.getText().isEmpty()) {
             zcC = zipCCodeInput.getText();
+        }
+        if (!afmCInput.getText().isEmpty()) {
             afmC = Integer.parseInt(afmCInput.getText());
             conID = Integer.parseInt(afmCInput.getText());
-
-            // Create the object and an instance of the ContactDAO to add it to DB
+        }
+        if ((!firstNameCInput.getText().isEmpty()) && (!lastNameCInput.getText().isEmpty()) && (!ageCInput.getText().isEmpty()) && (!phoneNumberCInput.getText().isEmpty()) && (municipalityCInput.getValue() != null) && (!addressCInput.getText().isEmpty()) && (!streetCInput.getText().isEmpty()) && (!zipCCodeInput.getText().isEmpty()) && (!afmCInput.getText().isEmpty())) {
             Contact contact = new Contact(afmC, conID, fnC, lnC, ageC, pnC,
-                    munC, addC, stC, zcC);
+                    munC,
+                    addC, stC, zcC);
             ContactDAO contactDAO = new ContactDAO();
-
             try {
-                // Create the contact and create also the "connection" case to contact
                 contactDAO.createContact(contact);
                 contactDAO.connectCaseContact(parseAFM, contact);
-                JOptionPane.showMessageDialog(null, "Contact has been successfully created");
-
-                // Clear the fields to add a new contact
-                // if the contact number given from the previous panel is not yet reached
-                clear_addContacts(event);
-
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
             } finally {
+                System.out.println("DIMIOURGITHIKE I EPAFI");
+                firstNameCInput.clear();
+                lastNameCInput.clear();
+                ageCInput.clear();
+                phoneNumberCInput.clear();
+                municipalityCInput.getSelectionModel().clearSelection();
+                addressCInput.clear();
+                streetCInput.clear();
+                zipCCodeInput.clear();
+                afmCInput.clear();
                 if (counterContacts > totalContacts) {
-                    addContactsPanel.setVisible(false);
-                    addContactsHide = true;
-                    counterContacts = 0;
+                    if (!addContactsHide) {
+                        addContactsPanel.setVisible(false);
+                        addContactsHide = true;
+                    }
                 }
             }
-
         }
 
-    }
-
-    // On click event in the addContacts Panel that cancel rest of the process
-    @FXML
-    void cancel_addContacts(MouseEvent event) {
-        // Clear the fields to add a new contact
-        clear_addContacts(event);
-        addContactsPanel.setVisible(false);
-        addContactsHide = true;
-    }
-
-    // On click event in the addContacts Panel that clear the fields
-    @FXML
-    void clear_addContacts(MouseEvent event) {
-        firstNameCInput.clear();
-        lastNameCInput.clear();
-        ageCInput.clear();
-        phoneNumberCInput.clear();
-        municipalityCInput.getSelectionModel().clearSelection();
-        addressCInput.clear();
-        streetCInput.clear();
-        zipCCodeInput.clear();
-        afmCInput.clear();
-    }    // Click event that opens a panel to create a contact for a specific case
-    @FXML
-    public void menuAddContactClick(MouseEvent event) {
-        if (addContactUniqueHide) {
-            addContactUniquePanel.setVisible(true);
-            addContactUniqueHide = false;
-        } else {
-            addContactUniquePanel.setVisible(false);
-            addContactUniqueHide = true;
-        }
     }
 
 
@@ -705,7 +674,6 @@ public class Controller implements Initializable {
 
     }
 
-
     @FXML
     public void allContactsClick(MouseEvent event) {
         ObservableList<Case> oblist = FXCollections.observableArrayList();
@@ -750,7 +718,6 @@ public class Controller implements Initializable {
 
     }
 
-
     @FXML
     public void allPersonsClick(MouseEvent event) {
         ObservableList<Case> oblist = FXCollections.observableArrayList();
@@ -794,6 +761,7 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
 
     }
+
 
 
     @FXML
@@ -966,6 +934,61 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
     }
 
+    public void openPanels(AnchorPane panelOpen){
+        if(panelOpen == menuBar){
+            if(menuHide){
+                menuBar.setVisible(true);
+                menuHide = false;
+            }else{
+                menuBar.setVisible(false);
+                menuHide = true;
+            }
+        }
+        if(panelOpen == createCasePanel){
+            if(createCaseHide){
+                createCasePanel.setVisible(true);
+                createCaseHide = false;
+
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }else{
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+            }
+        }
+
+        if(panelOpen == findPersonPanel){
+            if (findPersonHide){
+                findPersonPanel.setVisible(true);
+                findPersonHide = false;
+
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }else{
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+            }
+        }
+
+        if(panelOpen == addContactUniquePanel){
+            if(addContactUniqueHide){
+                addContactUniquePanel.setVisible(true);
+                addContactUniqueHide = false;
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+
+            }else{
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }
+        }
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
