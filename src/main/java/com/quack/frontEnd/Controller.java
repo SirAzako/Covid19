@@ -246,6 +246,18 @@ public class Controller implements Initializable {
     @FXML
     private Button allContactButton;
 
+    @FXML
+    private Button searchFilterButton;
+
+    @FXML
+    private TextField filterInput;
+
+    @FXML
+    private ComboBox<String> filterComboBox;
+
+    @FXML
+    private ComboBox<String> chooseTableComboBox;
+
 
 
 
@@ -644,11 +656,89 @@ public class Controller implements Initializable {
 
     @FXML
     public void allCasesClick(MouseEvent event) {
+        ObservableList<Case> oblist = FXCollections.observableArrayList();
+        try{
+            Connection con = DB.getConnection();
+            String querry = "SELECT * FROM Persons WHERE ContactID IS NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString("contactsNumber") != null){
+                    contactsNumberSQL = Integer.parseInt(rs.getString("contactsNumber"));
+                }else{
+                    contactsNumberSQL = 0;
+                }
+                oblist.add(new Case(
+                        contactsNumberSQL, rs.getString("Diagnosis"),
+                        rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                        rs.getString("firstName"), rs.getString("lastName"),
+                        Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                        Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                        rs.getString("streetNumber"), rs.getString("zipCode")));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
+        phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        dimosTable.setCellValueFactory(new PropertyValueFactory<>("dimosID"));
+        addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
+        stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
+        zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        diagnosisTable.setCellValueFactory(new PropertyValueFactory<>("Diagnosis"));
+        recoveryTable.setCellValueFactory(new PropertyValueFactory<>("Recovery"));
+        deathTable.setCellValueFactory(new PropertyValueFactory<>("Death"));
+        numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
+        afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
+        personsTable.setItems(oblist);
 
     }
 
     @FXML
     public void allContactsClick(MouseEvent event) {
+        ObservableList<Case> oblist = FXCollections.observableArrayList();
+        try{
+            Connection con = DB.getConnection();
+            String querry = "SELECT * FROM Persons WHERE ContactID IS NOT NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString("contactsNumber") != null){
+                    contactsNumberSQL = Integer.parseInt(rs.getString("contactsNumber"));
+                }else{
+                    contactsNumberSQL = 0;
+                }
+                oblist.add(new Case(
+                        contactsNumberSQL, rs.getString("Diagnosis"),
+                        rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                        rs.getString("firstName"), rs.getString("lastName"),
+                        Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                        Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                        rs.getString("streetNumber"), rs.getString("zipCode")));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
+        phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        dimosTable.setCellValueFactory(new PropertyValueFactory<>("dimosID"));
+        addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
+        stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
+        zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        diagnosisTable.setCellValueFactory(new PropertyValueFactory<>("Diagnosis"));
+        recoveryTable.setCellValueFactory(new PropertyValueFactory<>("Recovery"));
+        deathTable.setCellValueFactory(new PropertyValueFactory<>("Death"));
+        numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
+        afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
+        personsTable.setItems(oblist);
 
     }
 
@@ -698,6 +788,177 @@ public class Controller implements Initializable {
 
 
 
+    @FXML
+    public void searchFilterClick(MouseEvent event) {
+        String inputFilter = filterInput.getText();
+        String querry = "SELECT * FROM Persons WHERE ContactID IS NULL;";
+        switch (chooseTableComboBox.getValue()){
+            case "Persons":
+                switch (filterComboBox.getValue()){
+                    case "ΑΦΜ":
+                        querry = "SELECT * FROM Persons WHERE AFM = "+ inputFilter +";";
+                        break;
+                    case "First Name":
+                        querry = "SELECT * FROM Persons WHERE FirstName = '"+ inputFilter +"';";
+                        break;
+                    case "Last Name":
+                        querry = "SELECT * FROM Persons WHERE LastName = '"+ inputFilter +"';";
+                        break;
+                    case "Age":
+                        querry = "SELECT * FROM Persons WHERE Age = "+ inputFilter +";";
+                        break;
+                    case "Phone Number":
+                        querry = "SELECT * FROM Persons WHERE PhoneNumber = '"+ inputFilter +"';";
+                        break;
+                    case "Municipality":
+                        querry = "SELECT * FROM Persons WHERE DimosID = "+ inputFilter +";";
+                        break;
+                    case "Address":
+                        querry = "SELECT * FROM Persons WHERE Address = '"+ inputFilter +"';";
+                        break;
+                    case "Street Number":
+                        querry = "SELECT * FROM Persons WHERE StreetNumber = '"+ inputFilter +"';";
+                        break;
+                    case "Zip Code":
+                        querry = "SELECT * FROM Persons WHERE ZipCode = '"+ inputFilter +"';";
+                        break;
+                    case "Diagnosis Date":
+                        querry = "SELECT * FROM Persons WHERE Diagnosis = '"+ inputFilter +"';";
+                        break;
+                    case "Recovery Date":
+                        querry = "SELECT * FROM Persons WHERE Recovery = '"+ inputFilter +"';";
+                        break;
+                    case "Death Date":
+                        querry = "SELECT * FROM Persons WHERE Death = '"+ inputFilter +"';";
+                        break;
+                }
+                break;
+
+            case "Cases":
+                System.out.println("Cases");
+                switch (filterComboBox.getValue()){
+                    case "ΑΦΜ":
+                        System.out.println("AFM");
+                        break;
+                    case "First Name":
+                        System.out.println("Firstname");
+                        break;
+                    case "Last Name":
+                        System.out.println("Lastname");
+                        break;
+                    case "Age":
+                        System.out.println("Age");
+                        break;
+                    case "Phone Number":
+                        System.out.println("Phone Number");
+                        break;
+                    case "Municipality":
+                        System.out.println("Municipality");
+                        break;
+                    case "Address":
+                        System.out.println("Address");
+                        break;
+                    case "Street Number":
+                        System.out.println("Street Number");
+                        break;
+                    case "Zip Code":
+                        System.out.println("Zip Code");
+                        break;
+                    case "Diagnosis Date":
+                        System.out.println("Diagnosis Date");
+                        break;
+                    case "Recovery Date":
+                        System.out.println("Recovery Date");
+                        break;
+                    case "Death Date":
+                        System.out.println("Death Date");
+                        break;
+                }
+                break;
+
+            case "Contacts":
+                System.out.println("Contacts");
+                switch (filterComboBox.getValue()){
+                    case "ΑΦΜ":
+                        System.out.println("AFM");
+                        break;
+                    case "First Name":
+                        System.out.println("Firstname");
+                        break;
+                    case "Last Name":
+                        System.out.println("Lastname");
+                        break;
+                    case "Age":
+                        System.out.println("Age");
+                        break;
+                    case "Phone Number":
+                        System.out.println("Phone Number");
+                        break;
+                    case "Municipality":
+                        System.out.println("Municipality");
+                        break;
+                    case "Address":
+                        System.out.println("Address");
+                        break;
+                    case "Street Number":
+                        System.out.println("Street Number");
+                        break;
+                    case "Zip Code":
+                        System.out.println("Zip Code");
+                        break;
+                    case "Diagnosis Date":
+                        System.out.println("Diagnosis Date");
+                        break;
+                    case "Recovery Date":
+                        System.out.println("Recovery Date");
+                        break;
+                    case "Death Date":
+                        System.out.println("Death Date");
+                        break;
+                }
+                break;
+        }
+        ObservableList<Case> oblist = FXCollections.observableArrayList();
+        try{
+            Connection con = DB.getConnection();
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString("contactsNumber") != null){
+                    contactsNumberSQL = Integer.parseInt(rs.getString("contactsNumber"));
+                }else{
+                    contactsNumberSQL = 0;
+                }
+                oblist.add(new Case(
+                        contactsNumberSQL, rs.getString("Diagnosis"),
+                        rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                        rs.getString("firstName"), rs.getString("lastName"),
+                        Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                        Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                        rs.getString("streetNumber"), rs.getString("zipCode")));
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
+        phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        dimosTable.setCellValueFactory(new PropertyValueFactory<>("dimosID"));
+        addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
+        stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
+        zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        diagnosisTable.setCellValueFactory(new PropertyValueFactory<>("Diagnosis"));
+        recoveryTable.setCellValueFactory(new PropertyValueFactory<>("Recovery"));
+        deathTable.setCellValueFactory(new PropertyValueFactory<>("Death"));
+        numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
+        afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
+        personsTable.setItems(oblist);
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -721,8 +982,17 @@ public class Controller implements Initializable {
         municipalityCInput.setItems(municipalityInput.getItems());
         municipalityCQInput.setItems(municipalityInput.getItems());
 
+        chooseTableComboBox.getSelectionModel().select("Select Table");
+        chooseTableComboBox.getItems().addAll("Persons", "Cases", "Contacts");
+
+        filterComboBox.getSelectionModel().select("Select Column");
+        filterComboBox.getItems().addAll("ΑΦΜ","First Name", "Last Name", "Phone Number", "Age", "Municipality",
+                                                    "Address", "Street Number", "Zip Code", "Diagnosis Date", "Recovery Date",
+                                                    "Death Date");
+
+
+
     }
-    
 
 }
 
