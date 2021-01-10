@@ -302,7 +302,7 @@ public class Controller implements Initializable {
             streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
             contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
 
-            JOptionPane.showMessageDialog(null, "Please fill all the field with *");
+            JOptionPane.showMessageDialog(null, "Please fill all the field with *", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             // Initialize all the values we will need to create and insert the case in database
             // Municipality index must be +1 in order to match the case with the right municipality in database
@@ -334,6 +334,7 @@ public class Controller implements Initializable {
                 try {
                     caseDAO.createCaseActive(krousma);
                     JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
@@ -359,6 +360,7 @@ public class Controller implements Initializable {
                 try {
                     caseDAO.createCaseRecovery(krousma);
                     JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
@@ -379,19 +381,17 @@ public class Controller implements Initializable {
                     }
                 }
 
-            }else {
+            }else if (recoveryInput.getValue() == null && deathInput.getValue() != null){
                 parseAFM = af;
                 Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
                         st, zc);
                 try {
                     caseDAO.createCaseDead(krousma);
                     JOptionPane.showMessageDialog(null, "Case has been created successfully!");
+                    clear_newCasePane(event);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "An error oquired: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    System.out.println("Case created successfully..");
-                    System.out.println("The case is dead..");
-
                     totalContacts = cn;
                     numberLabel.setText(String.valueOf(totalContacts));
                     counterLabel.setText(String.valueOf(counterContacts));
@@ -407,28 +407,33 @@ public class Controller implements Initializable {
                     }
                 }
 
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "You cant enter both recovery date and death date", "Warning", JOptionPane.WARNING_MESSAGE);
             }
 
-            // Clear all the fields
-            firstNameInput.clear();
-            lastNameInput.clear();
-            ageInput.clear();
-            phoneNumberInput.clear();
-            addressInput.clear();
-            streetInput.clear();
-            zipCodeInput.clear();
-            contactsInput.clear();
-            diagnosisInput.getEditor().clear();
-            deathInput.getEditor().clear();
-            recoveryInput.getEditor().clear();
-            afmInput.clear();
-            municipalityInput.getSelectionModel().clearSelection();
+
         }
-
-
 
     }
 
+    // Clear the fields of new case pane
+    @FXML
+    void clear_newCasePane(MouseEvent event) {
+        firstNameInput.clear();
+        lastNameInput.clear();
+        ageInput.clear();
+        phoneNumberInput.clear();
+        addressInput.clear();
+        streetInput.clear();
+        zipCodeInput.clear();
+        contactsInput.clear();
+        diagnosisInput.getEditor().clear();
+        deathInput.getEditor().clear();
+        recoveryInput.getEditor().clear();
+        afmInput.clear();
+        municipalityInput.getSelectionModel().clearSelection();
+    }
 
     // Click event that will take the value from the create contact panel
     // and create the number contacts that the user inserted on the create case panel

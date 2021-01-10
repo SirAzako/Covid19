@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
    <children>
-      <AnchorPane fx:id="createCasePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clear_newCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
                <font>
@@ -159,7 +159,8 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="submitCaseButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitCaseClick" prefHeight="45.0" prefWidth="107.0" text="Button" />
+            <Button fx:id="submitCaseButton" layoutX="711.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#submitCaseClick" prefHeight="45.0" prefWidth="107.0" text="Save" />
+            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clear_newCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear" />
          </children></AnchorPane>
       <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
          <children>
