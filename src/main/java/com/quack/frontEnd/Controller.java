@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 
 
 public class Controller implements Initializable {
-    private boolean menuIsHide = true;
+    private boolean menuHide = true;
     private boolean createCaseHide = true;
     private boolean addContactsHide = true;
     private boolean addContactUniqueHide = true;
@@ -273,37 +273,24 @@ public class Controller implements Initializable {
     // Click event that open and close the menu bar
     @FXML
     public void menuClick(MouseEvent event) {
-        if (menuIsHide) {
-            menuBar.setVisible(true);
-            menuIsHide = false;
-        } else {
-            menuBar.setVisible(false);
-            menuIsHide = true;
-        }
+        openPanels(menuBar);
     }
 
     // Click event that opens and close the create case panel
     @FXML
     public void menuCreateClick(MouseEvent event) {
-        if (createCaseHide) {
-            createCasePanel.setVisible(true);
-            createCaseHide = false;
-        } else {
-            createCasePanel.setVisible(false);
-            createCaseHide = true;
-        }
+        openPanels(createCasePanel);
     }
 
     // Click event that opens and close the find persons panel
     @FXML
     public void menuFindPersonClick(MouseEvent event) {
-        if (findPersonHide) {
-            findPersonPanel.setVisible(true);
-            findPersonHide = false;
-        } else {
-            findPersonPanel.setVisible(false);
-            findPersonHide = true;
-        }
+        openPanels(findPersonPanel);
+    }
+
+    @FXML
+    public void menuContactClick(MouseEvent event) {
+        openPanels(addContactUniquePanel);
     }
     // Click event that will take the value from the create case panel
     // and create the case in the database
@@ -571,6 +558,7 @@ public class Controller implements Initializable {
         zipCCodeInput.clear();
         afmCInput.clear();
     }    // Click event that opens a panel to create a contact for a specific case
+
 
     @FXML
     public void menuAddContactClick(MouseEvent event) {
@@ -850,7 +838,7 @@ public class Controller implements Initializable {
                 System.out.println("Cases");
                 switch (filterComboBox.getValue()){
                     case "ΑΦΜ":
-                        System.out.println("AFM");
+                        querry = "SELECT * FROM Persons WHERE ContactID IS NULL AND AFM = "+ inputFilter +";";
                         break;
                     case "First Name":
                         System.out.println("Firstname");
@@ -970,7 +958,61 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
     }
 
+    public void openPanels(AnchorPane panelOpen){
+        if(panelOpen == menuBar){
+            if(menuHide){
+                menuBar.setVisible(true);
+                menuHide = false;
+            }else{
+                menuBar.setVisible(false);
+                menuHide = true;
+            }
+        }
+        if(panelOpen == createCasePanel){
+            if(createCaseHide){
+                createCasePanel.setVisible(true);
+                createCaseHide = false;
 
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }else{
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+            }
+        }
+
+        if(panelOpen == findPersonPanel){
+            if (findPersonHide){
+                findPersonPanel.setVisible(true);
+                findPersonHide = false;
+
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }else{
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+            }
+        }
+
+        if(panelOpen == addContactUniquePanel){
+            if(addContactUniqueHide){
+                addContactUniquePanel.setVisible(true);
+                addContactUniqueHide = false;
+                findPersonPanel.setVisible(false);
+                findPersonHide = true;
+                createCasePanel.setVisible(false);
+                createCaseHide = true;
+
+            }else{
+                addContactUniquePanel.setVisible(false);
+                addContactUniqueHide = true;
+            }
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -1008,3 +1050,5 @@ public class Controller implements Initializable {
 
 }
 
+
+//ALLAGES

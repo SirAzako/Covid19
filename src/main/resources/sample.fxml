@@ -213,9 +213,9 @@
                         </Label>
                      </children>
                   </Group>
-                  <Group fx:id="menuContactButton">
+                  <Group fx:id="menuContactButton" onMouseClicked="#menuContactClick">
                      <children>
-                        <ImageView layoutX="16.0" onMouseClicked="#menuAddContactClick" pickOnBounds="true" preserveRatio="true">
+                        <ImageView layoutX="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/icons8_link_50px.png" />
                            </image>
