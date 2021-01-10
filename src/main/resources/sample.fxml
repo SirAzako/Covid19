@@ -301,7 +301,7 @@
          <children>
             <VBox layoutX="50.0" layoutY="105.0" prefHeight="200.0" prefWidth="100.0" spacing="100.0">
                <children>
-                  <Group fx:id="muneFindPersonButton" onMouseClicked="#menuFindPersonClick">
+                  <Group fx:id="meneFindPersonButton" onMouseClicked="#menuFindPersonClick">
                      <children>
                         <ImageView layoutX="14.0" pickOnBounds="true" preserveRatio="true">
                            <image>
