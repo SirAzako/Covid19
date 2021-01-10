@@ -417,7 +417,7 @@ public class Controller implements Initializable {
 
     }
 
-    // Clear the fields of new case pane
+    // Clear button. It clears the fields of new case pane
     @FXML
     void clear_newCasePane(MouseEvent event) {
         firstNameInput.clear();
@@ -433,6 +433,16 @@ public class Controller implements Initializable {
         recoveryInput.getEditor().clear();
         afmInput.clear();
         municipalityInput.getSelectionModel().clearSelection();
+    }
+
+    // Cancel button. It cancels the creation of a case in new case pane
+    @FXML
+    void cancelB_newCase(MouseEvent event) {
+        clear_newCasePane(event);
+        if (!createCaseHide) {
+            createCasePanel.setVisible(false);
+            createCaseHide = true;
+        }
     }
 
     // Click event that will take the value from the create contact panel
