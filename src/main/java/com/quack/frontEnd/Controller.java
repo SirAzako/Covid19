@@ -544,16 +544,7 @@ public class Controller implements Initializable {
         zipCCodeInput.clear();
         afmCInput.clear();
     }    // Click event that opens a panel to create a contact for a specific case
-    @FXML
-    public void menuAddContactClick(MouseEvent event) {
-        if (addContactUniqueHide) {
-            addContactUniquePanel.setVisible(true);
-            addContactUniqueHide = false;
-        } else {
-            addContactUniquePanel.setVisible(false);
-            addContactUniqueHide = true;
-        }
-    }
+
 
 
     // Click event that take the values from the panel that creates a contact
