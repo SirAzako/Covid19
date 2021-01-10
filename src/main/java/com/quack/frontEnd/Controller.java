@@ -298,7 +298,6 @@ public class Controller implements Initializable {
             findPersonHide = true;
         }
     }
-
     // Click event that will take the value from the create case panel
     // and create the case in the database
     @FXML
@@ -319,10 +318,10 @@ public class Controller implements Initializable {
 
         // If at least one of the "must fill" fields is empty then show a message else continue the process
         if (municipalityInput.getSelectionModel().getSelectedIndex() == -1 || firstNameInput.getText().isEmpty() ||
-            lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty() ||
-            phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty() ||
-            streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
-            contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
+                lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty() ||
+                phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty() ||
+                streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty() ||
+                contactsInput.getText().isEmpty() || afmInput.getText().isEmpty() || diagnosisInput.getValue() == null) {
 
             JOptionPane.showMessageDialog(null, "Please fill all the field with *", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -557,9 +556,7 @@ public class Controller implements Initializable {
         streetCInput.clear();
         zipCCodeInput.clear();
         afmCInput.clear();
-    }
-
-    // Click event that opens a panel to create a contact for a specific case
+    }    // Click event that opens a panel to create a contact for a specific case
     @FXML
     public void menuAddContactClick(MouseEvent event) {
         if (addContactUniqueHide) {
@@ -707,6 +704,7 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
 
     }
+
 
     @FXML
     public void allContactsClick(MouseEvent event) {
@@ -967,8 +965,6 @@ public class Controller implements Initializable {
         afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
         personsTable.setItems(oblist);
     }
-
-
 
 
     @Override

@@ -348,63 +348,8 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-<<<<<<< HEAD
-         </children></AnchorPane>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
-         <children>
-            <VBox layoutX="50.0" layoutY="105.0" prefHeight="200.0" prefWidth="100.0" spacing="100.0">
-               <children>
-                  <Group fx:id="meneFindPersonButton" onMouseClicked="#menuFindPersonClick">
-                     <children>
-                        <ImageView layoutX="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/findPerson.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="7.0" layoutY="60.0" prefHeight="17.0" prefWidth="80.0" text="FIND PERSON" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group fx:id="menuCreateButton" onMouseClicked="#menuCreateClick">
-                     <children>
-                        <ImageView layoutX="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/mask.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutY="63.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group fx:id="menuContactButton">
-                     <children>
-                        <ImageView layoutX="16.0" onMouseClicked="#menuAddContactClick" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/icons8_link_50px.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="ADD CONTACT" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-               </children>
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </VBox>
-=======
             <Button layoutX="706.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#clear_addContacts" prefHeight="45.0" prefWidth="107.0" text="Clear" />
             <Button layoutX="706.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#cancel_addContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
->>>>>>> b091bd44e15178bd784f19ac0bc9defeee3dcec8
          </children></AnchorPane>
       <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
