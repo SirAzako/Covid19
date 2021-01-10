@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
    <children>
       <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clear_newCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
@@ -351,7 +351,7 @@
             <Button layoutX="706.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#clear_addContacts" prefHeight="45.0" prefWidth="107.0" text="Clear" />
             <Button layoutX="706.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#cancel_addContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactUniquePanel" layoutX="174.0" layoutY="-7.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -468,25 +468,52 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: DCDC65;" visible="false">
+      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <TableView fx:id="personsTable" prefHeight="961.0" prefWidth="1343.0">
+            <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="998.0" prefWidth="1155.0">
               <columns>
-                <TableColumn fx:id="afmTable" prefWidth="75.0" text="ΑΦΜ" />
-                  <TableColumn fx:id="numberOfContactsTable" prefWidth="136.33334350585938" text="Number of Contacts" />
-                  <TableColumn fx:id="firstNameTable" prefWidth="68.66668701171875" text="First Name" />
-                  <TableColumn fx:id="lastNameTable" prefWidth="70.33331298828125" text="Last Name" />
-                  <TableColumn fx:id="ageTable" prefWidth="80.66668701171875" text="Age" />
-                  <TableColumn fx:id="phoneNumberTable" prefWidth="94.66668701171875" text="Phone Number" />
-                  <TableColumn fx:id="dimosTable" prefWidth="80.66668701171875" text="Dimos" />
-                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="89.66668701171875" text="Address" />
-                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="89.66668701171875" text="St. Number" />
-                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="89.66668701171875" text="Zip Code" />
-                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="89.66668701171875" text="Diagnosis Date" />
-                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="89.66668701171875" text="Recovery Date" />
-                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="89.66668701171875" text="Death Date" />
+                <TableColumn fx:id="afmTable" prefWidth="143.0" text="ΑΦΜ" />
+                  <TableColumn fx:id="numberOfContactsTable" prefWidth="118.3333740234375" text="Number of Contacts" />
+                  <TableColumn fx:id="firstNameTable" prefWidth="65.6666259765625" text="First Name" />
+                  <TableColumn fx:id="lastNameTable" prefWidth="68.0" text="Last Name" />
+                  <TableColumn fx:id="ageTable" prefWidth="47.3333740234375" text="Age" />
+                  <TableColumn fx:id="phoneNumberTable" prefWidth="89.99993896484375" text="Phone Number" />
+                  <TableColumn fx:id="dimosTable" prefWidth="51.3333740234375" text="Dimos" />
+                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="95.0" text="Address" />
+                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="82.333251953125" text="St. Number" />
+                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="81.6666259765625" text="Zip Code" />
+                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="97.0" text="Diagnosis Date" />
+                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="102.666748046875" text="Recovery Date" />
+                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="108.0" text="Death Date" />
               </columns>
             </TableView>
+            <VBox layoutX="28.0" layoutY="14.0" prefHeight="221.0" prefWidth="135.0" spacing="50.0">
+               <children>
+                  <Button fx:id="allPersonsButton" mnemonicParsing="false" onMouseClicked="#allPersonsClick" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: DCDC65;" text="ALL PERSONS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="allCasesButton" mnemonicParsing="false" onMouseClicked="#allCasesClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CASES">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button fx:id="allContactButton" mnemonicParsing="false" onMouseClicked="#allContactsClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CONTACTS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+               </children>
+            </VBox>
+            <VBox layoutX="9.0" layoutY="374.0" prefHeight="210.0" prefWidth="174.0" spacing="15.0">
+               <children>
+                  <ComboBox fx:id="chooseTableComboBox" prefWidth="174.0" />
+                  <ComboBox fx:id="filterComboBox" prefWidth="174.0" />
+                  <TextField fx:id="filterInput" prefHeight="25.0" prefWidth="174.0" />
+                  <Button fx:id="searchFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEARCH" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

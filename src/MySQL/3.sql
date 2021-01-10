@@ -66,5 +66,3 @@ INSERT INTO Dimoi (Name, Population) VALUES('Σπετσών', 4027 );
 INSERT INTO Dimoi (Name, Population) VALUES('Τροιζηνίας', 7143 );
 INSERT INTO Dimoi (Name, Population) VALUES('Ύδρας', 1966 );
 
-INSERT INTO Person1 (name, username) VALUES("paraskos","azako");
-INSERT INTO Person1 (name, username) VALUES("antreas","sirkats");
