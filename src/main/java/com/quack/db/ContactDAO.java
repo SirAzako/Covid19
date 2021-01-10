@@ -58,4 +58,24 @@ public class ContactDAO {
             }
         }
     }
+
+    public void deleteContact(int afmC) throws Exception {
+        Connection con = null;
+        String querry = "Delete from Persons where AFM = ?;";
+        try{
+            con = DB.getConnection();
+            PreparedStatement stmt = con.prepareStatement(querry);
+            stmt.setInt(1, afmC);
+            stmt.executeUpdate();
+            stmt.close();
+            DB.close();
+
+        }catch (Exception e){
+            throw new Exception("Error occurred while: " + e.getMessage());
+        }finally {
+            if (con != null){
+                con.close();
+            }
+        }
+    }
 }

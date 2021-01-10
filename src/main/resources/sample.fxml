@@ -382,7 +382,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageCQInput1" prefWidth="174.0" />
+                        <TextField fx:id="ageCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
@@ -452,12 +452,12 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQInput" prefWidth="174.0" />
+                        <TextField fx:id="afmCQKrousmatosInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="submitContactUniqueButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
+            <Button fx:id="submitContactUniqueButton" layoutX="725.0" layoutY="340.0" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -466,6 +466,8 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
+            <Button fx:id="clear_addContactUniqButton" layoutX="726.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#clear_addContactUniq" prefHeight="45.0" prefWidth="107.0" text="Clear" />
+            <Button fx:id="cancel_addContactUniqButton" layoutX="730.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#cancel_addContactUniq" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">

@@ -190,6 +190,13 @@ public class Controller implements Initializable {
     @FXML
     private Button submitContactUniqueButton;
 
+    @FXML
+    private Button clear_addContactUniqButton;
+
+    @FXML
+    private Button cancel_addContactUniqButton;
+
+
     //Find persons (AnchorPane, Fields, Button)
     @FXML
     private AnchorPane findPersonPanel;
@@ -495,40 +502,47 @@ public class Controller implements Initializable {
 
             JOptionPane.showMessageDialog(null, "Please fill all the fields with *", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            fnC = firstNameCInput.getText();
-            lnC = lastNameCInput.getText();
-            ageC = Integer.parseInt(ageCInput.getText());
-            pnC = phoneNumberCInput.getText();
-            munC = municipalityCInput.getSelectionModel().getSelectedIndex() + 1;
-            addC = addressCInput.getText();
-            stC = streetCInput.getText();
-            zcC = zipCCodeInput.getText();
-            afmC = Integer.parseInt(afmCInput.getText());
-            conID = Integer.parseInt(afmCInput.getText());
-
-            // Create the object and an instance of the ContactDAO to add it to DB
-            Contact contact = new Contact(afmC, conID, fnC, lnC, ageC, pnC,
-                    munC, addC, stC, zcC);
-            ContactDAO contactDAO = new ContactDAO();
-
             try {
-                // Create the contact and create also the "connection" case to contact
-                contactDAO.createContact(contact);
-                contactDAO.connectCaseContact(parseAFM, contact);
-                JOptionPane.showMessageDialog(null, "Contact has been successfully created");
+                fnC = firstNameCInput.getText();
+                lnC = lastNameCInput.getText();
+                ageC = Integer.parseInt(ageCInput.getText());
+                pnC = phoneNumberCInput.getText();
+                munC = municipalityCInput.getSelectionModel().getSelectedIndex() + 1;
+                addC = addressCInput.getText();
+                stC = streetCInput.getText();
+                zcC = zipCCodeInput.getText();
+                afmC = Integer.parseInt(afmCInput.getText());
+                conID = Integer.parseInt(afmCInput.getText());
 
-                // Clear the fields to add a new contact
-                // if the contact number given from the previous panel is not yet reached
-                clear_addContacts(event);
+                // Create the object and an instance of the ContactDAO to add it to DB
+                Contact contact = new Contact(afmC, conID, fnC, lnC, ageC, pnC,
+                        munC, addC, stC, zcC);
+                ContactDAO contactDAO = new ContactDAO();
 
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                if (counterContacts > totalContacts) {
-                    addContactsPanel.setVisible(false);
-                    addContactsHide = true;
-                    counterContacts = 0;
+                try {
+                    // Create the contact and create also the "connection" case to contact
+                    contactDAO.createContact(contact);
+                    contactDAO.connectCaseContact(parseAFM, contact);
+                    JOptionPane.showMessageDialog(null, "Contact has been successfully created");
+
+                    // Clear the fields to add a new contact
+                    // if the contact number given from the previous panel is not yet reached
+                    clear_addContacts(event);
+
+                } catch (Exception e) {
+                    try {
+                        contactDAO.deleteContact(afmC);
+                    } catch (Exception ignored) {}
+                    throw new Exception("An error occured: " + e.getMessage());
+                } finally {
+                    if (counterContacts > totalContacts) {
+                        addContactsPanel.setVisible(false);
+                        addContactsHide = true;
+                        counterContacts = 0;
+                    }
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
@@ -557,6 +571,7 @@ public class Controller implements Initializable {
         zipCCodeInput.clear();
         afmCInput.clear();
     }    // Click event that opens a panel to create a contact for a specific case
+
     @FXML
     public void menuAddContactClick(MouseEvent event) {
         if (addContactUniqueHide) {
@@ -586,80 +601,69 @@ public class Controller implements Initializable {
         int conID = 0;
         int afmK = 0;
 
+        if (firstNameCQInput.getText().isEmpty() || lastNameCQInput.getText().isEmpty() ||
+                ageCQInput.getText().isEmpty() || phoneNumberCQInput.getText().isEmpty() ||
+                municipalityCQInput.getSelectionModel().getSelectedIndex() == -1 ||
+                addressCQInput.getText().isEmpty() || streetCQInput.getText().isEmpty() ||
+                zipCQCodeInput.getText().isEmpty() || afmCQInput.getText().isEmpty() ||
+                afmCQKrousmatosInput.getText().isEmpty()) {
 
-        if (!firstNameCQInput.getText().isEmpty()) {
-            fnC = firstNameCQInput.getText();
-            System.out.println("gematon name");
-        }
-        if (!lastNameCQInput.getText().isEmpty()) {
-            lnC = lastNameCQInput.getText();
-            System.out.println("gemato lastname");
-        }
-        if (!ageCQInput.getText().isEmpty()) {
-            ageC = Integer.parseInt(ageCQInput.getText());
-            System.out.println("gemati ilikia");
-        }
-        if (!phoneNumberCQInput.getText().isEmpty()) {
-            pnC = phoneNumberCQInput.getText();
-            System.out.println("gemato to number");
-        }
-        if (!municipalityCQInput.getValue().isEmpty()) {
-            munC = municipalityCQInput.getSelectionModel().getSelectedIndex() + 1;
-            System.out.println("gematos o dimos");
-        }
-        if (!addressCQInput.getText().isEmpty()) {
-            addC = addressCQInput.getText();
-            System.out.println("addres ok");
-        }
-        if (!streetCQInput.getText().isEmpty()) {
-            stC = streetCQInput.getText();
-            System.out.println("street ok");
-        }
-        if (!zipCQCodeInput.getText().isEmpty()) {
-            zcC = zipCQCodeInput.getText();
-            System.out.println("zip ok");
-        }
-        if (!afmCQInput.getText().isEmpty()) {
-            afmC = Integer.parseInt(afmCQInput.getText());
-            System.out.println("afm ok");
-        }
-        if (!afmCQKrousmatosInput.getText().isEmpty()) {
-            afmK = Integer.parseInt(afmCQKrousmatosInput.getText());
-        }
-        if ((!firstNameCQInput.getText().isEmpty()) && (!lastNameCQInput.getText().isEmpty()) && (!ageCQInput.getText().isEmpty()) && (!phoneNumberCQInput.getText().isEmpty()) && (!municipalityCQInput.getValue().isEmpty()) && (!addressCQInput.getText().isEmpty()) && (!streetCQInput.getText().isEmpty()) && (!zipCQCodeInput.getText().isEmpty()) && (!afmCQInput.getText().isEmpty()) && (!afmCQKrousmatosInput.getText().isEmpty())) {
-            System.out.println("antikimeno ok");
-            Contact contact = new Contact(afmC, afmC, fnC, lnC, ageC, pnC,
-                    munC,
-                    addC, stC, zcC);
-            ContactDAO contactDAO = new ContactDAO();
+            JOptionPane.showMessageDialog(null, "Please fill all the field with *");
+        } else {
             try {
-                contactDAO.createContact(contact);
-                contactDAO.connectCaseContact(afmK, contact);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                System.out.println("DIMIOURGITHIKE I EPAFI");
-                firstNameCQInput.clear();
-                lastNameCQInput.clear();
-                ageCQInput.clear();
-                phoneNumberCQInput.clear();
-                municipalityCQInput.getSelectionModel().clearSelection();
-                addressCQInput.clear();
-                streetCQInput.clear();
-                zipCQCodeInput.clear();
-                afmCQInput.clear();
-                afmCQKrousmatosInput.clear();
+                fnC = firstNameCQInput.getText();
+                lnC = lastNameCQInput.getText();
+                ageC = Integer.parseInt(ageCQInput.getText());
+                pnC = phoneNumberCQInput.getText();
+                munC = municipalityCQInput.getSelectionModel().getSelectedIndex() + 1;
+                addC = addressCQInput.getText();
+                stC = streetCQInput.getText();
+                zcC = zipCQCodeInput.getText();
+                afmC = Integer.parseInt(afmCQInput.getText());
+                afmK = Integer.parseInt(afmCQKrousmatosInput.getText());
 
-                if (!addContactUniqueHide) {
-                    addContactUniquePanel.setVisible(false);
-                    addContactUniqueHide = true;
+                Contact contact = new Contact(afmC, afmC, fnC, lnC, ageC, pnC,
+                        munC, addC, stC, zcC);
+                ContactDAO contactDAO = new ContactDAO();
 
+                try {
+                    contactDAO.createContact(contact);
+                    contactDAO.connectCaseContact(afmK, contact);
+                    JOptionPane.showMessageDialog(null, "The contact has been insert to its case successfully");
+
+                    // Clear and close the panel
+                    cancel_addContactUniq(event);
+                } catch (Exception e) {
+                    throw new Exception(e.getMessage());
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
     }
 
+    @FXML
+    void cancel_addContactUniq(MouseEvent event) {
+        // clear the field and close the panel
+        clear_addContactUniq(event);
+        addContactUniquePanel.setVisible(false);
+        addContactUniqueHide = true;
+    }
+
+    @FXML
+    void clear_addContactUniq(MouseEvent event) {
+            firstNameCQInput.clear();
+            lastNameCQInput.clear();
+            ageCQInput.clear();
+            phoneNumberCQInput.clear();
+            municipalityCQInput.getSelectionModel().clearSelection();
+            addressCQInput.clear();
+            streetCQInput.clear();
+            zipCQCodeInput.clear();
+            afmCQInput.clear();
+            afmCQKrousmatosInput.clear();
+    }
 
     @FXML
     public void allCasesClick(MouseEvent event) {
