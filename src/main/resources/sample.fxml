@@ -159,9 +159,18 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="submitCaseButton" layoutX="709.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#submitCaseClick" prefHeight="45.0" prefWidth="107.0" text="Save" />
-            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clear_newCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear" />
-            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelB_newCase" prefHeight="45.0" prefWidth="107.0" text="Cancel" />
+            <Button fx:id="submitCaseButton" layoutX="709.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#submitCaseClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CASE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clear_newCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelB_newCase" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
          </children></AnchorPane>
       <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
          <children>
@@ -268,14 +277,20 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="submitContactButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactClick" prefHeight="45.0" prefWidth="107.0" text="Button" />
+            <Button fx:id="submitContactButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <Label layoutX="113.0" layoutY="64.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="numberLabel" layoutX="445.0" layoutY="78.0" prefHeight="17.0" prefWidth="88.0" text="#" />
-            <Label fx:id="counterLabel" layoutX="279.0" layoutY="78.0" text="Counter" />
+            <Label fx:id="numberLabel" layoutX="430.0" layoutY="79.0" prefHeight="17.0" prefWidth="88.0" text="#" textFill="#b33a3a" />
+            <Label fx:id="counterLabel" layoutX="279.0" layoutY="78.0" text="Counter" textFill="#4bb543">
+               <font>
+                  <Font size="13.0" />
+               </font></Label>
             <Label layoutX="365.0" layoutY="64.0" text="OF" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
@@ -334,7 +349,7 @@
                </rotationAxis>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactUniquePanel" layoutX="174.0" layoutY="-7.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="113.0" layoutY="214.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -345,7 +360,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="firstNameCQInput" />
+                        <TextField fx:id="firstNameCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
@@ -355,7 +370,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="lastNameCQInput" />
+                        <TextField fx:id="lastNameCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
@@ -365,7 +380,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageCQInput1" />
+                        <TextField fx:id="ageCQInput1" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
@@ -375,7 +390,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="phoneNumberCQInput" />
+                        <TextField fx:id="phoneNumberCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
@@ -395,7 +410,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="addressCQInput" />
+                        <TextField fx:id="addressCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
@@ -405,7 +420,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="streetCQInput" />
+                        <TextField fx:id="streetCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
@@ -415,7 +430,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="zipCQCodeInput" />
+                        <TextField fx:id="zipCQCodeInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="60.0">
@@ -425,7 +440,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQInput" />
+                        <TextField fx:id="afmCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
@@ -435,12 +450,15 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQInput" />
+                        <TextField fx:id="afmCQInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="submitContactUniqueButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" text="Button" />
+            <Button fx:id="submitContactUniqueButton" layoutX="722.0" layoutY="503.0" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
             <Label layoutX="569.0" layoutY="85.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
