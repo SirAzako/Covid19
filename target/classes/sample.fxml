@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
    <children>
-      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clear_newCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clear_newCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
                <font>

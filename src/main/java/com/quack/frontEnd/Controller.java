@@ -276,11 +276,13 @@ public class Controller implements Initializable {
         openPanels(menuBar);
     }
 
+
     // Click event that opens and close the create case panel
     @FXML
     public void menuCreateClick(MouseEvent event) {
         openPanels(createCasePanel);
     }
+
 
     // Click event that opens and close the find persons panel
     @FXML
@@ -288,10 +290,13 @@ public class Controller implements Initializable {
         openPanels(findPersonPanel);
     }
 
+
     @FXML
     public void menuContactClick(MouseEvent event) {
         openPanels(addContactUniquePanel);
     }
+
+
     // Click event that will take the value from the create case panel
     // and create the case in the database
     @FXML
@@ -322,7 +327,6 @@ public class Controller implements Initializable {
             try {
                 // Initialize all the values we will need to create and insert the case in database
                 // Municipality index must be +1 in order to match the case with the right municipality in database
-
                 mun = municipalityInput.getSelectionModel().getSelectedIndex() + 1;
                 fn = firstNameInput.getText();
                 ln = lastNameInput.getText();
@@ -338,6 +342,7 @@ public class Controller implements Initializable {
                 // Recovered data and death date
                 rd = String.valueOf(recoveryInput.getValue());
                 dt = String.valueOf(deathInput.getValue());
+
 
                 // There are 3 chances (new Case, new Recovered Case or new Dead Case)
                 if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
@@ -388,6 +393,7 @@ public class Controller implements Initializable {
 
     }
 
+
     // Clear button. It clears the fields of new case pane
     @FXML
     void clear_newCasePane(MouseEvent event) {
@@ -406,6 +412,7 @@ public class Controller implements Initializable {
         municipalityInput.getSelectionModel().clearSelection();
     }
 
+
     // Cancel button. It cancels the creation of a case in new case pane
     @FXML
     void cancel_newCase(MouseEvent event) {
@@ -413,6 +420,7 @@ public class Controller implements Initializable {
         createCasePanel.setVisible(false);
         createCaseHide = true;
     }
+
 
     // In this method we give the case object and it automatically insert it
     // Also depend to the contactNumber it goes to the next Panel or not
@@ -461,6 +469,7 @@ public class Controller implements Initializable {
             throw new Exception("What do you mean you contacted with " + krousma.getContactsNumber() + " people??");
         }
     }
+
 
     // Click event that will take the value from the create contact panel
     // and create the number contacts that the user inserted on the create case panel
@@ -536,6 +545,7 @@ public class Controller implements Initializable {
 
     }
 
+
     // On click event in the addContacts Panel that cancel rest of the process
     @FXML
     void cancel_addContacts(MouseEvent event) {
@@ -544,6 +554,7 @@ public class Controller implements Initializable {
         addContactsPanel.setVisible(false);
         addContactsHide = true;
     }
+
 
     // On click event in the addContacts Panel that clear the fields
     @FXML
@@ -557,7 +568,7 @@ public class Controller implements Initializable {
         streetCInput.clear();
         zipCCodeInput.clear();
         afmCInput.clear();
-    }    // Click event that opens a panel to create a contact for a specific case
+    }
     
 
     // Click event that take the values from the panel that creates a contact
@@ -619,6 +630,7 @@ public class Controller implements Initializable {
 
     }
 
+
     @FXML
     void cancel_addContactUniq(MouseEvent event) {
         // clear the field and close the panel
@@ -626,6 +638,7 @@ public class Controller implements Initializable {
         addContactUniquePanel.setVisible(false);
         addContactUniqueHide = true;
     }
+
 
     @FXML
     void clear_addContactUniq(MouseEvent event) {
@@ -640,6 +653,7 @@ public class Controller implements Initializable {
             afmCQInput.clear();
             afmCQKrousmatosInput.clear();
     }
+
 
     @FXML
     public void allCasesClick(MouseEvent event) {
@@ -946,6 +960,7 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
     }
 
+
     public void openPanels(AnchorPane panelOpen){
         if(panelOpen == menuBar){
             if(menuHide){
@@ -1001,6 +1016,8 @@ public class Controller implements Initializable {
             }
         }
     }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

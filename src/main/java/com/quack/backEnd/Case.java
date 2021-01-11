@@ -13,7 +13,9 @@ public class Case extends Person {
     private int contactsNumber;
 
     //Το κρούσμα ανάρρωσε 
-    public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+    public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM,
+                String firstName, String lastName, int age, String phoneNumber,
+                int dimosID, String address, String streetNumber, String zipCode) {
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Recovery = Recovery;
@@ -22,7 +24,9 @@ public class Case extends Person {
 
   
     //Το κρούσμα πέθανε
-    public Case(String Diagnosis, String Death, int contactsNo,int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+    public Case(String Diagnosis, String Death, int contactsNo,int AFM,
+                String firstName, String lastName, int age, String phoneNumber,
+                int dimosID, String address, String streetNumber, String zipCode) {
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.Death = Death;
@@ -30,7 +34,9 @@ public class Case extends Person {
     }
     
     //Το κρούσμα δεν ανάρρωσε ούτε και πέθανε
-    public Case(String Diagnosis, int contactsNumber, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+    public Case(String Diagnosis, int contactsNumber, int AFM, String firstName,
+                String lastName, int age, String phoneNumber, int dimosID, String address,
+                String streetNumber, String zipCode) {
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
         this.Diagnosis = Diagnosis;
         this.contactsNumber = contactsNumber;
