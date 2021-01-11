@@ -1,6 +1,4 @@
-package com.quack.backEnd;
-
-import java.util.UUID;
+package com.quack.backend;
 
 /**
  * @author Azako

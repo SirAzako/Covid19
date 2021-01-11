@@ -1,4 +1,4 @@
-package com.quack.backEnd;
+package com.quack.backend;
 
 public class Contact extends Person {
     protected int contactID;

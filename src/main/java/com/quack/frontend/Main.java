@@ -1,4 +1,4 @@
-package com.quack.frontEnd;
+package com.quack.frontend;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

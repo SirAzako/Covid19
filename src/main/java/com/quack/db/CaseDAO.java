@@ -1,6 +1,6 @@
 package com.quack.db;
 
-import com.quack.backEnd.Case;
+import com.quack.backend.Case;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

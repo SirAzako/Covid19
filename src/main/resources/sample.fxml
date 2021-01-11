@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontEnd.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontend.Controller">
    <children>
-      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clear_newCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clearNewCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
                <font>
@@ -163,11 +163,11 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clear_newCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear">
+            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clearNewCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancel_newCase" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
+            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelNewCase" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
@@ -244,7 +244,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="firstNameCInput" prefWidth="174.0" />
+                        <TextField fx:id="firstNameCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
@@ -254,7 +254,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="lastNameCInput" prefWidth="174.0" />
+                        <TextField fx:id="lastNameCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
@@ -264,7 +264,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageCInput" prefWidth="174.0" />
+                        <TextField fx:id="ageCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
@@ -274,7 +274,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="phoneNumberCInput" prefWidth="174.0" />
+                        <TextField fx:id="phoneNumberCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
@@ -284,7 +284,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="municipalityCInput" prefWidth="174.0" />
+                        <ComboBox fx:id="municipalityCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="580.0" prefHeight="13.0" prefWidth="134.0" spacing="94.0">
@@ -294,7 +294,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="addressCInput" prefWidth="174.0" />
+                        <TextField fx:id="addressCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
@@ -304,7 +304,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="streetCInput" prefWidth="174.0" />
+                        <TextField fx:id="streetCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
@@ -314,7 +314,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="zipCCodeInput" prefWidth="174.0" />
+                        <TextField fx:id="zipCodeCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="60.0">
@@ -324,7 +324,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCInput" prefWidth="174.0" />
+                        <TextField fx:id="afmCoInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
@@ -348,8 +348,8 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Button layoutX="706.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#clear_addContacts" prefHeight="45.0" prefWidth="107.0" text="Clear" />
-            <Button layoutX="706.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#cancel_addContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
+            <Button layoutX="706.0" layoutY="435.0" mnemonicParsing="false" onMouseClicked="#clearAddContacts" prefHeight="45.0" prefWidth="107.0" text="Clear" />
+            <Button layoutX="706.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#cancelAddContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children></AnchorPane>
       <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
@@ -362,7 +362,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="firstNameCQInput" prefWidth="174.0" />
+                        <TextField fx:id="firstNameCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
@@ -372,7 +372,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="lastNameCQInput" prefWidth="174.0" />
+                        <TextField fx:id="lastNameCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
@@ -382,7 +382,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="ageCQInput" prefWidth="174.0" />
+                        <TextField fx:id="ageCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
@@ -392,7 +392,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="phoneNumberCQInput" prefWidth="174.0" />
+                        <TextField fx:id="phoneNumberCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
@@ -402,7 +402,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="municipalityCQInput" prefWidth="174.0" />
+                        <ComboBox fx:id="municipalityCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="580.0" prefHeight="13.0" prefWidth="134.0" spacing="94.0">
@@ -412,7 +412,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="addressCQInput" prefWidth="174.0" />
+                        <TextField fx:id="addressCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
@@ -422,7 +422,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="streetCQInput" prefWidth="174.0" />
+                        <TextField fx:id="streetCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
@@ -432,7 +432,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="zipCQCodeInput" prefWidth="174.0" />
+                        <TextField fx:id="zipCodeCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="60.0">
@@ -442,7 +442,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQInput" prefWidth="174.0" />
+                        <TextField fx:id="afmCoUnInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
@@ -452,7 +452,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="afmCQKrousmatosInput" prefWidth="174.0" />
+                        <TextField fx:id="afmCoUnKrousmatosInput" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
@@ -466,27 +466,29 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Button fx:id="clear_addContactUniqButton" layoutX="726.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#clear_addContactUniq" prefHeight="45.0" prefWidth="107.0" text="Clear" />
-            <Button fx:id="cancel_addContactUniqButton" layoutX="730.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#cancel_addContactUniq" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
+            <Button fx:id="clearAddContactUniqButton" layoutX="726.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#clearAddContactUniq" prefHeight="45.0" prefWidth="107.0" text="Clear" />
+            <Button fx:id="cancelAddContactUniqButton" layoutX="730.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#cancelAddContactUniq" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="998.0" prefWidth="1155.0">
+            <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="540.0" prefWidth="1155.0">
               <columns>
-                <TableColumn fx:id="afmTable" prefWidth="143.0" text="ΑΦΜ" />
-                  <TableColumn fx:id="numberOfContactsTable" prefWidth="118.3333740234375" text="Number of Contacts" />
-                  <TableColumn fx:id="firstNameTable" prefWidth="65.6666259765625" text="First Name" />
-                  <TableColumn fx:id="lastNameTable" prefWidth="68.0" text="Last Name" />
-                  <TableColumn fx:id="ageTable" prefWidth="47.3333740234375" text="Age" />
-                  <TableColumn fx:id="phoneNumberTable" prefWidth="89.99993896484375" text="Phone Number" />
-                  <TableColumn fx:id="dimosTable" prefWidth="51.3333740234375" text="Dimos" />
-                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="95.0" text="Address" />
-                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="82.333251953125" text="St. Number" />
-                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="81.6666259765625" text="Zip Code" />
-                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="97.0" text="Diagnosis Date" />
-                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="102.666748046875" text="Recovery Date" />
-                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="108.0" text="Death Date" />
+                <TableColumn fx:id="afmTable" prefWidth="100.33331298828125" text="ΑΦΜ" />
+                  <TableColumn fx:id="numberOfContactsTable" prefWidth="120.66668701171875" text="Number of Contacts" />
+                  <TableColumn fx:id="firstNameTable" prefWidth="76.0" text="First Name" />
+                  <TableColumn fx:id="lastNameTable" prefWidth="74.66668701171875" text="Last Name" />
+                  <TableColumn fx:id="ageTable" prefWidth="40.66668701171875" text="Age" />
+                  <TableColumn fx:id="phoneNumberTable" prefWidth="92.0" text="Phone Number" />
+                  <TableColumn fx:id="dimosTable" prefWidth="41.33331298828125" text="Dimos" />
+                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="59.3333740234375" text="Address" />
+                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="74.0" text="St. Number" />
+                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="64.6666259765625" text="Zip Code" />
+                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="95.0" text="Diagnosis Date" />
+                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="86.0" text="Recovery Date" />
+                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="72.0" text="Death Date" />
+                  <TableColumn fx:id="infoTable" minWidth="0.0" prefWidth="70.3333740234375" text="Info" />
+                  <TableColumn fx:id="actionTable" minWidth="0.0" prefWidth="96.6666259765625" text="Action" />
               </columns>
             </TableView>
             <VBox layoutX="28.0" layoutY="14.0" prefHeight="221.0" prefWidth="135.0" spacing="50.0">
