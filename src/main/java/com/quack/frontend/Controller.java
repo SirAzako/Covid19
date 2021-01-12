@@ -187,7 +187,7 @@ public class Controller implements Initializable {
   private TextField streetCoUnInput;
 
   @FXML
-  private TextField zipCoUnCodeInput;
+  private TextField zipCodeCoUnInput;
 
   @FXML
   private TextField afmCoUnInput;
@@ -339,8 +339,7 @@ public class Controller implements Initializable {
             || contactsInput.getText().isEmpty()
             || afmInput.getText().isEmpty()
             || diagnosisInput.getValue() == null) {
-      JOptionPane.showMessageDialog(null, "Please fill all the field with *",
-              "Warning", JOptionPane.WARNING_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Please fill all the field with *");
     } else {
       try {
         // Initialize all the values we will need to create and insert the case in database
@@ -627,7 +626,7 @@ public class Controller implements Initializable {
             || ageCoUnInput.getText().isEmpty() || phoneNumberCoUnInput.getText().isEmpty()
             || municipalityCoUnInput.getSelectionModel().getSelectedIndex() == -1
             || addressCoUnInput.getText().isEmpty() || streetCoUnInput.getText().isEmpty()
-            || zipCoUnCodeInput.getText().isEmpty() || afmCoUnInput.getText().isEmpty()
+            || zipCodeCoUnInput.getText().isEmpty() || afmCoUnInput.getText().isEmpty()
             || afmCoUnKrousmatosInput.getText().isEmpty()) {
 
       JOptionPane.showMessageDialog(null, "Please fill all the field with *");
@@ -640,7 +639,7 @@ public class Controller implements Initializable {
         munC = municipalityCoUnInput.getSelectionModel().getSelectedIndex() + 1;
         addC = addressCoUnInput.getText();
         stC = streetCoUnInput.getText();
-        zcC = zipCoUnCodeInput.getText();
+        zcC = zipCodeCoUnInput.getText();
         afmC = Integer.parseInt(afmCoUnInput.getText());
         afmK = Integer.parseInt(afmCoUnKrousmatosInput.getText());
 
@@ -687,7 +686,7 @@ public class Controller implements Initializable {
     municipalityCoUnInput.getSelectionModel().clearSelection();
     addressCoUnInput.clear();
     streetCoUnInput.clear();
-    zipCoUnCodeInput.clear();
+    zipCodeCoUnInput.clear();
     afmCoUnInput.clear();
     afmCoUnKrousmatosInput.clear();
   }
