@@ -369,40 +369,27 @@ public class Controller implements Initializable {
         // There are 3 chances (new Case, new Recovered Case or new Dead Case)
         if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
           parseAfm = af;
+
           Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
                   st, zc);
-
-          try {
-            insertCase(krousma);
-            clearNewCasePane(event);
-          } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-                    JOptionPane.ERROR_MESSAGE);
-          }
+          checkContactsNum(krousma);
+          clearNewCasePane(event);
 
         } else if (recoveryInput.getValue() != null && deathInput.getValue() == null) {
           parseAfm = af;
+
           Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
                   ad, st, zc);
-          try {
-            insertCase(krousma);
-            clearNewCasePane(event);
-          } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-          }
+          checkContactsNum(krousma);
+          clearNewCasePane(event);
 
         } else if (recoveryInput.getValue() == null && deathInput.getValue() != null) {
           parseAfm = af;
+
           Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
                   st, zc);
-          try {
-            insertCase(krousma);
-            clearNewCasePane(event);
-          } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
-          }
+          checkContactsNum(krousma);
+          clearNewCasePane(event);
 
         } else {
           JOptionPane.showMessageDialog(null,
@@ -412,10 +399,8 @@ public class Controller implements Initializable {
 
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null,
-                "An error occurred: " + e.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
+                e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
       }
-
 
     }
 
@@ -450,58 +435,52 @@ public class Controller implements Initializable {
   }
 
 
-  // In this method we give the case object and it automatically insert it
-  // Also depend to the contactNumber it goes to the next Panel or not
-  public void insertCase(Case krousma) throws Exception {
-    // Creating a instance of CaseDAO in order to insert the case in database
-    CaseDAO caseDao = new CaseDAO();
+  // In this method we give the case object and depend to the contactNumber
+  // it goes to the next Panel or not
+  public void checkContactsNum(Case krousma) throws Exception {
 
     if (krousma.getContactsNumber() == 0) {
-      // If the case didnt had contacts then just create the case and close the pane
-
-      try {
-        // Insert the case
-        caseDao.createCaseActive(krousma);
-        JOptionPane.showMessageDialog(null, "Case has been created successfully!");
-
-        // Close the createCasePanel
-        createCasePanel.setVisible(false);
-        createCaseHide = true;
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(
-                null, "An error oquired: " + e.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
-      }
+      // If the case didn't had contacts then just create the case and close the pane
+      insertCase(krousma);
 
     } else if (krousma.getContactsNumber() > 0) {
       // If the case had contacts then create the case and open the addContactsPanel
-      try {
-        // Insert the case
-        caseDao.createCaseActive(krousma);
-        JOptionPane.showMessageDialog(null,
-                "Case has been created successfully!");
+      insertCase(krousma);
 
-        // Update the variables that count how many contacts you will add
-        totalContacts = krousma.getContactsNumber();
-        numberLabel.setText(String.valueOf(totalContacts));
-        counterLabel.setText(String.valueOf(counterContacts));
+      // Update the variables that count how many contacts you will add
+      totalContacts = krousma.getContactsNumber();
+      numberLabel.setText(String.valueOf(totalContacts));
+      counterLabel.setText(String.valueOf(counterContacts));
 
-        // Close the createCasePanel and open addContactPanel
-        // in order to add the number of contacts the user said
-        addContactsPanel.setVisible(true);
-        addContactsHide = false;
-        createCasePanel.setVisible(false);
-        createCaseHide = true;
-      } catch (Exception e) {
-        JOptionPane.showMessageDialog(
-                null, "An error oquired: " + e.getMessage(),
-                "Error", JOptionPane.ERROR_MESSAGE);
-      }
+      // Open addContactPanel
+      // in order to add the number of contacts the user said
+      addContactsPanel.setVisible(true);
+      addContactsHide = false;
+      createCasePanel.setVisible(false);
+      createCaseHide = true;
 
     } else {
+      // if the contacts number is < 0 then an error will occur
       throw new Exception(
               "What do you mean you contacted with " + krousma.getContactsNumber() + " people??");
     }
+
+    // Close the createCasePanel
+    createCasePanel.setVisible(false);
+    createCaseHide = true;
+  }
+
+
+  // This method is doing the insertion in the database
+  public void insertCase(Case krousma) throws Exception {
+    // Creating a instance of CaseDAO in order to insert the case in database
+    CaseDAO casedao = new CaseDAO();
+
+    // Insert the case
+    casedao.createCaseActive(krousma);
+    JOptionPane.showMessageDialog(null,
+              "Case has been created successfully!");
+
   }
 
 
@@ -531,8 +510,7 @@ public class Controller implements Initializable {
             || zipCodeCoInput.getText().isEmpty() || afmCoInput.getText().isEmpty()) {
 
       JOptionPane.showMessageDialog(
-              null, "Please fill all the fields with *",
-              "Warning", JOptionPane.WARNING_MESSAGE);
+              null, "Please fill all the fields with *");
     } else {
       try {
         fnC = firstNameCoInput.getText();
@@ -546,41 +524,47 @@ public class Controller implements Initializable {
         afmC = Integer.parseInt(afmCoInput.getText());
         conId = Integer.parseInt(afmCoInput.getText());
 
-        // Create the object and an instance of the ContactDAO to add it to DB
+        // Create the object to add it to DB
         Contact contact = new Contact(afmC, conId, fnC, lnC, ageC, pnC,
                 munC, addC, stC, zcC);
-        ContactDAO contactDao = new ContactDAO();
+        insertContact(contact, parseAfm);
 
-        try {
-          // Create the contact and create also the "connection" case to contact
-          contactDao.createContact(contact);
-          contactDao.connectCaseContact(parseAfm, contact);
-          JOptionPane.showMessageDialog(null, "Contact has been successfully created");
-
-          // Clear the fields to add a new contact
-          // if the contact number given from the previous panel is not yet reached
-          clearAddContacts(event);
-
-        } catch (Exception e) {
-          try {
-            contactDao.deleteContact(afmC);
-          } catch (Exception ignored) {
-            System.out.println(e.getMessage());
-          }
-          throw new Exception("An error occured: " + e.getMessage());
-        } finally {
-          if (counterContacts > totalContacts) {
-            addContactsPanel.setVisible(false);
-            addContactsHide = true;
-            counterContacts = 0;
-          }
-        }
       } catch (Exception e) {
         JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
       }
 
     }
+    // Clear the fields to add a new contact
+    // if the contact number given from the previous panel is not yet reached
+    clearAddContacts(event);
 
+    // if the counter of contacts added surpass the contact number given
+    // from the createCase panel then close this panel
+    if (counterContacts > totalContacts) {
+      addContactsPanel.setVisible(false);
+      addContactsHide = true;
+      counterContacts = 1;
+    }
+
+  }
+
+
+  // A method that take the contact and insert it in the database
+  // Also it creates the connection with the case from the previous panel (createCase)
+  public void insertContact(Contact contact, int krousmaAFM) throws Exception {
+    ContactDAO contactDao = new ContactDAO();
+
+    try {
+      // Create the contact and create also the "connection" case to contact
+      contactDao.createContact(contact);
+      contactDao.connectCaseContact(krousmaAFM, contact);
+      JOptionPane.showMessageDialog(null, "Contact has been successfully created");
+
+    } catch (Exception e) {
+      // If something went wrong then delete the created contact in order not to have false data
+      contactDao.deleteContact(contact.getAFM());
+      throw new Exception("An error occurred: " + e.getMessage());
+    }
   }
 
 
@@ -626,6 +610,7 @@ public class Controller implements Initializable {
     int conId = 0;
     int afmK = 0;
 
+    // All the must fill field must not be null
     if (firstNameCoUnInput.getText().isEmpty() || lastNameCoUnInput.getText().isEmpty()
             || ageCoUnInput.getText().isEmpty() || phoneNumberCoUnInput.getText().isEmpty()
             || municipalityCoUnInput.getSelectionModel().getSelectedIndex() == -1
@@ -635,6 +620,7 @@ public class Controller implements Initializable {
 
       JOptionPane.showMessageDialog(null, "Please fill all the field with *");
     } else {
+      // Reading all the values in order to continue the process
       try {
         fnC = firstNameCoUnInput.getText();
         lnC = lastNameCoUnInput.getText();
@@ -647,21 +633,14 @@ public class Controller implements Initializable {
         afmC = Integer.parseInt(afmCoUnInput.getText());
         afmK = Integer.parseInt(afmCoUnKrousmatosInput.getText());
 
+        // Creating the contact object and inserting the database with the method insertContact
         Contact contact = new Contact(afmC, afmC, fnC, lnC, ageC, pnC,
                 munC, addC, stC, zcC);
-        ContactDAO contactDao = new ContactDAO();
+        insertContact(contact, afmK);
 
-        try {
-          contactDao.createContact(contact);
-          contactDao.connectCaseContact(afmK, contact);
-          JOptionPane.showMessageDialog(null,
-                  "The contact has been insert to its case successfully");
+        // Clear and close the panel
+        cancelAddContactUniq(event);
 
-          // Clear and close the panel
-          cancelAddContactUniq(event);
-        } catch (Exception e) {
-          throw new Exception(e.getMessage());
-        }
       } catch (Exception e) {
         JOptionPane.showMessageDialog(
                 null, "An error occurred: " + e.getMessage(),
@@ -694,6 +673,7 @@ public class Controller implements Initializable {
     afmCoUnInput.clear();
     afmCoUnKrousmatosInput.clear();
   }
+
 
   public String convertDimosId(String dimosId) {
     if (dimosId.equals("1")) {
@@ -897,6 +877,7 @@ public class Controller implements Initializable {
     return null;
   }
 
+
   @FXML
   public void allCasesClick(MouseEvent event) throws Exception {
     CaseDAO caseDao = new CaseDAO();
@@ -987,6 +968,7 @@ public class Controller implements Initializable {
     ObservableList<Case> oblist = caseDao.getPersonFilter(table, column, filterInput.getText());
 
 
+
     firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
     lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
@@ -1002,7 +984,6 @@ public class Controller implements Initializable {
     afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
     personsTable.setItems(oblist);
   }
-
 
 
   public void openPanels(AnchorPane panelOpen) {

@@ -14,7 +14,7 @@ public class DB {
 	private final static String port = "3306";
 	private final static String db = "covid19";
 	private final static String username = "root";
-	private final static String password = "root";
+	private final static String password = "040298140a";
 
 	private static Connection con = null;
 
