@@ -510,7 +510,7 @@
             <VBox layoutX="9.0" layoutY="374.0" prefHeight="210.0" prefWidth="174.0" spacing="15.0">
                <children>
                   <ComboBox fx:id="chooseTableComboBox" prefWidth="174.0" />
-                  <ComboBox fx:id="filterComboBox" prefWidth="174.0" />
+                  <ComboBox fx:id="chooseColumnComboBox" prefWidth="174.0" />
                   <TextField fx:id="filterInput" prefHeight="25.0" prefWidth="174.0" />
                   <Button fx:id="searchFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEARCH" textFill="WHITE">
                      <font>
