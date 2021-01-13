@@ -53,6 +53,15 @@ public class Case extends Person {
         this.Recovery = Recovery;
     }
 
+    public Case(int contactsNo, String Diagnosis, String Death, String Recovery, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+        super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
+
+        this.Diagnosis = Diagnosis;
+        this.Death = Death;
+        this.contactsNumber = contactsNo;
+        this.Recovery = Recovery;
+    }
+
 
     public String getDiagnosis() {
         return Diagnosis;

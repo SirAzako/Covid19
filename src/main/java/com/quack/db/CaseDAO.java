@@ -215,4 +215,42 @@ public class CaseDAO {
 
   }
 
+  public ObservableList<Case> getPersonAfm(String afmInput) throws Exception {
+    ObservableList<Case> oblist = FXCollections.observableArrayList();
+    try {
+      Connection con = DB.getConnection();
+      String querry = "SELECT * FROM Persons WHERE AFM = "+afmInput+";";
+      PreparedStatement stmt = con.prepareStatement(querry);
+      ResultSet rs = stmt.executeQuery();
+
+      while (rs.next()) {
+        int contactsNumberSql;
+        if (rs.getString("contactsNumber") != null) {
+          contactsNumberSql = Integer.parseInt(rs.getString("contactsNumber"));
+        } else {
+          contactsNumberSql = 0;
+        }
+        oblist.add(new Case(
+                contactsNumberSql, rs.getString("Diagnosis"), rs.getString("Death"),
+                rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                rs.getString("firstName"), rs.getString("lastName"),
+                Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                rs.getString("streetNumber"), rs.getString("zipCode")));
+      }
+      rs.close();
+      stmt.close();
+      DB.close();
+      return oblist;
+    } catch (Exception e) {
+      throw new Exception(e.getMessage());
+    } finally {
+      try {
+        DB.close();
+      } catch (Exception e) {
+
+      }
+    }
+
+  }
 }

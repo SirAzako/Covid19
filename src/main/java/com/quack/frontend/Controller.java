@@ -11,6 +11,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -43,6 +44,7 @@ public class Controller implements Initializable {
   private boolean addContactsHide = true;
   private boolean addContactUniqueHide = true;
   private boolean findPersonHide = true;
+  private boolean editProfileHide = true;
   private int totalContacts = 0;
   private int counterContacts = 1;
   private int parseAfm = 0;
@@ -75,6 +77,9 @@ public class Controller implements Initializable {
 
   @FXML
   private Group menuFindPersonButton;
+
+  @FXML
+  private Group menuEditProfileButton;
 
 
   // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button)
@@ -164,6 +169,54 @@ public class Controller implements Initializable {
   @FXML
   private Button submitContactButton;
 
+  //Edit profile
+  @FXML
+  private AnchorPane editProfilePanel;
+
+  @FXML
+  private TextField afmEditInput;
+
+  @FXML
+  private Button editPersonButton;
+
+  @FXML
+  private TextField firstNameEditInput;
+
+  @FXML
+  private TextField lastNameEditInput;
+
+  @FXML
+  private TextField ageEditInput;
+
+  @FXML
+  private TextField phoneNumberEditInput;
+
+  @FXML
+  private ComboBox<?> municipalityEditInput;
+
+  @FXML
+  private TextField addressEditInput;
+
+  @FXML
+  private TextField streetEditInput;
+
+  @FXML
+  private TextField zipCodeEditInput;
+
+  @FXML
+  private TextField contactsEditInput;
+
+  @FXML
+  private DatePicker diagnosisEditInput;
+
+  @FXML
+  private DatePicker recoveryEditInput;
+
+  @FXML
+  private DatePicker deathEditInput;
+
+  @FXML
+  private Button submitEditPersonButton;
 
   // Add a contact to a specific case (AnchorPane, Fields, Button)
   @FXML
@@ -256,13 +309,6 @@ public class Controller implements Initializable {
   private TableColumn<Case, String> deathTable;
 
   @FXML
-  private TableColumn<?, ?> infoTable;
-
-  @FXML
-  private TableColumn<?, ?> actionTable;
-
-
-  @FXML
   private Button allPersonsButton;
 
   @FXML
@@ -276,6 +322,12 @@ public class Controller implements Initializable {
 
   @FXML
   private TextField filterInput;
+
+  @FXML
+  private TextField filterContactInput;
+
+  @FXML
+  private Label resultsInput;
 
   @FXML
   private ComboBox<String> chooseColumnComboBox;
@@ -315,6 +367,10 @@ public class Controller implements Initializable {
   }
 
 
+  @FXML
+  public void menuEditProfileClick(MouseEvent event) {
+    openPanels(editProfilePanel);
+  }
   // Click event that will take the value from the create case panel
   // and create the case in the database
   @FXML
@@ -677,8 +733,14 @@ public class Controller implements Initializable {
 
   @FXML
   public void allCasesClick(MouseEvent event) throws Exception {
+    int counter = 0;
     CaseDAO caseDao = new CaseDAO();
     ObservableList<Case> oblist = caseDao.getCases();
+    for (Case krousma:oblist){
+      counter++;
+    }
+    resultsInput.setText(String.valueOf(counter));
+
     try {
       caseDao.getPersons();
     } catch (Exception e) {
@@ -705,9 +767,13 @@ public class Controller implements Initializable {
 
   @FXML
   public void allContactsClick(MouseEvent event) throws Exception {
-
+    int counter = 0;
     CaseDAO caseDao = new CaseDAO();
     ObservableList<Case> oblist = caseDao.getContacts();
+    for (Case krousma:oblist){
+      counter++;
+    }
+    resultsInput.setText(String.valueOf(counter));
     try {
       caseDao.getPersons();
     } catch (Exception e) {
@@ -730,9 +796,14 @@ public class Controller implements Initializable {
 
   @FXML
   public void allPersonsClick(MouseEvent event) throws Exception {
-
+    int counter=0;
     CaseDAO caseDao = new CaseDAO();
     ObservableList<Case> oblist = caseDao.getPersons();
+    for (Case krousma:oblist){
+      counter++;
+    }
+    resultsInput.setText(String.valueOf(counter));
+    System.out.println(counter);
     try {
       caseDao.getPersons();
     } catch (Exception e) {
@@ -758,12 +829,16 @@ public class Controller implements Initializable {
 
   @FXML
   public void searchFilterClick(MouseEvent event) throws Exception {
+    int counter = 0;
     CaseDAO caseDao = new CaseDAO();
     Filters filter = new Filters();
     String table  = filter.chooseTable(chooseTableComboBox.getValue());
     String column = filter.chooseColumn(chooseColumnComboBox.getValue());
     ObservableList<Case> oblist = caseDao.getPersonFilter(table, column, filterInput.getText());
-
+    for (Case krousma:oblist){
+      counter++;
+    }
+    resultsInput.setText(String.valueOf(counter));
 
 
     firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -780,6 +855,11 @@ public class Controller implements Initializable {
     numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
     afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
     personsTable.setItems(oblist);
+  }
+
+  @FXML
+  public void searchFilterContactClick(MouseEvent event) {
+  int counter = 0;
   }
 
 
@@ -802,6 +882,8 @@ public class Controller implements Initializable {
         findPersonHide = true;
         addContactUniquePanel.setVisible(false);
         addContactUniqueHide = true;
+        editProfilePanel.setVisible(false);
+        editProfileHide = true;
       } else {
         createCasePanel.setVisible(false);
         createCaseHide = true;
@@ -812,11 +894,12 @@ public class Controller implements Initializable {
       if (findPersonHide) {
         findPersonPanel.setVisible(true);
         findPersonHide = false;
-
         createCasePanel.setVisible(false);
         createCaseHide = true;
         addContactUniquePanel.setVisible(false);
         addContactUniqueHide = true;
+        editProfilePanel.setVisible(false);
+        editProfileHide = true;
       } else {
         findPersonPanel.setVisible(false);
         findPersonHide = true;
@@ -831,14 +914,69 @@ public class Controller implements Initializable {
         findPersonHide = true;
         createCasePanel.setVisible(false);
         createCaseHide = true;
+        editProfilePanel.setVisible(false);
+        editProfileHide = true;
 
       } else {
         addContactUniquePanel.setVisible(false);
         addContactUniqueHide = true;
       }
     }
+
+    if (panelOpen == editProfilePanel) {
+      if (editProfileHide) {
+        editProfilePanel.setVisible(true);
+        editProfileHide = false;
+        findPersonPanel.setVisible(false);
+        findPersonHide = true;
+        createCasePanel.setVisible(false);
+        createCaseHide = true;
+        addContactUniquePanel.setVisible(false);
+        addContactUniqueHide = true;
+
+      } else {
+        editProfilePanel.setVisible(false);
+        editProfileHide = true;
+      }
+    }
   }
 
+  @FXML
+  void submitEditPersonClick(MouseEvent event) {
+
+  }
+
+  @FXML
+  public void editPersonClick(MouseEvent event) throws Exception {
+    CaseDAO caseDao = new CaseDAO();
+    String amfInput = afmEditInput.getText();
+    ObservableList<Case> oblist = caseDao.getPersonAfm(amfInput);
+    for(Case krousma: oblist){
+
+      firstNameEditInput.setText(krousma.getFirstName());
+      lastNameEditInput.setText(krousma.getLastName());
+      ageEditInput.setText(String.valueOf(krousma.getAge()));
+      phoneNumberEditInput.setText(krousma.getPhoneNumber());
+      addressEditInput.setText(krousma.getAddress());
+      streetEditInput.setText(krousma.getStreetNumber());
+      zipCodeEditInput.setText(krousma.getZipCode());
+      contactsEditInput.setText(String.valueOf(krousma.getContactsNumber()));
+      if(krousma.getDiagnosis() != null){
+        diagnosisEditInput.setValue(LocalDate.parse(krousma.getDiagnosis()));
+      }
+      if(krousma.getRecovery() != null){
+        recoveryEditInput.setValue(LocalDate.parse(krousma.getRecovery()));
+      }
+      if(krousma.getDeath() != null){
+        deathEditInput.setValue(LocalDate.parse(krousma.getDeath()));
+      }
+
+
+    }
+
+
+
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

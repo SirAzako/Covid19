@@ -18,6 +18,81 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontend.Controller">
    <children>
+      <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
+         <children>
+            <ImageView fx:id="menuButton" layoutX="12.0" layoutY="34.0" onMouseClicked="#menuClick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/menu.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;">
+         <children>
+            <VBox layoutX="50.0" layoutY="105.0" prefHeight="622.0" prefWidth="100.0" spacing="100.0">
+               <children>
+                  <Group fx:id="muneFindPersonButton" onMouseClicked="#menuFindPersonClick">
+                     <children>
+                        <ImageView layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/findPerson.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="7.0" layoutY="60.0" prefHeight="17.0" prefWidth="80.0" text="FIND PERSON" textAlignment="CENTER" textFill="#dcdc65">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group fx:id="menuCreateButton" onMouseClicked="#menuCreateClick">
+                     <children>
+                        <ImageView layoutX="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/mask.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="63.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group fx:id="menuContactButton" onMouseClicked="#menuContactClick">
+                     <children>
+                        <ImageView layoutX="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/icons8_link_50px.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="ADD CONTACT" textAlignment="CENTER" textFill="#dcdc65">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group fx:id="menuEditProfileButton" layoutX="10.0" layoutY="367.0" onMouseClicked="#menuEditProfileClick">
+                     <children>
+                        <ImageView layoutX="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/editProfile.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="2.0" layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="EDIT PROFILE" textAlignment="CENTER" textFill="#dcdc65">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+               </children>
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </VBox>
+         </children></AnchorPane>
       <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clearNewCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
@@ -171,67 +246,6 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-         </children></AnchorPane>
-      <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
-         <children>
-            <ImageView fx:id="menuButton" layoutX="12.0" layoutY="34.0" onMouseClicked="#menuClick" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@icons/menu.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
-         <children>
-            <VBox layoutX="50.0" layoutY="105.0" prefHeight="200.0" prefWidth="100.0" spacing="100.0">
-               <children>
-                  <Group fx:id="muneFindPersonButton" onMouseClicked="#menuFindPersonClick">
-                     <children>
-                        <ImageView layoutX="14.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/findPerson.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutX="7.0" layoutY="60.0" prefHeight="17.0" prefWidth="80.0" text="FIND PERSON" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group fx:id="menuCreateButton" onMouseClicked="#menuCreateClick">
-                     <children>
-                        <ImageView layoutX="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/mask.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutY="63.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-                  <Group fx:id="menuContactButton" onMouseClicked="#menuContactClick">
-                     <children>
-                        <ImageView layoutX="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/icons8_link_50px.png" />
-                           </image>
-                        </ImageView>
-                        <Label layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="ADD CONTACT" textAlignment="CENTER" textFill="#dcdc65">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Group>
-               </children>
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </VBox>
          </children></AnchorPane>
       <AnchorPane fx:id="addContactsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
@@ -474,51 +488,244 @@
          <children>
             <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="540.0" prefWidth="1155.0">
               <columns>
-                <TableColumn fx:id="afmTable" prefWidth="100.33331298828125" text="ΑΦΜ" />
-                  <TableColumn fx:id="numberOfContactsTable" prefWidth="120.66668701171875" text="Number of Contacts" />
-                  <TableColumn fx:id="firstNameTable" prefWidth="76.0" text="First Name" />
-                  <TableColumn fx:id="lastNameTable" prefWidth="74.66668701171875" text="Last Name" />
-                  <TableColumn fx:id="ageTable" prefWidth="40.66668701171875" text="Age" />
+                <TableColumn fx:id="afmTable" prefWidth="137.0" text="ΑΦΜ" />
+                  <TableColumn fx:id="numberOfContactsTable" prefWidth="56.0" text="Contacts" />
+                  <TableColumn fx:id="firstNameTable" prefWidth="119.0" text="First Name" />
+                  <TableColumn fx:id="lastNameTable" prefWidth="106.0" text="Last Name" />
+                  <TableColumn fx:id="ageTable" prefWidth="45.0" text="Age" />
                   <TableColumn fx:id="phoneNumberTable" prefWidth="92.0" text="Phone Number" />
-                  <TableColumn fx:id="dimosTable" prefWidth="41.33331298828125" text="Dimos" />
-                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="59.3333740234375" text="Address" />
-                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="74.0" text="St. Number" />
-                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="64.6666259765625" text="Zip Code" />
-                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="95.0" text="Diagnosis Date" />
-                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="86.0" text="Recovery Date" />
-                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="72.0" text="Death Date" />
-                  <TableColumn fx:id="infoTable" minWidth="0.0" prefWidth="70.3333740234375" text="Info" />
-                  <TableColumn fx:id="actionTable" minWidth="0.0" prefWidth="96.6666259765625" text="Action" />
+                  <TableColumn fx:id="dimosTable" prefWidth="121.0" text="Dimos" />
+                  <TableColumn fx:id="addressTable" minWidth="0.0" prefWidth="78.0" text="Address" />
+                  <TableColumn fx:id="stNumberTable" minWidth="0.0" prefWidth="71.0" text="St. Number" />
+                  <TableColumn fx:id="zipCodeTable" minWidth="0.0" prefWidth="64.0" text="Zip Code" />
+                  <TableColumn fx:id="diagnosisTable" minWidth="0.0" prefWidth="91.0" text="Diagnosis Date" />
+                  <TableColumn fx:id="recoveryTable" minWidth="0.0" prefWidth="91.0" text="Recovery Date" />
+                  <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="83.0" text="Death Date" />
               </columns>
             </TableView>
-            <VBox layoutX="28.0" layoutY="14.0" prefHeight="221.0" prefWidth="135.0" spacing="50.0">
+            <Label layoutX="679.0" layoutY="560.0" text="RESULTS:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="resultsInput" layoutX="818.0" layoutY="560.0" text="#" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <VBox layoutY="14.0" prefHeight="152.0" prefWidth="174.0" spacing="60.0">
                <children>
-                  <Button fx:id="allPersonsButton" mnemonicParsing="false" onMouseClicked="#allPersonsClick" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: DCDC65;" text="ALL PERSONS">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="allCasesButton" mnemonicParsing="false" onMouseClicked="#allCasesClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CASES">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="allContactButton" mnemonicParsing="false" onMouseClicked="#allContactsClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CONTACTS">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-               </children>
-            </VBox>
-            <VBox layoutX="9.0" layoutY="374.0" prefHeight="210.0" prefWidth="174.0" spacing="15.0">
-               <children>
-                  <ComboBox fx:id="chooseTableComboBox" prefWidth="174.0" />
-                  <ComboBox fx:id="chooseColumnComboBox" prefWidth="174.0" />
-                  <TextField fx:id="filterInput" prefHeight="25.0" prefWidth="174.0" />
-                  <Button fx:id="searchFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEARCH" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
+                  <VBox prefHeight="122.0" prefWidth="135.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="allPersonsButton" mnemonicParsing="false" onMouseClicked="#allPersonsClick" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: DCDC65;" text="ALL PERSONS">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="allCasesButton" mnemonicParsing="false" onMouseClicked="#allCasesClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CASES">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="allContactButton" mnemonicParsing="false" onMouseClicked="#allContactsClick" prefHeight="25.0" prefWidth="138.0" style="-fx-background-color: DCDC65;" text="CONTACTS">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="152.0" prefWidth="174.0" spacing="15.0">
+                     <children>
+                        <ComboBox fx:id="chooseTableComboBox" prefWidth="174.0" />
+                        <ComboBox fx:id="chooseColumnComboBox" prefWidth="174.0" />
+                        <TextField fx:id="filterInput" prefHeight="25.0" prefWidth="174.0" />
+                        <Button fx:id="searchFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEARCH" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="195.0" prefHeight="152.0" prefWidth="174.0" spacing="15.0">
+                     <children>
+                        <Label text="CONTACTS OF:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="filterContactInput" prefHeight="25.0" prefWidth="174.0" promptText="ΑΦΜ" />
+                        <Button fx:id="searchContactFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterContactClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEE CONTACTS" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #6D3345;">
+         <children>
+            <VBox layoutX="150.0" layoutY="115.0" prefHeight="660.0" prefWidth="344.0" spacing="30.0">
+               <children>
+                  <HBox prefHeight="25.0" prefWidth="361.0" spacing="15.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="46.0" text="ΑΦΜ*" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="afmEditInput" prefWidth="174.0" />
+                        <Button fx:id="editPersonButton" mnemonicParsing="false" onMouseClicked="#editPersonClick" prefHeight="13.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="FIND PERSON" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="102.0" text="FIRST NAME *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="firstNameEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="55.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="107.0" text="LAST NAME *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="lastNameEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="13.0" prefWidth="134.0" spacing="108.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="54.0" text="AGE *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="ageEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="565.0" prefHeight="13.0" prefWidth="134.0" spacing="47.0">
+                     <children>
+                        <Label text="PHONE NUMBER *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="phoneNumberEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="520.0" prefHeight="13.0" prefWidth="134.0" spacing="62.0">
+                     <children>
+                        <Label text="MUNICIPALITY *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="municipalityEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="580.0" prefHeight="13.0" prefWidth="134.0" spacing="94.0">
+                     <children>
+                        <Label text="ADDRESS *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="addressEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="585.0" prefHeight="13.0" prefWidth="134.0" spacing="75.0">
+                     <children>
+                        <Label text="ST. NUMBER *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="streetEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="590.0" prefHeight="13.0" prefWidth="134.0" spacing="93.0">
+                     <children>
+                        <Label text="ZIP CODE *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="zipCodeEditInput" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="595.0" prefHeight="13.0" prefWidth="134.0" spacing="83.0">
+                     <children>
+                        <Label text="CONTACTS *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="contactsEditInput" prefHeight="25.0" prefWidth="174.0" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="600.0" prefHeight="13.0" prefWidth="134.0" spacing="82.0">
+                     <children>
+                        <Label text="DIAGNOSIS *" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="diagnosisEditInput" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="605.0" prefHeight="13.0" prefWidth="134.0" spacing="97.0">
+                     <children>
+                        <Label text="RECOVERY" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="recoveryEditInput" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="610.0" prefHeight="13.0" prefWidth="134.0" spacing="120.0">
+                     <children>
+                        <Label text="DEATH" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="deathEditInput" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="620.0" layoutY="79.0" text="EDIT PERSON" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button fx:id="submitEditPersonButton" layoutX="709.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#submitEditPersonClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="EDIT PERSON" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clearNewCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelNewCase" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

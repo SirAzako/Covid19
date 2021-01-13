@@ -7,9 +7,11 @@ show tables;
 #DROP TABLE Dimoi;
 #DROP TABLE Persons;
 
-SELECT * FROM Persons;
+SELECT * FROM Persons WHERE 1=1 AND FirstName = 'Paraskevas';
 
 SELECT * FROM Contacts;
+
+SEL
 
 SELECT * FROM Dimoi;
 
@@ -18,3 +20,6 @@ describe Persons;
 SELECT * FROM Persons WHERE ContactID IS NULL;
 
 SELECT * FROM Persons WHERE FirstName = 'Paraskevas';
+
+SELECT * FROM Persons WHERE ContactID IS NULLl;
+
