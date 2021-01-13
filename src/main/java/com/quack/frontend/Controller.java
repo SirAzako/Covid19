@@ -675,209 +675,6 @@ public class Controller implements Initializable {
   }
 
 
-  public String convertDimosId(String dimosId) {
-    if (dimosId.equals("1")) {
-      return "Αθηναίων";
-    }
-    if (dimosId.equals("2")) {
-      return "Βύρωνος";
-    }
-    if (dimosId.equals("3")) {
-      return "Γαλατσίου";
-    }
-    if (dimosId.equals("4")) {
-      return "Δάφνης – Υμηττού";
-    }
-    if (dimosId.equals("5")) {
-      return "Ζωγράφου";
-    }
-    if (dimosId.equals("6")) {
-      return "Ηλιουπόλεως";
-    }
-    if (dimosId.equals("7")) {
-      return "Καισαριανής";
-    }
-    if (dimosId.equals("8")) {
-      return "Φιλαδελφείας – Χαλκηδόνος";
-    }
-    if (dimosId.equals("9")) {
-      return "Αγίας Παρασκευής";
-    }
-    if (dimosId.equals("10")) {
-      return "Αμαρουσίου";
-    }
-    if (dimosId.equals("11")) {
-      return "Βριλησσίων";
-    }
-    if (dimosId.equals("12")) {
-      return "Ηρακλείου";
-    }
-    if (dimosId.equals("13")) {
-      return "Κηφισιάς";
-    }
-    if (dimosId.equals("14")) {
-      return "Λυκόβρυσης – Πεύκης";
-    }
-    if (dimosId.equals("15")) {
-      return "Μεταμορφώσεως";
-    }
-    if (dimosId.equals("16")) {
-      return "Νέας Ιωνίας";
-    }
-    if (dimosId.equals("17")) {
-      return "Παπάγου – Χολαργού";
-    }
-    if (dimosId.equals("18")) {
-      return "Πεντέλης";
-    }
-    if (dimosId.equals("19")) {
-      return "Φιλοθέης – Ψυχικού";
-    }
-    if (dimosId.equals("20")) {
-      return "Χαλανδρίου";
-    }
-    if (dimosId.equals("21")) {
-      return "Περιστερίου";
-    }
-    if (dimosId.equals("22")) {
-      return "Αγίας Βαρβάρας";
-    }
-    if (dimosId.equals("23")) {
-      return "Αγίων Αναργύρων – Καματερού";
-    }
-    if (dimosId.equals("24")) {
-      return "Αιγάλεω";
-    }
-    if (dimosId.equals("25")) {
-      return "Ιλίου";
-    }
-    if (dimosId.equals("26")) {
-      return "Πετρουπόλεως";
-    }
-    if (dimosId.equals("27")) {
-      return "Χαϊδαρίου";
-    }
-    if (dimosId.equals("28")) {
-      return "Καλλιθέας";
-    }
-    if (dimosId.equals("29")) {
-      return "Αγίου Δημητρίου";
-    }
-    if (dimosId.equals("30")) {
-      return "Αλίμου";
-    }
-    if (dimosId.equals("31")) {
-      return "Γλυφάδας";
-    }
-    if (dimosId.equals("32")) {
-      return "Ελληνικού – Αργυρούπολης";
-    }
-    if (dimosId.equals("33")) {
-      return "Μοσχάτου – Ταύρου";
-    }
-    if (dimosId.equals("34")) {
-      return "Νέας Σμύρνης";
-    }
-    if (dimosId.equals("35")) {
-      return "Παλαιού Φαλήρου";
-    }
-    if (dimosId.equals("36")) {
-      return "Αχαρνών";
-    }
-    if (dimosId.equals("37")) {
-      return "Βάρης – Βούλας – Βουλιαγμένης";
-    }
-    if (dimosId.equals("38")) {
-      return "Διονύσου";
-    }
-    if (dimosId.equals("39")) {
-      return "Κρωπίας";
-    }
-    if (dimosId.equals("40")) {
-      return "Λαυρεωτικής";
-    }
-    if (dimosId.equals("41")) {
-      return "Μαραθώνα";
-    }
-    if (dimosId.equals("42")) {
-      return "Μαρκοπούλου Μεσογαίας";
-    }
-    if (dimosId.equals("43")) {
-      return "Παιανίας";
-    }
-    if (dimosId.equals("44")) {
-      return "Παλλήνης";
-    }
-    if (dimosId.equals("45")) {
-      return "Ραφήνας – Πικερμίου";
-    }
-    if (dimosId.equals("46")) {
-      return "Σαρωνικού";
-    }
-    if (dimosId.equals("47")) {
-      return "Σπάτων – Αρτέμιδος";
-    }
-    if (dimosId.equals("48")) {
-      return "Ωρωπού";
-    }
-    if (dimosId.equals("49")) {
-      return "Ελευσίνας";
-    }
-    if (dimosId.equals("50")) {
-      return "Ασπροπύργου";
-    }
-    if (dimosId.equals("51")) {
-      return "Μάνδρας – Ειδυλλίας";
-    }
-    if (dimosId.equals("52")) {
-      return "Μεγαρέων";
-    }
-    if (dimosId.equals("53")) {
-      return "Φυλής";
-    }
-    if (dimosId.equals("54")) {
-      return "Πειραιώς";
-    }
-    if (dimosId.equals("55")) {
-      return "Κερατσινίου – Δραπετσώνας";
-    }
-    if (dimosId.equals("56")) {
-      return "Κορυδαλλού";
-    }
-    if (dimosId.equals("57")) {
-      return "Νίκαιας – Αγίου Ιωάννη Ρέντη";
-    }
-    if (dimosId.equals("58")) {
-      return "Περάματος";
-    }
-    if (dimosId.equals("59")) {
-      return "Σαλαμίνος";
-    }
-    if (dimosId.equals("60")) {
-      return "Αγκιστρίου";
-    }
-    if (dimosId.equals("61")) {
-      return "Αίγινας";
-    }
-    if (dimosId.equals("62")) {
-      return "Κυθήρων";
-    }
-    if (dimosId.equals("63")) {
-      return "Πόρου";
-    }
-    if (dimosId.equals("64")) {
-      return "Σπετσών";
-    }
-    if (dimosId.equals("65")) {
-      return "Τροιζηνίας";
-    }
-    if (dimosId.equals("66")) {
-      return "Ύδρας";
-    }
-    return null;
-  }
-
-
   @FXML
   public void allCasesClick(MouseEvent event) throws Exception {
     CaseDAO caseDao = new CaseDAO();
@@ -892,7 +689,7 @@ public class Controller implements Initializable {
     lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
     phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-    dimosTable.setCellValueFactory(new PropertyValueFactory<>(convertDimosId("dimosID")));
+    dimosTable.setCellValueFactory(new PropertyValueFactory<>("dimosName"));
     addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
     stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
     zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
@@ -921,7 +718,7 @@ public class Controller implements Initializable {
     lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
     phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-    dimosTable.setCellValueFactory(new PropertyValueFactory<>(convertDimosId("dimosID")));
+    dimosTable.setCellValueFactory(new PropertyValueFactory<>(("dimosName")));
     addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
     stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
     zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
@@ -945,7 +742,7 @@ public class Controller implements Initializable {
     lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
     phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-    dimosTable.setCellValueFactory(new PropertyValueFactory<>(convertDimosId("dimosID")));
+    dimosTable.setCellValueFactory(new PropertyValueFactory<>(("dimosName")));
     addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
     stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
     zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
@@ -973,7 +770,7 @@ public class Controller implements Initializable {
     lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
     phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-    dimosTable.setCellValueFactory(new PropertyValueFactory<>(convertDimosId("dimosID")));
+    dimosTable.setCellValueFactory(new PropertyValueFactory<>(("dimosName")));
     addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
     stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
     zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));

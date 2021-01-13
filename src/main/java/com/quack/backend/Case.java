@@ -11,6 +11,7 @@ public class Case extends Person {
     private String Recovery;
     private String Death;
     private int contactsNumber;
+    private String dimosName;
 
     //Το κρούσμα ανάρρωσε 
     public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM,
@@ -42,9 +43,10 @@ public class Case extends Person {
         this.contactsNumber = contactsNumber;
     }
 
-    public Case(int contactsNo, String Diagnosis, String Death, String Recovery, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode) {
+    public Case(int contactsNo, String Diagnosis, String Death, String Recovery, int AFM, String firstName, String lastName, int age, String phoneNumber, int dimosID, String address, String streetNumber, String zipCode, String dimosName) {
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address, streetNumber, zipCode);
 
+        this.dimosName = dimosName;
         this.Diagnosis = Diagnosis;
         this.Death = Death;
         this.contactsNumber = contactsNo;
@@ -154,6 +156,14 @@ public class Case extends Person {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getDimosName() {
+        return dimosName;
+    }
+
+    public void setDimosName(String dimosName) {
+        this.dimosName = dimosName;
     }
 
 }

@@ -52,7 +52,9 @@ public class CaseDAO {
     ObservableList<Case> oblist = FXCollections.observableArrayList();
     try {
       Connection con = DB.getConnection();
-      String querry = "SELECT * FROM Persons;";
+      String querry = "Select P.*, D.Name dimosName " +
+                      "From Persons P, Dimoi D " +
+                      "Where P.DimosID = D.DimosID;";
       PreparedStatement stmt = con.prepareStatement(querry);
       ResultSet rs = stmt.executeQuery();
 
@@ -69,7 +71,7 @@ public class CaseDAO {
                 rs.getString("firstName"), rs.getString("lastName"),
                 Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
                 Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
-                rs.getString("streetNumber"), rs.getString("zipCode")));
+                rs.getString("streetNumber"), rs.getString("zipCode"), rs.getString("dimosName")));
       }
       rs.close();
       stmt.close();
@@ -91,7 +93,9 @@ public class CaseDAO {
     ObservableList<Case> oblist = FXCollections.observableArrayList();
     try {
       Connection con = DB.getConnection();
-      String querry = "SELECT * FROM Persons WHERE ContactID IS NULL;";
+      String querry = "SELECT P.*, D.Name dimosName " +
+                      "FROM Persons P, Dimoi D " +
+                      "WHERE ContactID IS NULL and D.DimosID = P.DimosID;";
       PreparedStatement stmt = con.prepareStatement(querry);
       ResultSet rs = stmt.executeQuery();
 
@@ -108,7 +112,7 @@ public class CaseDAO {
                 rs.getString("firstName"), rs.getString("lastName"),
                 Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
                 Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
-                rs.getString("streetNumber"), rs.getString("zipCode")));
+                rs.getString("streetNumber"), rs.getString("zipCode"), rs.getString("dimosName")));
       }
       rs.close();
       stmt.close();
@@ -130,7 +134,9 @@ public class CaseDAO {
     ObservableList<Case> oblist = FXCollections.observableArrayList();
     try {
       Connection con = DB.getConnection();
-      String querry = "SELECT * FROM Persons WHERE ContactID IS NOT NULL;";
+      String querry = "SELECT P.*, D.Name dimosName " +
+                      "FROM Persons P, Dimoi D " +
+                      "WHERE ContactID IS NOT NULL and P.DimosID = D.DimosID;";
       PreparedStatement stmt = con.prepareStatement(querry);
       ResultSet rs = stmt.executeQuery();
 
@@ -147,7 +153,7 @@ public class CaseDAO {
                 rs.getString("firstName"), rs.getString("lastName"),
                 Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
                 Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
-                rs.getString("streetNumber"), rs.getString("zipCode")));
+                rs.getString("streetNumber"), rs.getString("zipCode"), rs.getString("dimosName")));
       }
       rs.close();
       stmt.close();
@@ -172,7 +178,9 @@ public class CaseDAO {
       Connection con = DB.getConnection();
 
       String querry =
-              "SELECT * FROM Persons "+ querryTable+ " " + querryColumn + " '"+ filterInput +"';";
+              "SELECT P.*, D.Name dimosName " +
+                      "FROM Persons P, Dimoi D " +
+                      "WHERE "+ querryTable+ " AND " + querryColumn + " '"+ filterInput +"' AND D.DimosID = P.DimosID;";
       PreparedStatement stmt = con.prepareStatement(querry);
       ResultSet rs = stmt.executeQuery();
 
@@ -189,7 +197,7 @@ public class CaseDAO {
                 rs.getString("firstName"), rs.getString("lastName"),
                 Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
                 Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
-                rs.getString("streetNumber"), rs.getString("zipCode")));
+                rs.getString("streetNumber"), rs.getString("zipCode"), rs.getString("dimosName")));
       }
       rs.close();
       stmt.close();

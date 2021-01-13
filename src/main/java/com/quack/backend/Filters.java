@@ -5,11 +5,11 @@ package com.quack.backend;
 public class Filters {
   public String chooseTable(String table) {
     if (table.equals("Persons")) {
-      return "WHERE 1 = 1";
+      return "1 = 1";
     } else if (table.equals("Cases")) {
-      return "WHERE ContactID IS NULL";
+      return "ContactID IS NULL";
     } else if (table.equals("Contacts")) {
-      return "WHERE ContactID IS NOT NULL";
+      return "ContactID IS NOT NULL";
     } else {
       return null;
     }
@@ -17,29 +17,29 @@ public class Filters {
 //AND AFM = "";
   public String chooseColumn(String column){
     if(column.equals("ΑΦΜ")){
-      return "AND AFM =";
+      return "AFM =";
     }else if(column.equals("First Name")){
-      return "AND FirstName =";
+      return "FirstName =";
     }else if(column.equals("Last Name")){
-      return "AND LastName =";
+      return "LastName =";
     }else if(column.equals("Age")){
-      return "AND Age =";
+      return "Age =";
     }else if(column.equals("Phone Number")){
-      return "AND PhoneNumber =";
+      return "PhoneNumber =";
     }else if(column.equals("Municipality")){
-      return "AND DimosID =";
+      return "DimosID =";
     }else if(column.equals("Address")){
-      return "AND Address =";
+      return "Address =";
     }else if(column.equals("Street Number")){
-      return "AND StreetNumber =";
+      return "StreetNumber =";
     }else if(column.equals("Zip Code")){
-      return "AND Zip Code =";
+      return "Zip Code =";
     }else if(column.equals("Diagnosis Date")){
-      return "AND Diagnosis =";
+      return "Diagnosis =";
     }else if(column.equals("Recovery Date")){
-      return "AND Recovery =";
+      return "Recovery =";
     }else if(column.equals("Death Date")) {
-      return "AND Death =";
+      return "Death =";
     }else {
       return null;
     }
