@@ -27,9 +27,9 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;">
+      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
          <children>
-            <VBox layoutX="50.0" layoutY="105.0" prefHeight="622.0" prefWidth="100.0" spacing="100.0">
+            <VBox layoutX="50.0" layoutY="42.0" prefHeight="801.0" prefWidth="100.0" spacing="100.0">
                <children>
                   <Group fx:id="muneFindPersonButton" onMouseClicked="#menuFindPersonClick">
                      <children>
@@ -52,7 +52,7 @@
                               <Image url="@icons/mask.png" />
                            </image>
                         </ImageView>
-                        <Label layoutY="63.0" prefHeight="17.0" prefWidth="80.0" text="CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
+                        <Label layoutY="63.0" prefHeight="17.0" prefWidth="80.0" text=" CREATE CASE" textAlignment="CENTER" textFill="#dcdc65">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -80,7 +80,21 @@
                               <Image url="@icons/editProfile.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="2.0" layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="EDIT PROFILE" textAlignment="CENTER" textFill="#dcdc65">
+                        <Label layoutX="2.0" layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text=" EDIT PERSON" textAlignment="CENTER" textFill="#dcdc65">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Group>
+                  <Group layoutX="8.0" layoutY="543.0" onMouseClicked="#menuStatsClick">
+                     <children>
+                        <ImageView layoutX="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/stats.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="2.0" layoutY="59.0" prefHeight="17.0" prefWidth="88.0" text="      STATS" textAlignment="CENTER" textFill="#dcdc65">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -565,7 +579,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #6D3345;">
+      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: # #0D102F;" visible="false">
          <children>
             <VBox layoutX="150.0" layoutY="115.0" prefHeight="660.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -716,16 +730,17 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clearNewCasePane" prefHeight="45.0" prefWidth="107.0" text="Clear">
+            <Button layoutX="711.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#clearEditPerson" prefHeight="45.0" prefWidth="107.0" text="Clear">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelNewCase" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
+            <Button layoutX="711.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#cancelEditPerson" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children></AnchorPane>
+      <AnchorPane fx:id="statsPanel" layoutX="745.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0D65;" visible="false" />
    </children>
 </AnchorPane>
