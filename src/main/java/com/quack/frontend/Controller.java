@@ -28,20 +28,13 @@ import javax.swing.JOptionPane;
  * @version 1.0.1 11 Jan 2021
  */
 public class Controller implements Initializable {
-    private boolean menuHide = true;
-    private boolean createCaseHide = true;
-    private boolean addContactsHide = true;
-    private boolean addContactUniqueHide = true;
-    private boolean findPersonHide = true;
-    private boolean editProfileHide = true;
-    private boolean statsHide = true;
     private int totalContacts = 0;
     private int counterContacts = 1;
     private int parseAfm = 0;
     private int contactsNumberSql = 0;
 
     /*  Here we will initialize all the fields, button, datePickers and AnchorPane
-     *   that we will need in our use cases
+     *   that we will need in our use cases, and we read them from the fxml file
      */
 
     // Main anchorPane
@@ -72,7 +65,7 @@ public class Controller implements Initializable {
     private Group menuEditProfileButton;
 
 
-    // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button)
+    // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button etc.)
     @FXML
     private AnchorPane createCasePanel;
 
@@ -119,7 +112,7 @@ public class Controller implements Initializable {
     private Button submitCaseButton;
 
 
-    // Add contacts to the created case (AnchorPane, Fields, Button, Labels)
+    // Add contacts panel after the create case panel (AnchorPane, Fields, Button, Labels etc.)
     @FXML
     private AnchorPane addContactsPanel;
 
@@ -159,7 +152,8 @@ public class Controller implements Initializable {
     @FXML
     private Button submitContactButton;
 
-    //Edit profile
+
+    //Edit profile (AnchorPane, Fields, Button etc.)
     @FXML
     private AnchorPane editProfilePanel;
 
@@ -208,7 +202,8 @@ public class Controller implements Initializable {
     @FXML
     private Button submitEditPersonButton;
 
-    // Add a contact to a specific case (AnchorPane, Fields, Button)
+
+    // Add a contact to a specific case panel (AnchorPane, Fields, Button etc.)
     @FXML
     private AnchorPane addContactUniquePanel;
 
@@ -329,40 +324,9 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane statsPanel;
 
+
     /* Here we will initialize all the functions and events on click */
 
-
-    // Click event that open and close the menu bar
-    @FXML
-    public void menuClick(MouseEvent event) {
-        openPanels(menuBar);
-    }
-
-
-    // Click event that opens and close the create case panel
-    @FXML
-    public void menuCreateClick(MouseEvent event) {
-        openPanels(createCasePanel);
-    }
-
-
-    // Click event that opens and close the find persons panel
-    @FXML
-    public void menuFindPersonClick(MouseEvent event) {
-        openPanels(findPersonPanel);
-    }
-
-
-    @FXML
-    public void menuContactClick(MouseEvent event) {
-        openPanels(addContactUniquePanel);
-    }
-
-
-    @FXML
-    public void menuEditProfileClick(MouseEvent event) {
-        openPanels(editProfilePanel);
-    }
 
     // Click event that will take the value from the create case panel
     // and create the case in the database
@@ -468,7 +432,6 @@ public class Controller implements Initializable {
     public void cancelNewCase(MouseEvent event) {
         clearNewCasePane(event);
         createCasePanel.setVisible(false);
-        createCaseHide = true;
     }
 
 
@@ -492,9 +455,7 @@ public class Controller implements Initializable {
             // Open addContactPanel
             // in order to add the number of contacts the user said
             addContactsPanel.setVisible(true);
-            addContactsHide = false;
             createCasePanel.setVisible(false);
-            createCaseHide = true;
 
         } else {
             // if the contacts number is < 0 then an error will occur
@@ -504,7 +465,6 @@ public class Controller implements Initializable {
 
         // Close the createCasePanel
         createCasePanel.setVisible(false);
-        createCaseHide = true;
     }
 
 
@@ -579,7 +539,6 @@ public class Controller implements Initializable {
         // from the createCase panel then close this panel
         if (counterContacts > totalContacts) {
             addContactsPanel.setVisible(false);
-            addContactsHide = true;
             counterContacts = 1;
         }
 
@@ -610,8 +569,7 @@ public class Controller implements Initializable {
     public void cancelAddContacts(MouseEvent event) {
         // Clear the fields to add a new contact
         clearAddContacts(event);
-        addContactsPanel.setVisible(false);
-        addContactsHide = true;
+        openPanels("addContactsPanel");
     }
 
 
@@ -684,8 +642,7 @@ public class Controller implements Initializable {
     public void cancelAddContactUniq(MouseEvent event) {
         // clear the field and close the panel
         clearAddContactUniq(event);
-        addContactUniquePanel.setVisible(false);
-        addContactUniqueHide = true;
+        openPanels("addContactUniquePanel");
     }
 
 
@@ -821,116 +778,12 @@ public class Controller implements Initializable {
         personsTable.setItems(oblist);
     }
 
+
     @FXML
     public void searchFilterContactClick(MouseEvent event) {
         int counter = 0;
     }
 
-
-    public void openPanels(AnchorPane panelOpen) {
-        if (panelOpen == menuBar) {
-            if (menuHide) {
-                menuBar.setVisible(true);
-                menuHide = false;
-            } else {
-                menuBar.setVisible(false);
-                menuHide = true;
-            }
-        }
-        if (panelOpen == createCasePanel) {
-            if (createCaseHide) {
-                createCasePanel.setVisible(true);
-                createCaseHide = false;
-
-                findPersonPanel.setVisible(false);
-                findPersonHide = true;
-                addContactUniquePanel.setVisible(false);
-                addContactUniqueHide = true;
-                editProfilePanel.setVisible(false);
-                editProfileHide = true;
-                statsPanel.setVisible(false);
-                statsHide = true;
-            } else {
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-            }
-        }
-
-        if (panelOpen == findPersonPanel) {
-            if (findPersonHide) {
-                findPersonPanel.setVisible(true);
-                findPersonHide = false;
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-                addContactUniquePanel.setVisible(false);
-                addContactUniqueHide = true;
-                editProfilePanel.setVisible(false);
-                editProfileHide = true;
-                statsPanel.setVisible(false);
-                statsHide = true;
-            } else {
-                findPersonPanel.setVisible(false);
-                findPersonHide = true;
-            }
-        }
-
-        if (panelOpen == addContactUniquePanel) {
-            if (addContactUniqueHide) {
-                addContactUniquePanel.setVisible(true);
-                addContactUniqueHide = false;
-                findPersonPanel.setVisible(false);
-                findPersonHide = true;
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-                editProfilePanel.setVisible(false);
-                editProfileHide = true;
-                statsPanel.setVisible(false);
-                statsHide = true;
-            } else {
-                addContactUniquePanel.setVisible(false);
-                addContactUniqueHide = true;
-            }
-        }
-        if (panelOpen == editProfilePanel) {
-            if (editProfileHide) {
-                editProfilePanel.setVisible(true);
-                editProfileHide = false;
-                statsPanel.setVisible(false);
-                statsHide = true;
-                findPersonPanel.setVisible(false);
-                findPersonHide = true;
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-                addContactUniquePanel.setVisible(false);
-                addContactUniqueHide = true;
-
-            } else {
-                editProfilePanel.setVisible(false);
-                editProfileHide = true;
-            }
-        }
-        if (panelOpen == statsPanel) {
-            if (statsHide) {
-                statsPanel.setVisible(true);
-                statsHide = false;
-
-                editProfilePanel.setVisible(false);
-                editProfileHide = true;
-                findPersonPanel.setVisible(false);
-                findPersonHide = true;
-                createCasePanel.setVisible(false);
-                createCaseHide = true;
-                addContactUniquePanel.setVisible(false);
-                addContactUniqueHide = true;
-
-            } else {
-                statsPanel.setVisible(false);
-                statsHide = true;
-            }
-        }
-
-
-    }
 
     @FXML
     void submitEditPersonClick(MouseEvent event) {
@@ -1022,6 +875,7 @@ public class Controller implements Initializable {
 
     }
 
+
     @FXML
     public void editPersonClick(MouseEvent event) throws Exception {
         CaseDAO caseDao = new CaseDAO();
@@ -1059,6 +913,7 @@ public class Controller implements Initializable {
 
     }
 
+
     @FXML
     public void clearEditPerson(MouseEvent event) {
         clearFields(editProfilePanel);
@@ -1067,8 +922,9 @@ public class Controller implements Initializable {
 
     @FXML
     public void cancelEditPerson(MouseEvent event) {
-        openPanels(editProfilePanel);
+        openPanels("editProfilePanel");
     }
+
 
     public void clearFields(AnchorPane panel) {
         if (panel == createCasePanel) {
@@ -1124,11 +980,97 @@ public class Controller implements Initializable {
 
     }
 
-    @FXML
-    public void menuStatsClick(MouseEvent event) {
-        openPanels(statsPanel);
+
+    // A method to open and close the panels from the menu bar
+    public void openPanels(String panelOpen) {
+        // Close all the other panels except the panel you wanna open
+        if (!panelOpen.equals("createCasePanel")) {
+            if (this.createCasePanel.isVisible())
+                this.createCasePanel.setVisible(false);
+        } else {
+            this.createCasePanel.setVisible(!this.createCasePanel.isVisible());
+        }
+
+        if (!panelOpen.equals("addContactsPanel")) {
+            if (this.addContactsPanel.isVisible())
+                this.addContactsPanel.setVisible(false);
+        } else {
+            this.addContactsPanel.setVisible(!this.addContactsPanel.isVisible());
+        }
+
+        if (!panelOpen.equals("addContactUniquePanel")) {
+            if (this.addContactUniquePanel.isVisible())
+                this.addContactUniquePanel.setVisible(false);
+        } else {
+            this.addContactUniquePanel.setVisible(!this.addContactUniquePanel.isVisible());
+        }
+
+        if (!panelOpen.equals("findPersonPanel")) {
+            if (this.findPersonPanel.isVisible())
+                this.findPersonPanel.setVisible(false);
+        } else {
+            this.findPersonPanel.setVisible(!this.findPersonPanel.isVisible());
+        }
+
+        if (!panelOpen.equals("editPersonPanel")) {
+            if (this.editProfilePanel.isVisible())
+                this.editProfilePanel.setVisible(false);
+        } else {
+            this.editProfilePanel.setVisible(!this.editProfilePanel.isVisible());
+        }
+
+        if (!panelOpen.equals("statsPanel")) {
+            if (this.statsPanel.isVisible())
+                this.statsPanel.setVisible(false);
+        } else {
+            this.statsPanel.setVisible(!this.statsPanel.isVisible());
+        }
+
+
     }
 
+
+    // Click event that open and close the menu bar
+    @FXML
+    public void menuClick(MouseEvent event) {
+        this.menuBar.setVisible(!this.menuBar.isVisible());
+    }
+
+
+    @FXML
+    public void menuStatsClick(MouseEvent event) {
+        openPanels("statsPanel");
+    }
+
+
+    // Click event that opens and close the create case panel
+    @FXML
+    public void menuCreateClick(MouseEvent event) {
+        openPanels("createCasePanel");
+    }
+
+
+    // Click event that opens and close the find persons panel
+    @FXML
+    public void menuFindPersonClick(MouseEvent event) {
+        openPanels("findPersonPanel");
+    }
+
+
+    // Click event that opens and close the addContactsUniquePanel panel
+    @FXML
+    public void menuContactClick(MouseEvent event) {
+        openPanels("addContactUniquePanel");
+    }
+
+
+    // Click event that opens and close the edit persons panel
+    @FXML
+    public void menuEditProfileClick(MouseEvent event) {
+        openPanels("editPersonPanel");
+    }
+
+    // The initialize method in order on the start of the app to set values and do stuff
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

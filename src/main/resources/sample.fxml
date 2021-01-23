@@ -741,6 +741,6 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="745.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0D65;" visible="false" />
+      <AnchorPane fx:id="statsPanel" layoutX="745.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0D65;" />
    </children>
 </AnchorPane>
