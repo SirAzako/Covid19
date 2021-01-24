@@ -1,8 +1,6 @@
-package com.quack.frontend;
+package com.quack.backend;
 
-import com.quack.backend.Case;
-import com.quack.backend.Contact;
-import com.quack.backend.Filters;
+
 import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
@@ -13,8 +11,13 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,306 +26,501 @@ import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
 
 /**
- * In Controller done all management for the gui
+ * In Controller done all management for the gui.
  *
  * @version 1.0.1 11 Jan 2021
  */
-public class Controller implements Initializable {
-    private int totalContacts = 0;
-    private int counterContacts = 1;
-    private int parseAfm = 0;
-    private int contactsNumberSql = 0;
 
-    /*  Here we will initialize all the fields, button, datePickers and AnchorPane
-     *   that we will need in our use cases, and we read them from the fxml file
+public class Controller implements Initializable {
+    /**
+     * private integer totalContacts.
+     */
+    private int totalContacts = 0;
+    /**
+     * private integer counterContacts.
+     */
+    private int counterContacts = 1;
+    /**
+     * private integer parseAfm.
+     */
+    private int parseAfm = 0;
+
+    /*  Here we will initialize all the fields, button,
+     *   datePickers and AnchorPane that we will need in our use cases, and
+     * we read them from the fxml file
      */
 
     // Main anchorPane
+    /**
+     * private AnchorPane anchorPane.
+     */
     @FXML
     private AnchorPane anchorPane;
 
 
     // Menu bar items
+    /**
+     * private AnchorPane menuButton.
+     */
     @FXML
     private ImageView menuButton;
-
+    /**
+     * private AnchorPane toolBar.
+     */
     @FXML
     private AnchorPane toolBar;
-
+    /**
+     * private AnchorPane menuBar.
+     */
     @FXML
     private AnchorPane menuBar;
 
-    @FXML
-    private Group menuCreateButton;
 
-    @FXML
-    private Group menuContactButton;
-
-    @FXML
-    private Group menuFindPersonButton;
-
-    @FXML
-    private Group menuEditProfileButton;
-
-
-    // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button etc.)
+    // Create Case Panel (AnchorPane, Fields, ComboBox, DatePickers, Button)
+    /**
+     * private AnchorPane createCasePanel.
+     */
     @FXML
     private AnchorPane createCasePanel;
-
+    /**
+     * private TextField firstNameInput.
+     */
     @FXML
     private TextField firstNameInput;
-
+    /**
+     * private TextField lastNameInput.
+     */
     @FXML
     private TextField lastNameInput;
-
+    /**
+     * private TextField ageInput.
+     */
     @FXML
     private TextField ageInput;
-
+    /**
+     * private TextField phoneNumberInput.
+     */
     @FXML
     private TextField phoneNumberInput;
-
+    /**
+     * private TextField addressInput.
+     */
     @FXML
     private TextField addressInput;
-
+    /**
+     * private TextField streetInput.
+     */
     @FXML
     private TextField streetInput;
-
+    /**
+     * private TextField zipCodeInput.
+     */
     @FXML
     private TextField zipCodeInput;
-
+    /**
+     * private TextField contactsInput.
+     */
     @FXML
     private TextField contactsInput;
-
+    /**
+     * private TextField afmInput.
+     */
     @FXML
     private TextField afmInput;
-
+    /**
+     * private ComboBox<String> municipalityInput.
+     */
     @FXML
     private ComboBox<String> municipalityInput;
-
+    /**
+     * private DatePicker diagnosisInput.
+     */
     @FXML
     private DatePicker diagnosisInput;
-
+    /**
+     * private DatePicker recoveryInput.
+     */
     @FXML
     private DatePicker recoveryInput;
-
+    /**
+     * private DatePicker deathInput.
+     */
     @FXML
     private DatePicker deathInput;
 
-    @FXML
-    private Button submitCaseButton;
-
-
-    // Add contacts panel after the create case panel (AnchorPane, Fields, Button, Labels etc.)
+    // Add contacts panel after the create case panel.
+    /**
+     * private AnchorPane addContactsPanel.
+     */
     @FXML
     private AnchorPane addContactsPanel;
-
+    /**
+     * private Label numberLabel.
+     */
     @FXML
     private Label numberLabel;
-
+    /**
+     * private Label counterLabel.
+     */
     @FXML
     private Label counterLabel;
 
+    /**
+     * private TextField firstNameCoInput.
+     */
     @FXML
     private TextField firstNameCoInput;
-
+    /**
+     * private TextField lastNameCoInput.
+     */
     @FXML
     private TextField lastNameCoInput;
-
+    /**
+     * private TextField ageCoInput.
+     */
     @FXML
     private TextField ageCoInput;
-
+    /**
+     * private TextField phoneNumberCoInput.
+     */
     @FXML
     private TextField phoneNumberCoInput;
-
+    /**
+     * private ComboBox<String> municipalityCoInput.
+     */
     @FXML
     private ComboBox<String> municipalityCoInput;
-
+    /**
+     * private TextField addressCoInput.
+     */
     @FXML
     private TextField addressCoInput;
-
+    /**
+     * private TextField streetCoInput.
+     */
     @FXML
     private TextField streetCoInput;
-
+    /**
+     * private TextField zipCodeCoInput.
+     */
     @FXML
     private TextField zipCodeCoInput;
-
+    /**
+     * private TextField afmCoInput.
+     */
     @FXML
     private TextField afmCoInput;
 
-    @FXML
-    private Button submitContactButton;
-
 
     //Edit profile (AnchorPane, Fields, Button etc.)
+    /**
+     * private TextField editProfilePanel.
+     */
     @FXML
     private AnchorPane editProfilePanel;
-
+    /**
+     * private TextField afmEditInput.
+     */
     @FXML
     private TextField afmEditInput;
 
-    @FXML
-    private Button editPersonButton;
-
+    /**
+     * private TextField firstNameEditInput.
+     */
     @FXML
     private TextField firstNameEditInput;
-
+    /**
+     * private TextField lastNameEditInput.
+     */
     @FXML
     private TextField lastNameEditInput;
-
+    /**
+     * private TextField ageEditInput.
+     */
     @FXML
     private TextField ageEditInput;
-
+    /**
+     * private TextField phoneNumberEditInput.
+     */
     @FXML
     private TextField phoneNumberEditInput;
-
+    /**
+     * private ComboBox<String> municipalityEditInput.
+     */
     @FXML
     private ComboBox<String> municipalityEditInput;
-
+    /**
+     * private TextField addressEditInput.
+     */
     @FXML
     private TextField addressEditInput;
-
+    /**
+     * private TextField streetEditInput.
+     */
     @FXML
     private TextField streetEditInput;
-
+    /**
+     * private TextField zipCodeEditInput.
+     */
     @FXML
     private TextField zipCodeEditInput;
-
+    /**
+     * private TextField contactsEditInput.
+     */
     @FXML
     private TextField contactsEditInput;
-
+    /**
+     * private DatePicker diagnosisEditInput.
+     */
     @FXML
     private DatePicker diagnosisEditInput;
-
+    /**
+     * private DatePicker recoveryEditInput.
+     */
     @FXML
     private DatePicker recoveryEditInput;
-
+    /**
+     * private DatePicker deathEditInput.
+     */
     @FXML
     private DatePicker deathEditInput;
 
-    @FXML
-    private Button submitEditPersonButton;
-
 
     // Add a contact to a specific case panel (AnchorPane, Fields, Button etc.)
+    /**
+     * private AnchorPane addContactUniquePanel.
+     */
     @FXML
     private AnchorPane addContactUniquePanel;
-
+    /**
+     * private TextField firstNameCoUnInput.
+     */
     @FXML
     private TextField firstNameCoUnInput;
-
+    /**
+     * private TextField lastNameCoUnInput.
+     */
     @FXML
     private TextField lastNameCoUnInput;
-
+    /**
+     * private TextField ageCoUnInput.
+     */
     @FXML
     private TextField ageCoUnInput;
-
+    /**
+     * private TextField phoneNumberCoUnInput.
+     */
     @FXML
     private TextField phoneNumberCoUnInput;
-
+    /**
+     * private ComboBox<String> municipalityCoUnInput.
+     */
     @FXML
     private ComboBox<String> municipalityCoUnInput;
-
+    /**
+     * private TextField addressCoUnInput.
+     */
     @FXML
     private TextField addressCoUnInput;
-
+    /**
+     * private TextField streetCoUnInput.
+     */
     @FXML
     private TextField streetCoUnInput;
-
+    /**
+     * private TextField zipCodeCoUnInput.
+     */
     @FXML
     private TextField zipCodeCoUnInput;
-
+    /**
+     * private TextField afmCoUnInput.
+     */
     @FXML
     private TextField afmCoUnInput;
-
+    /**
+     * private TextField afmCoUnKrousmatosInput.
+     */
     @FXML
     private TextField afmCoUnKrousmatosInput;
 
-    @FXML
-    private Button submitContactUniqueButton;
-
-    @FXML
-    private Button clearAddContactUniqButton;
-
-    @FXML
-    private Button cancelAddContactUniqButton;
-
-
     //Find persons (AnchorPane, Fields, Button)
+    /**
+     * private TableColumn<Case, String> findPersonPanel.
+     */
     @FXML
     private AnchorPane findPersonPanel;
-
+    /**
+     * private TableColumn<Case, String> personsTable.
+     */
     @FXML
     private TableView<Case> personsTable;
-
+    /**
+     * private TableColumn<Case, String> afmTable.
+     */
     @FXML
     private TableColumn<Case, Integer> afmTable;
-
+    /**
+     * private TableColumn<Case, String> numberOfContactsTable.
+     */
     @FXML
     private TableColumn<Case, Integer> numberOfContactsTable;
-
+    /**
+     * private TableColumn<Case, String> firstNameTable.
+     */
     @FXML
     private TableColumn<Case, String> firstNameTable;
-
+    /**
+     * private TableColumn<Case, String> lastNameTable.
+     */
     @FXML
     private TableColumn<Case, String> lastNameTable;
-
+    /**
+     * private TableColumn<Case, String> ageTable.
+     */
     @FXML
     private TableColumn<Case, Integer> ageTable;
-
+    /**
+     * private TableColumn<Case, String> phoneNumberTable.
+     */
     @FXML
     private TableColumn<Case, String> phoneNumberTable;
-
+    /**
+     * private TableColumn<Case, String> dimosTable.
+     */
     @FXML
     private TableColumn<Case, Integer> dimosTable;
-
+    /**
+     * private TableColumn<Case, String> addressTable.
+     */
     @FXML
     private TableColumn<Case, String> addressTable;
-
+    /**
+     * private TableColumn<Case, String> stNumberTable.
+     */
     @FXML
     private TableColumn<Case, String> stNumberTable;
-
+    /**
+     * private TableColumn<Case, String> zipCodeTable.
+     */
     @FXML
     private TableColumn<Case, String> zipCodeTable;
-
+    /**
+     * private TableColumn<Case, String> diagnosisTable.
+     */
     @FXML
     private TableColumn<Case, String> diagnosisTable;
-
+    /**
+     * private TableColumn<Case, String> recoveryTable.
+     */
     @FXML
     private TableColumn<Case, String> recoveryTable;
-
+    /**
+     * private TableColumn<Case, String> deathTable.
+     */
     @FXML
     private TableColumn<Case, String> deathTable;
-
-    @FXML
-    private Button allPersonsButton;
-
-    @FXML
-    private Button allCasesButton;
-
-    @FXML
-    private Button allContactButton;
-
-    @FXML
-    private Button searchFilterButton;
-
+    /**
+     * private TextField filterInput.
+     */
     @FXML
     private TextField filterInput;
-
+    /**
+     * private TextField filterContactInput.
+     */
     @FXML
     private TextField filterContactInput;
-
+    /**
+     * private Label resultsInput.
+     */
     @FXML
     private Label resultsInput;
-
+    /**
+     * private ComboBox<String> chooseColumnComboBox.
+     */
     @FXML
     private ComboBox<String> chooseColumnComboBox;
-
+    /**
+     * private ComboBox<String> chooseTableComboBox.
+     */
     @FXML
     private ComboBox<String> chooseTableComboBox;
 
     //Stats
+    /**
+     * private AnchorPane statsPanel.
+     */
     @FXML
     private AnchorPane statsPanel;
+    /**
+     * private ComboBox<String> municipalityStats.
+     */
+    @FXML
+    private ComboBox<String> municipalityStats;
+    /**
+     * private Label casesStLabel.
+     */
+    @FXML
+    private Label casesStLabel;
+    /**
+     * private Label activeCasesStLabel.
+     */
+    @FXML
+    private Label activeCasesStLabel;
+    /**
+     * private Label recoveryCasesStLabel.
+     */
+    @FXML
+    private Label recoveryCasesStLabel;
+    /**
+     * private Label deathCasesStLabel.
+     */
+    @FXML
+    private Label deathCasesStLabel;
+    /**
+     * private Label contactsStLabel.
+     */
+    @FXML
+    private Label contactsStLabel;
+    /**
+     * private Label contactsSickStLabel.
+     */
+    @FXML
+    private Label contactsSickStLabel;
+    /**
+     * private Label avCasesStLabel.
+     */
+    @FXML
+    private Label avCasesStLabel;
+    /**
+     * private Label avActiveCasesStLabel.
+     */
+    @FXML
+    private Label avActiveCasesStLabel;
+    /**
+     * private Label avRecoveryCasesStLabel.
+     */
+    @FXML
+    private Label avRecoveryCasesStLabel;
+    /**
+     * private Label avDeathCasesStLabel.
+     */
+    @FXML
+    private Label avDeathCasesStLabel;
+    /**
+     * private Label avContactsStLabel.
+     */
+    @FXML
+    private Label avContactsStLabel;
+    /**
+     * private Label avContactsSickStLabel.
+     */
+    @FXML
+    private Label avContactsSickStLabel;
+    /**
+     * private Label municipalityStLabel.
+     */
+    @FXML
+    private Label municipalityStLabel;
 
 
     /* Here we will initialize all the functions and events on click */
@@ -330,6 +528,13 @@ public class Controller implements Initializable {
 
     // Click event that will take the value from the create case panel
     // and create the case in the database
+
+    /**
+     * <p>This method create new Case.</p>
+     *
+     * @param event the event of mouse on click.
+     * @since 1.0
+     */
     @FXML
     public void submitCaseClick(MouseEvent event) {
         String fn = null;
@@ -350,19 +555,25 @@ public class Controller implements Initializable {
         // then show a message else continue the process
         if (municipalityInput.getSelectionModel().getSelectedIndex() == -1
                 || firstNameInput.getText().isEmpty()
-                || lastNameInput.getText().isEmpty() || ageInput.getText().isEmpty()
-                || phoneNumberInput.getText().isEmpty() || addressInput.getText().isEmpty()
-                || streetInput.getText().isEmpty() || zipCodeInput.getText().isEmpty()
+                || lastNameInput.getText().isEmpty()
+                || ageInput.getText().isEmpty()
+                || phoneNumberInput.getText().isEmpty()
+                || addressInput.getText().isEmpty()
+                || streetInput.getText().isEmpty()
+                || zipCodeInput.getText().isEmpty()
                 || contactsInput.getText().isEmpty()
                 || afmInput.getText().isEmpty()
                 || diagnosisInput.getValue() == null) {
-            JOptionPane.showMessageDialog(null, "Please fill all the field with *");
+            JOptionPane.showMessageDialog(null,
+                    "Please fill all the field with *");
         } else {
             try {
-                // Initialize all the values we will need to create and insert the case in database
+                // Initialize all the values we will need to create and
+                // insert the case in database
                 // Municipality index must be +1 in order to match
                 // the case with the right municipality in database
-                mun = municipalityInput.getSelectionModel().getSelectedIndex() + 1;
+                mun = municipalityInput
+                        .getSelectionModel().getSelectedIndex() + 1;
                 fn = firstNameInput.getText();
                 ln = lastNameInput.getText();
                 ag = Integer.parseInt(ageInput.getText());
@@ -379,8 +590,9 @@ public class Controller implements Initializable {
                 dt = String.valueOf(deathInput.getValue());
 
 
-                // There are 3 chances (new Case, new Recovered Case or new Dead Case)
-                if (recoveryInput.getValue() == null && deathInput.getValue() == null) {
+                // There are 3 chances ( Case, Recovered Case or Dead Case)
+                if (recoveryInput.getValue() == null
+                        && deathInput.getValue() == null) {
                     parseAfm = af;
 
                     Case krousma = new Case(dd, cn, af, fn, ln, ag, pn, mun, ad,
@@ -388,7 +600,8 @@ public class Controller implements Initializable {
                     checkContactsNum(krousma);
                     clearNewCasePane(event);
 
-                } else if (recoveryInput.getValue() != null && deathInput.getValue() == null) {
+                } else if (recoveryInput.getValue() != null
+                        && deathInput.getValue() == null) {
                     parseAfm = af;
 
                     Case krousma = new Case(cn, dd, rd, af, fn, ln, ag, pn, mun,
@@ -396,10 +609,12 @@ public class Controller implements Initializable {
                     checkContactsNum(krousma);
                     clearNewCasePane(event);
 
-                } else if (recoveryInput.getValue() == null && deathInput.getValue() != null) {
+                } else if (recoveryInput.getValue() == null
+                        && deathInput.getValue() != null) {
                     parseAfm = af;
 
-                    Case krousma = new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
+                    Case krousma =
+                            new Case(dd, dt, cn, af, fn, ln, ag, pn, mun, ad,
                             st, zc);
                     checkContactsNum(krousma);
                     clearNewCasePane(event);
@@ -421,6 +636,11 @@ public class Controller implements Initializable {
 
 
     // Clear button. It clears the fields of new case pane
+    /**
+     * <p>This method clear fields of createCasePanel.</p>
+     * @param event the event of mouse on click.
+     * @since 1.0
+     */
     @FXML
     public void clearNewCasePane(MouseEvent event) {
         clearFields(createCasePanel);
@@ -428,6 +648,11 @@ public class Controller implements Initializable {
 
 
     // Cancel button. It cancels the creation of a case in new case pane
+    /**
+     * <p>This method cancel (close) createCasePanel.</p>
+     * @param event the event of mouse on click.
+     * @since 1.0
+     */
     @FXML
     public void cancelNewCase(MouseEvent event) {
         clearNewCasePane(event);
@@ -437,14 +662,21 @@ public class Controller implements Initializable {
 
     // In this method we give the case object and depend to the contactNumber
     // it goes to the next Panel or not
+    /**
+     * <p>This method checking if case had contacts and do the insertion.</p>
+     * @param krousma type Case.
+     * @since 1.0
+     */
     public void checkContactsNum(Case krousma) throws Exception {
 
         if (krousma.getContactsNumber() == 0) {
-            // If the case didn't had contacts then just create the case and close the pane
+            // If the case didn't had contacts then just create the case
+            // and close the pane
             insertCase(krousma);
 
         } else if (krousma.getContactsNumber() > 0) {
-            // If the case had contacts then create the case and open the addContactsPanel
+            // If the case had contacts then create the case
+            // and open the addContactsPanel
             insertCase(krousma);
 
             // Update the variables that count how many contacts you will add
@@ -460,17 +692,20 @@ public class Controller implements Initializable {
         } else {
             // if the contacts number is < 0 then an error will occur
             throw new Exception(
-                    "What do you mean you contacted with " + krousma.getContactsNumber() + " people??");
+                    "What do you mean you contacted with "
+                            + krousma.getContactsNumber() + " people??");
         }
 
         // Close the createCasePanel
         createCasePanel.setVisible(false);
     }
-
-
-    // This method is doing the insertion in the database
+    /**
+     * <p>This method is doing the insertion in the database.</p>
+     * @param krousma type Case.
+     * @since 1.0
+     */
     public void insertCase(Case krousma) throws Exception {
-        // Creating a instance of CaseDAO in order to insert the case in database
+        // Creating a instance of CaseDAO in order to insert the case in db
         CaseDAO casedao = new CaseDAO();
 
         // Insert the case
@@ -482,8 +717,18 @@ public class Controller implements Initializable {
 
 
     // Click event that will take the value from the create contact panel
-    // and create the number contacts that the user inserted on the create case panel
+    // and create the number contacts that the user inserted on the
+    // createCase panel
     // This panel is auto open when the user finish the creation of a case
+    /**
+     * <p>Click event that will take the value from the create contact panel
+     *    and create the number contacts that the user inserted on the
+     *    createCase panel.
+     *    This panel is auto open when the user finish the creation of a case
+     *    </p>
+     * @param event the event of mouse on click.
+     * @since 1.0
+     */
     @FXML
     public void submitContactClick(MouseEvent event) {
         String fnC = null;
@@ -500,11 +745,16 @@ public class Controller implements Initializable {
         counterContacts++;
         counterLabel.setText(String.valueOf(counterContacts));
 
-        if (firstNameCoInput.getText().isEmpty() || lastNameCoInput.getText().isEmpty()
-                || ageCoInput.getText().isEmpty() || phoneNumberCoInput.getText().isEmpty()
-                || municipalityCoInput.getSelectionModel().getSelectedIndex() == -1
-                || addressCoInput.getText().isEmpty() || streetCoInput.getText().isEmpty()
-                || zipCodeCoInput.getText().isEmpty() || afmCoInput.getText().isEmpty()) {
+        if (firstNameCoInput.getText().isEmpty()
+                || lastNameCoInput.getText().isEmpty()
+                || ageCoInput.getText().isEmpty()
+                || phoneNumberCoInput.getText().isEmpty()
+                || municipalityCoInput.getSelectionModel()
+                .getSelectedIndex() == -1
+                || addressCoInput.getText().isEmpty()
+                || streetCoInput.getText().isEmpty()
+                || zipCodeCoInput.getText().isEmpty()
+                || afmCoInput.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(
                     null, "Please fill all the fields with *");
@@ -514,7 +764,8 @@ public class Controller implements Initializable {
                 lnC = lastNameCoInput.getText();
                 ageC = Integer.parseInt(ageCoInput.getText());
                 pnC = phoneNumberCoInput.getText();
-                munC = municipalityCoInput.getSelectionModel().getSelectedIndex() + 1;
+                munC = municipalityCoInput.
+                        getSelectionModel().getSelectedIndex() + 1;
                 addC = addressCoInput.getText();
                 stC = streetCoInput.getText();
                 zcC = zipCodeCoInput.getText();
@@ -527,12 +778,14 @@ public class Controller implements Initializable {
                 insertContact(contact, parseAfm);
 
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,
+                        e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }
         // Clear the fields to add a new contact
-        // if the contact number given from the previous panel is not yet reached
+        // if the contact number given from the previous panel is not yet
+        // reached
         clearAddContacts(event);
 
         // if the counter of contacts added surpass the contact number given
@@ -544,10 +797,22 @@ public class Controller implements Initializable {
 
     }
 
-
+//TODO EDO EMINA @paraskos
     // A method that take the contact and insert it in the database
-    // Also it creates the connection with the case from the previous panel (createCase)
-    public void insertContact(Contact contact, int krousmaAFM) throws Exception {
+    // Also it creates the connection with the case from the previous
+    // panel (createCase)
+    /**
+     * <p>Click event that will take the value from the create contact panel
+     *    and create the number contacts that the user inserted on the
+     *    createCase panel.
+     *    This panel is auto open when the user finish the creation of a case
+     *    </p>
+     * @param contact the event of mouse on click.
+     * @param krousmaAFM the event of mouse on click.
+     * @since 1.0
+     */
+    public void insertContact(Contact contact,
+                              int krousmaAFM) throws Exception {
         ContactDAO contactDao = new ContactDAO();
 
         try {
@@ -780,13 +1045,40 @@ public class Controller implements Initializable {
 
 
     @FXML
-    public void searchFilterContactClick(MouseEvent event) {
+    public void searchFilterContactClick(MouseEvent event) throws Exception {
+        CaseDAO caseDao = new CaseDAO();
         int counter = 0;
+        String afm = filterContactInput.getText();
+        Filters filter = new Filters();
+        String table = filter.chooseTable(chooseTableComboBox.getValue());
+        String column = filter.chooseColumn(chooseColumnComboBox.getValue());
+        ObservableList<Case> oblist = caseDao.getContactsOfCase(afm);
+        for (Case krousma : oblist) {
+            counter++;
+        }
+        resultsInput.setText(String.valueOf(counter));
+
+
+        firstNameTable.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameTable.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        ageTable.setCellValueFactory(new PropertyValueFactory<>("age"));
+        phoneNumberTable.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        dimosTable.setCellValueFactory(new PropertyValueFactory<>(("dimosName")));
+        addressTable.setCellValueFactory(new PropertyValueFactory<>("address"));
+        stNumberTable.setCellValueFactory(new PropertyValueFactory<>("streetNumber"));
+        zipCodeTable.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        diagnosisTable.setCellValueFactory(new PropertyValueFactory<>("Diagnosis"));
+        recoveryTable.setCellValueFactory(new PropertyValueFactory<>("Recovery"));
+        deathTable.setCellValueFactory(new PropertyValueFactory<>("Death"));
+        numberOfContactsTable.setCellValueFactory(new PropertyValueFactory<>("contactsNumber"));
+        afmTable.setCellValueFactory(new PropertyValueFactory<>("AFM"));
+        personsTable.setItems(oblist);
+
     }
 
 
     @FXML
-    void submitEditPersonClick(MouseEvent event) {
+    public void submitEditPersonClick(MouseEvent event) {
         CaseDAO caseDao = new CaseDAO();
         String fn = null;
         String ln = null;
@@ -809,9 +1101,7 @@ public class Controller implements Initializable {
                 || lastNameEditInput.getText().isEmpty() || ageEditInput.getText().isEmpty()
                 || phoneNumberEditInput.getText().isEmpty() || addressEditInput.getText().isEmpty()
                 || streetEditInput.getText().isEmpty() || zipCodeEditInput.getText().isEmpty()
-                || contactsEditInput.getText().isEmpty()
-                || afmEditInput.getText().isEmpty()
-                || diagnosisEditInput.getValue() == null) {
+                || afmEditInput.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill all the field with *");
         } else {
             try {
@@ -827,7 +1117,10 @@ public class Controller implements Initializable {
                 st = streetEditInput.getText();
                 zc = zipCodeEditInput.getText();
                 cn = Integer.parseInt(contactsEditInput.getText());
-                dd = String.valueOf(diagnosisEditInput.getValue());
+                if (diagnosisEditInput.getValue() != null) {
+                    dd = String.valueOf(diagnosisEditInput.getValue());
+                }
+
                 af = Integer.parseInt(afmEditInput.getText());
 
                 // Recovered data and death date
@@ -892,7 +1185,7 @@ public class Controller implements Initializable {
                 streetEditInput.setText(krousma.getStreetNumber());
                 zipCodeEditInput.setText(krousma.getZipCode());
                 contactsEditInput.setText(String.valueOf(krousma.getContactsNumber()));
-
+                municipalityEditInput.getSelectionModel().select(krousma.getDimosID() - 1);
                 if (krousma.getDiagnosis() != null) {
                     diagnosisEditInput.setValue(LocalDate.parse(krousma.getDiagnosis()));
                 }
@@ -1070,6 +1363,78 @@ public class Controller implements Initializable {
         openPanels("editPersonPanel");
     }
 
+    @FXML
+    public void findStatsClick(MouseEvent event) throws Exception {
+        CaseDAO caseDao = new CaseDAO();
+        int counterCases = 0;
+        int counterActiveCase = 0;
+        int counterRecoveryCase = 0;
+        int counterDeathCase = 0;
+        int counterContacts = 0;
+        int counterSickContacts = 0;
+        int counterAllCases = 0;
+        int counterAllActiveCases = 0;
+        int counterAllRecoveryCases = 0;
+        int counterAllDeathCases = 0;
+        int counterAllContacts = 0;
+        int counterAllSickContacts = 0;
+
+        counterAllCases = caseDao.countCases();
+        counterActiveCase = caseDao.countActiveCases();
+        counterAllRecoveryCases = caseDao.countRecoveryCases();
+        counterAllDeathCases = caseDao.countDeathCases();
+        counterAllContacts = caseDao.countContacts();
+        counterAllSickContacts = caseDao.countContactsSick();
+
+        municipalityStLabel.setText(municipalityStats.getValue());
+        counterCases = caseDao.countCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        casesStLabel.setText(String.valueOf(counterCases));
+        counterActiveCase = caseDao.countActiveCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        activeCasesStLabel.setText(String.valueOf(counterActiveCase));
+        counterRecoveryCase = caseDao.countRecoveryCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        recoveryCasesStLabel.setText(String.valueOf(counterRecoveryCase));
+        counterDeathCase = caseDao.countDeathCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        deathCasesStLabel.setText(String.valueOf(counterDeathCase));
+        counterContacts = caseDao.countContactsByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        contactsStLabel.setText(String.valueOf(counterContacts));
+        counterSickContacts = caseDao.countContactsSickByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
+        contactsSickStLabel.setText(String.valueOf(counterSickContacts));
+        if (counterAllCases == 0) {
+            avCasesStLabel.setText(String.valueOf(0));
+        } else {
+            avCasesStLabel.setText(String.valueOf(counterCases / counterAllCases));
+        }
+        if (counterAllActiveCases == 0) {
+            avActiveCasesStLabel.setText(String.valueOf(0));
+        } else {
+            avActiveCasesStLabel.setText(String.valueOf(counterActiveCase / counterAllActiveCases));
+        }
+        if (counterAllRecoveryCases == 0) {
+            avRecoveryCasesStLabel.setText(String.valueOf(0));
+        } else {
+            avRecoveryCasesStLabel.setText(String.valueOf(counterRecoveryCase / counterAllRecoveryCases));
+        }
+        if (counterAllDeathCases == 0) {
+            avDeathCasesStLabel.setText(String.valueOf(0));
+        } else {
+            avDeathCasesStLabel.setText(String.valueOf(counterDeathCase / counterAllDeathCases));
+        }
+
+        if (counterAllContacts == 0) {
+            avContactsStLabel.setText(String.valueOf(0));
+        } else {
+            avContactsStLabel.setText(String.valueOf(counterContacts / counterAllContacts));
+        }
+
+        if (counterAllSickContacts == 0) {
+            avContactsSickStLabel.setText(String.valueOf(0));
+        } else {
+            avContactsSickStLabel.setText(String.valueOf(counterSickContacts / counterAllSickContacts));
+        }
+
+
+    }
+
     // The initialize method in order on the start of the app to set values and do stuff
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -1079,6 +1444,7 @@ public class Controller implements Initializable {
         municipalityCoInput.getSelectionModel().select("Select municipality");
         municipalityCoUnInput.getSelectionModel().select("Select municipality");
         municipalityEditInput.getSelectionModel().select("Select municipality");
+        municipalityStats.getSelectionModel().select("Select municipality");
         // Initialize the chooses that the comboBox will have
         municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου",
                 "Δάφνης – Υμηττού", "Ζωγράφου", "Ηλιουπόλεως", "Καισαριανής", "Φιλαδελφείας – ",
@@ -1098,6 +1464,7 @@ public class Controller implements Initializable {
         municipalityCoInput.setItems(municipalityInput.getItems());
         municipalityCoUnInput.setItems(municipalityInput.getItems());
         municipalityEditInput.setItems(municipalityInput.getItems());
+        municipalityStats.setItems(municipalityInput.getItems());
         chooseTableComboBox.getSelectionModel().select("Select Table");
         chooseTableComboBox.getItems().addAll("Persons", "Cases", "Contacts");
 

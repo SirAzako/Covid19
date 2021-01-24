@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.geometry.Point3D?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.frontend.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.backend.Controller">
    <children>
       <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
          <children>
@@ -107,7 +108,7 @@
                </rotationAxis>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="createCasePanel" layoutX="258.0" onMouseClicked="#clearNewCasePane" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="createCasePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
                <font>
@@ -498,7 +499,7 @@
             <Button fx:id="cancelAddContactUniqButton" layoutX="730.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#cancelAddContactUniq" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
          <children>
             <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="540.0" prefWidth="1155.0">
               <columns>
@@ -579,7 +580,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: # #0D102F;" visible="false">
+      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="150.0" layoutY="115.0" prefHeight="660.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -741,6 +742,209 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="745.0" layoutY="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #0D65;" />
+      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+         <children>
+            <Label layoutX="531.0" layoutY="75.0" text="Municality:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="municipalityStats" layoutX="694.0" layoutY="83.0" prefWidth="150.0" />
+            <HBox layoutX="227.0" layoutY="298.0" prefHeight="358.0" prefWidth="423.0">
+               <children>
+                  <VBox prefHeight="600.0" prefWidth="304.0" spacing="20.0">
+                     <children>
+                        <Label text="Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="50.0" text="Active Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="90.0" text="Recovery Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="130.0" text="Death Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="170.0" text="Contacts:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="286.0" text="Contacts got Sick:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="498.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="casesStLabel" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="activeCasesStLabel" layoutX="10.0" layoutY="10.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="recoveryCasesStLabel" layoutX="10.0" layoutY="50.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="deathCasesStLabel" layoutX="10.0" layoutY="90.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="contactsStLabel" layoutX="10.0" layoutY="130.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="contactsSickStLabel" layoutX="10.0" layoutY="170.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox layoutX="780.0" layoutY="293.0" prefHeight="358.0" prefWidth="423.0">
+               <children>
+                  <VBox prefHeight="600.0" prefWidth="304.0" spacing="20.0">
+                     <children>
+                        <Label text="Cases" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="50.0" text="Active Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="90.0" text="Recovery Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="130.0" text="Death Cases:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="170.0" text="Contacts:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="286.0" text="Contacts got Sick:" textFill="#ebebeb">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="498.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <Label fx:id="avCasesStLabel" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="avActiveCasesStLabel" layoutX="10.0" layoutY="10.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="avRecoveryCasesStLabel" layoutX="10.0" layoutY="50.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="avDeathCasesStLabel" layoutX="10.0" layoutY="90.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="avContactsStLabel" layoutX="10.0" layoutY="130.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="avContactsSickStLabel" layoutX="10.0" layoutY="170.0" text="#" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label fx:id="municipalityStLabel" layoutX="352.0" layoutY="232.0" text="Munic" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="907.0" layoutY="231.0" text="Averages" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Button layoutX="881.0" layoutY="83.0" mnemonicParsing="false" onMouseClicked="#findStatsClick" prefHeight="25.0" prefWidth="62.0" text="FIND">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

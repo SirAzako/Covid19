@@ -130,6 +130,358 @@ public class CaseDAO {
 
     }
 
+    public int countCases() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE Diagnosis IS NOT NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countActiveCases() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE Diagnosis IS NOT NULL AND Recovery IS NULL AND Death IS NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countRecoveryCases() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE Diagnosis IS NOT NULL AND Recovery IS NOT NULL AND Death IS NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countDeathCases() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE Diagnosis IS NOT NULL AND Recovery IS NULL AND Death IS NOT NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countContacts() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE ContactID IS NOT NULL;";
+
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countContactsSick() throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE ContactID IS NOT NULL AND Diagnosis IS NOT NULL;";
+
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countCasesByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND Diagnosis IS NOT NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countActiveCasesByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND Diagnosis IS NOT NULL AND Recovery IS NULL AND Death IS NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countRecoveryCasesByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND Diagnosis IS NOT NULL AND Recovery IS NOT NULL AND Death IS NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countDeathCasesByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND Diagnosis IS NOT NULL AND Recovery IS NULL AND Death IS NOT NULL;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countContactsByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND ContactID IS NOT NULL;";
+
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
+    public int countContactsSickByDimosID(int dimosID) throws Exception {
+        int counter = 0;
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT count(AFM) Counter " +
+                    "FROM Persons " +
+                    "WHERE DimosID = " + dimosID + " AND ContactID IS NOT NULL AND Diagnosis IS NOT NULL;";
+
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                counter = rs.getInt("Counter");
+            }
+
+            rs.close();
+            stmt.close();
+            DB.close();
+            return counter;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
     public ObservableList<Case> getContacts() throws Exception {
         ObservableList<Case> oblist = FXCollections.observableArrayList();
         try {
@@ -254,14 +606,53 @@ public class CaseDAO {
 
     }
 
+    public ObservableList<Case> getContactsOfCase(String afmInput) throws Exception {
+        ObservableList<Case> oblist = FXCollections.observableArrayList();
+        try {
+            Connection con = DB.getConnection();
+            String querry = "SELECT Persons.* FROM Persons, Contacts WHERE Contacts.AFM = " + afmInput + " AND Contacts.ContactID = Persons.ContactID;";
+            PreparedStatement stmt = con.prepareStatement(querry);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int contactsNumberSql;
+                if (rs.getString("contactsNumber") != null) {
+                    contactsNumberSql = Integer.parseInt(rs.getString("contactsNumber"));
+                } else {
+                    contactsNumberSql = 0;
+                }
+                oblist.add(new Case(
+                        contactsNumberSql, rs.getString("Diagnosis"), rs.getString("Death"),
+                        rs.getString("Recovery"), Integer.parseInt(rs.getString("AFM")),
+                        rs.getString("firstName"), rs.getString("lastName"),
+                        Integer.parseInt(rs.getString("age")), rs.getString("phoneNumber"),
+                        Integer.parseInt(rs.getString("dimosID")), rs.getString("address"),
+                        rs.getString("streetNumber"), rs.getString("zipCode")));
+            }
+            rs.close();
+            stmt.close();
+            DB.close();
+            return oblist;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        } finally {
+            try {
+                DB.close();
+            } catch (Exception e) {
+
+            }
+        }
+
+    }
+
     public void updatePerson(int afm, Case krousma) throws Exception {
         Connection con = null;
         String querry = "UPDATE Persons SET FirstName = ?, LastName = ?, ContactsNumber = ?, Age = ?, " +
                 "PhoneNumber = ?, Diagnosis = ?, Recovery = ?, Death = ?, DimosID = ?, Address = ?," +
                 "StreetNumber = ?, ZipCode = ? WHERE AFM = ?";
-        try{
-          con = DB.getConnection();
-          PreparedStatement stmt = con.prepareStatement(querry);
+        try {
+            con = DB.getConnection();
+            PreparedStatement stmt = con.prepareStatement(querry);
             stmt.setString(1, krousma.getFirstName());
             stmt.setString(2, krousma.getLastName());
             stmt.setInt(3, krousma.getContactsNumber());
@@ -275,14 +666,16 @@ public class CaseDAO {
             stmt.setString(11, krousma.getStreetNumber());
             stmt.setString(12, krousma.getZipCode());
             stmt.setInt(13, krousma.getAFM());
-          stmt.executeUpdate();
-          stmt.close();
-          DB.close();
-        }catch (Exception e){
-          throw new Exception("Error while trying to update Person " + e.getMessage());
-        }finally {
-          if (con != null)
-            con.close();
+            stmt.executeUpdate();
+            stmt.close();
+            DB.close();
+        } catch (Exception e) {
+            throw new Exception("Error while trying to update Person " + e.getMessage());
+        } finally {
+            if (con != null)
+                con.close();
         }
     }
+
+
 }
