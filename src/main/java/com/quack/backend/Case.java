@@ -1,19 +1,29 @@
 package com.quack.backend;
 
-
-
 /**
  *
  * @author paras
  */
 public class Case extends Person {
+    /** the date of diagnosis. */
     private String Diagnosis;
+
+    /** the date of recovery. */
     private String Recovery;
+
+    /** the date of death. */
     private String Death;
+
+    /**
+     * the number of contacts that
+     * the case had when the diagnosis made.
+     * */
     private int contactsNumber;
+
+    /** the name of the municipality that the case lives */
     private String dimosName;
 
-    //Το κρούσμα ανάρρωσε 
+    //Το κρούσμα ανάρρωσε
     public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM,
                 String firstName, String lastName, int age, String phoneNumber,
                 int dimosID, String address, String streetNumber, String zipCode) {

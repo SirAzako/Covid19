@@ -8,8 +8,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**
+     * <p>
+     *     The method that will run at the start of the program
+     *     from the main method and it will create the main stage,
+     *     app name, set the app icon and load the fxml
+     *     with the data for the GUI.
+     * </p>
+     * */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(final Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Quack - Covid19");
         primaryStage.setScene(new Scene(root, 1600, 1000));
@@ -17,6 +25,12 @@ public class Main extends Application {
     }
 
 
+    /**
+     * <p>
+     *     The main.
+     * </p>
+     * @param args
+     * */
     public static void main(String[] args) {
         launch(args);
     }

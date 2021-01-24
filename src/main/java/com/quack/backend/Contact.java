@@ -1,7 +1,7 @@
 package com.quack.backend;
 
 public class Contact extends Person {
-    protected int contactID;
+    private int contactID;
 
     public Contact(int AFM, int contactID, String firstName,
                    String lastName, int age, String phoneNumber, int dimosID,

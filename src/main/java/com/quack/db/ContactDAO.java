@@ -7,12 +7,19 @@ import java.sql.PreparedStatement;
 
 public class ContactDAO {
 
-    public void createContact(Contact contact) throws Exception {
+    /**
+     * <p>
+     *     A method that inserting a new contact in the database.
+     * </p>
+     * @param contact Object instance of Contact class
+     * */
+    public void createContact(final Contact contact) throws Exception {
         Connection con = null;
-        String querry = "INSERT INTO Persons(AFM, ContactID, FirstName, " +
-                "LastName, Age, PhoneNumber, DimosID, Address, StreetNumber, " +
-                "ZipCode) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        try{
+        String querry = "INSERT INTO Persons(AFM, ContactID, FirstName, "
+                            + "LastName, Age, PhoneNumber, DimosID, Address, "
+                            + "StreetNumber, ZipCode) "
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
             stmt.setInt(1, contact.getAFM());
@@ -28,19 +35,28 @@ public class ContactDAO {
             stmt.executeUpdate();
             stmt.close();
             DB.close();
-        }catch (Exception e){
-            throw new Exception("Error while trying to create contact " + e.getMessage());
-        }finally {
+        } catch (Exception e) {
+            throw new Exception("Error while trying to create contact "
+                    + e.getMessage());
+        } finally {
             if (con != null) {
                 con.close();
             }
         }
     }
 
-    public void connectCaseContact(int afm, Contact contact) throws Exception {
+    /**
+     * <p>
+     *    A method that creating the connection Case - Contact in the db.
+     * </p>
+     * @param afm the afm of the case that the contact had met
+     * @param contact Object instance of Contact class
+     * */
+    public void connectCaseContact(
+            final int afm, final Contact contact) throws Exception {
         Connection con = null;
         String querry = "INSERT INTO Contacts(AFM, ContactID) VALUES(?, ?);";
-        try{
+        try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
             stmt.setInt(1, afm);
@@ -49,19 +65,26 @@ public class ContactDAO {
             stmt.close();
             DB.close();
 
-        }catch (Exception e){
-            throw new Exception("Error while trying to create contact " + e.getMessage());
-        }finally {
-            if (con != null){
+        } catch (Exception e) {
+            throw new Exception("Error while trying to create contact "
+                    + e.getMessage());
+        } finally {
+            if (con != null) {
                 con.close();
             }
         }
     }
 
-    public void deleteContact(int afmC) throws Exception {
+    /**
+     * <p>
+     *     A method that delete a contact from the db with the given.
+     * </p>
+     * @param afmC the afm of the contact that the method delete
+     * */
+    public void deleteContact(final int afmC) throws Exception {
         Connection con = null;
         String querry = "Delete from Persons where AFM = ?;";
-        try{
+        try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
             stmt.setInt(1, afmC);
@@ -69,12 +92,14 @@ public class ContactDAO {
             stmt.close();
             DB.close();
 
-        }catch (Exception e){
-            throw new Exception("Error occurred while: " + e.getMessage());
-        }finally {
-            if (con != null){
+        } catch (Exception e) {
+            throw new Exception("Error occurred while: "
+                    + e.getMessage());
+        } finally {
+            if (con != null) {
                 con.close();
             }
         }
     }
+
 }
