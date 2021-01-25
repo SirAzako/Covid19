@@ -26,9 +26,8 @@ public class Main extends Application {
 
 
     /**
-     * <p>
-     *     The main.
-     * </p>
+     * The main.
+     *
      * @param args
      * */
     public static void main(String[] args) {

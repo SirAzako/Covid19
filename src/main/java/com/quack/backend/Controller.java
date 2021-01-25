@@ -4,7 +4,6 @@ package com.quack.backend;
 import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -610,9 +609,9 @@ public class Controller implements Initializable {
             streetInput.clear();
             zipCodeInput.clear();
             contactsInput.clear();
-            diagnosisInput.getEditor().clear();
-            deathInput.getEditor().clear();
-            recoveryInput.getEditor().clear();
+            diagnosisInput.setValue(null);
+            deathInput.setValue(null);
+            recoveryInput.setValue(null);
             afmInput.clear();
             municipalityInput.getSelectionModel().clearSelection();
         } else if (panel == addContactsPanel) {
@@ -645,9 +644,9 @@ public class Controller implements Initializable {
             streetEditInput.clear();
             zipCodeEditInput.clear();
             contactsEditInput.clear();
-            diagnosisEditInput.getEditor().clear();
-            deathEditInput.getEditor().clear();
-            recoveryEditInput.getEditor().clear();
+            diagnosisEditInput.setValue(null);
+            deathEditInput.setValue(null);
+            recoveryEditInput.setValue(null);
             afmEditInput.clear();
             municipalityEditInput.getSelectionModel().clearSelection();
         }
@@ -1081,49 +1080,47 @@ public class Controller implements Initializable {
      * </p>
      */
     @FXML
-    public void allCasesClick() throws Exception {
-        int counter = 0;
-        CaseDAO caseDao = new CaseDAO();
-        ObservableList<Case> oblist = caseDao.getCases();
-        for (Case krousma : oblist) {
-            counter++;
-        }
-        resultsInput.setText(String.valueOf(counter));
-
+    public void allCasesClick() {
         try {
-            caseDao.getPersons();
-        } catch (Exception e) {
-            e.printStackTrace();
+            // Search for all the cases
+            CaseDAO caseDao = new CaseDAO();
+            ObservableList<Case> oblist = caseDao.getCases();
+
+            // Initialize the label with the number of the results
+            resultsInput.setText(String.valueOf(oblist.size()));
+
+            // Initialize the table
+            firstNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("firstName"));
+            lastNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("lastName"));
+            ageTable.setCellValueFactory(
+                    new PropertyValueFactory<>("age"));
+            phoneNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("phoneNumber"));
+            dimosTable.setCellValueFactory(
+                    new PropertyValueFactory<>("dimosName"));
+            addressTable.setCellValueFactory(
+                    new PropertyValueFactory<>("address"));
+            stNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("streetNumber"));
+            zipCodeTable.setCellValueFactory(
+                    new PropertyValueFactory<>("zipCode"));
+            diagnosisTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Diagnosis"));
+            recoveryTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Recovery"));
+            deathTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Death"));
+            numberOfContactsTable.setCellValueFactory(
+                    new PropertyValueFactory<>("contactsNumber"));
+            afmTable.setCellValueFactory(
+                    new PropertyValueFactory<>("AFM"));
+            personsTable.setItems(oblist);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        firstNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("firstName"));
-        lastNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("lastName"));
-        ageTable.setCellValueFactory(
-                new PropertyValueFactory<>("age"));
-        phoneNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("phoneNumber"));
-        dimosTable.setCellValueFactory(
-                new PropertyValueFactory<>("dimosName"));
-        addressTable.setCellValueFactory(
-                new PropertyValueFactory<>("address"));
-        stNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("streetNumber"));
-        zipCodeTable.setCellValueFactory(
-                new PropertyValueFactory<>("zipCode"));
-        diagnosisTable.setCellValueFactory(
-                new PropertyValueFactory<>("Diagnosis"));
-        recoveryTable.setCellValueFactory(
-                new PropertyValueFactory<>("Recovery"));
-        deathTable.setCellValueFactory(
-                new PropertyValueFactory<>("Death"));
-        numberOfContactsTable.setCellValueFactory(
-                new PropertyValueFactory<>("contactsNumber"));
-        afmTable.setCellValueFactory(
-                new PropertyValueFactory<>("AFM"));
-        personsTable.setItems(oblist);
-
     }
 
 
@@ -1133,39 +1130,40 @@ public class Controller implements Initializable {
      * </p>
      */
     @FXML
-    public void allContactsClick() throws Exception {
-        int counter = 0;
-        CaseDAO caseDao = new CaseDAO();
-        ObservableList<Case> oblist = caseDao.getContacts();
-        for (Case krousma : oblist) {
-            counter++;
-        }
-        resultsInput.setText(String.valueOf(counter));
-        try {
-            caseDao.getPersons();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void allContactsClick() {
 
-        firstNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("firstName"));
-        lastNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("lastName"));
-        ageTable.setCellValueFactory(
-                new PropertyValueFactory<>("age"));
-        phoneNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("phoneNumber"));
-        dimosTable.setCellValueFactory(
-                new PropertyValueFactory<>(("dimosName")));
-        addressTable.setCellValueFactory(
-                new PropertyValueFactory<>("address"));
-        stNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("streetNumber"));
-        zipCodeTable.setCellValueFactory(
-                new PropertyValueFactory<>("zipCode"));
-        afmTable.setCellValueFactory(
-                new PropertyValueFactory<>("AFM"));
-        personsTable.setItems(oblist);
+        try {
+            // Search for the results
+            ContactDAO contactDao = new ContactDAO();
+            ObservableList<Case> oblist = contactDao.getContacts();
+
+            // Initialize the label with the number of the results
+            resultsInput.setText(String.valueOf(oblist.size()));
+
+            // Initialize the table
+            firstNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("firstName"));
+            lastNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("lastName"));
+            ageTable.setCellValueFactory(
+                    new PropertyValueFactory<>("age"));
+            phoneNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("phoneNumber"));
+            dimosTable.setCellValueFactory(
+                    new PropertyValueFactory<>(("dimosName")));
+            addressTable.setCellValueFactory(
+                    new PropertyValueFactory<>("address"));
+            stNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("streetNumber"));
+            zipCodeTable.setCellValueFactory(
+                    new PropertyValueFactory<>("zipCode"));
+            afmTable.setCellValueFactory(
+                    new PropertyValueFactory<>("AFM"));
+            personsTable.setItems(oblist);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 
@@ -1176,47 +1174,48 @@ public class Controller implements Initializable {
      * </p>
      */
     @FXML
-    public void allPersonsClick() throws Exception {
-        int counter = 0;
-        CaseDAO caseDao = new CaseDAO();
-        ObservableList<Case> oblist = caseDao.getPersons();
-        for (Case krousma : oblist) {
-            counter++;
-        }
-        resultsInput.setText(String.valueOf(counter));
-        try {
-            caseDao.getPersons();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        firstNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("firstName"));
-        lastNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("lastName"));
-        ageTable.setCellValueFactory(
-                new PropertyValueFactory<>("age"));
-        phoneNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("phoneNumber"));
-        dimosTable.setCellValueFactory(
-                new PropertyValueFactory<>(("dimosName")));
-        addressTable.setCellValueFactory(
-                new PropertyValueFactory<>("address"));
-        stNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("streetNumber"));
-        zipCodeTable.setCellValueFactory(
-                new PropertyValueFactory<>("zipCode"));
-        diagnosisTable.setCellValueFactory(
-                new PropertyValueFactory<>("Diagnosis"));
-        recoveryTable.setCellValueFactory(
-                new PropertyValueFactory<>("Recovery"));
-        deathTable.setCellValueFactory(
-                new PropertyValueFactory<>("Death"));
-        numberOfContactsTable.setCellValueFactory(
-                new PropertyValueFactory<>("contactsNumber"));
-        afmTable.setCellValueFactory(
-                new PropertyValueFactory<>("AFM"));
-        personsTable.setItems(oblist);
+    public void allPersonsClick() {
 
+        try {
+            // Find all the persons
+            CaseDAO caseDao = new CaseDAO();
+            ObservableList<Case> oblist = caseDao.getPersons();
+
+            // Initialize the label with the number of the results
+            resultsInput.setText(String.valueOf(oblist.size()));
+
+            // Initialize the table
+            firstNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("firstName"));
+            lastNameTable.setCellValueFactory(
+                    new PropertyValueFactory<>("lastName"));
+            ageTable.setCellValueFactory(
+                    new PropertyValueFactory<>("age"));
+            phoneNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("phoneNumber"));
+            dimosTable.setCellValueFactory(
+                    new PropertyValueFactory<>(("dimosName")));
+            addressTable.setCellValueFactory(
+                    new PropertyValueFactory<>("address"));
+            stNumberTable.setCellValueFactory(
+                    new PropertyValueFactory<>("streetNumber"));
+            zipCodeTable.setCellValueFactory(
+                    new PropertyValueFactory<>("zipCode"));
+            diagnosisTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Diagnosis"));
+            recoveryTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Recovery"));
+            deathTable.setCellValueFactory(
+                    new PropertyValueFactory<>("Death"));
+            numberOfContactsTable.setCellValueFactory(
+                    new PropertyValueFactory<>("contactsNumber"));
+            afmTable.setCellValueFactory(
+                    new PropertyValueFactory<>("AFM"));
+            personsTable.setItems(oblist);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
@@ -1228,46 +1227,69 @@ public class Controller implements Initializable {
      */
     @FXML
     public void searchFilterClick() throws Exception {
-        int counter = 0;
-        CaseDAO caseDao = new CaseDAO();
-        Filters filter = new Filters();
-        String table = filter.chooseTable(chooseTableComboBox.getValue());
-        String column = filter.chooseColumn(chooseColumnComboBox.getValue());
-        ObservableList<Case> oblist = caseDao.getPersonFilter(table,
-                column, filterInput.getText());
-        for (Case krousma : oblist) {
-            counter++;
+
+        if (filterInput.getText().isEmpty()
+                || chooseTableComboBox.getSelectionModel()
+                        .getSelectedIndex() == -1
+                || chooseColumnComboBox.getSelectionModel()
+                        .getSelectedIndex() == -1) {
+
+            JOptionPane.showMessageDialog(null, "Please insert values in the "
+                    + "fielters fields");
+        } else {
+            try {
+                CaseDAO caseDao = new CaseDAO();
+                Filters filter = new Filters();
+
+                // Read the variables from the filters
+                String table = filter.chooseTable(
+                        chooseTableComboBox.getValue());
+                String column = filter.chooseColumn(
+                        chooseColumnComboBox.getValue());
+                String input = filterInput.getText();
+
+                // Search the data with the filters values
+                ObservableList<Case> oblist = caseDao.getPersonFilter(table,
+                        column, input);
+
+                // Initialize the label with the number of the results
+                resultsInput.setText(String.valueOf(oblist.size()));
+
+                // Initialize table
+                firstNameTable.setCellValueFactory(
+                        new PropertyValueFactory<>("firstName"));
+                lastNameTable.setCellValueFactory(
+                        new PropertyValueFactory<>("lastName"));
+                ageTable.setCellValueFactory(
+                        new PropertyValueFactory<>("age"));
+                phoneNumberTable.setCellValueFactory(
+                        new PropertyValueFactory<>("phoneNumber"));
+                dimosTable.setCellValueFactory(
+                        new PropertyValueFactory<>(("dimosName")));
+                addressTable.setCellValueFactory(
+                        new PropertyValueFactory<>("address"));
+                stNumberTable.setCellValueFactory(
+                        new PropertyValueFactory<>("streetNumber"));
+                zipCodeTable.setCellValueFactory(
+                        new PropertyValueFactory<>("zipCode"));
+                diagnosisTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Diagnosis"));
+                recoveryTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Recovery"));
+                deathTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Death"));
+                numberOfContactsTable.setCellValueFactory(
+                        new PropertyValueFactory<>("contactsNumber"));
+                afmTable.setCellValueFactory(
+                        new PropertyValueFactory<>("AFM"));
+                personsTable.setItems(oblist);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Error: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-        resultsInput.setText(String.valueOf(counter));
 
-
-        firstNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("firstName"));
-        lastNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("lastName"));
-        ageTable.setCellValueFactory(
-                new PropertyValueFactory<>("age"));
-        phoneNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("phoneNumber"));
-        dimosTable.setCellValueFactory(
-                new PropertyValueFactory<>(("dimosName")));
-        addressTable.setCellValueFactory(
-                new PropertyValueFactory<>("address"));
-        stNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("streetNumber"));
-        zipCodeTable.setCellValueFactory(
-                new PropertyValueFactory<>("zipCode"));
-        diagnosisTable.setCellValueFactory(
-                new PropertyValueFactory<>("Diagnosis"));
-        recoveryTable.setCellValueFactory(
-                new PropertyValueFactory<>("Recovery"));
-        deathTable.setCellValueFactory(
-                new PropertyValueFactory<>("Death"));
-        numberOfContactsTable.setCellValueFactory(
-                new PropertyValueFactory<>("contactsNumber"));
-        afmTable.setCellValueFactory(
-                new PropertyValueFactory<>("AFM"));
-        personsTable.setItems(oblist);
     }
 
 
@@ -1278,46 +1300,54 @@ public class Controller implements Initializable {
      * </p>
      */
     @FXML
-    public void searchFilterContactClick() throws Exception {
-        CaseDAO caseDao = new CaseDAO();
-        int counter = 0;
+    public void searchFilterContactClick() {
         String afm = filterContactInput.getText();
-        ObservableList<Case> oblist = caseDao.getContactsOfCase(afm);
-        for (Case krousma : oblist) {
-            counter++;
+
+        if (afm != null) {
+            try {
+                // Find the contacts
+                ContactDAO contactDao = new ContactDAO();
+                ObservableList<Case> oblist = contactDao.getContactsOfCase(afm);
+
+                // Initialize the label with the number of the results
+                resultsInput.setText(String.valueOf(oblist.size()));
+
+                // Initialize table
+                firstNameTable.setCellValueFactory(
+                        new PropertyValueFactory<>("firstName"));
+                lastNameTable.setCellValueFactory(
+                        new PropertyValueFactory<>("lastName"));
+                ageTable.setCellValueFactory(
+                        new PropertyValueFactory<>("age"));
+                phoneNumberTable.setCellValueFactory(
+                        new PropertyValueFactory<>("phoneNumber"));
+                dimosTable.setCellValueFactory(
+                        new PropertyValueFactory<>(("dimosName")));
+                addressTable.setCellValueFactory(
+                        new PropertyValueFactory<>("address"));
+                stNumberTable.setCellValueFactory(
+                        new PropertyValueFactory<>(
+                                "streetNumber"));
+                zipCodeTable.setCellValueFactory(
+                        new PropertyValueFactory<>("zipCode"));
+                diagnosisTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Diagnosis"));
+                recoveryTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Recovery"));
+                deathTable.setCellValueFactory(
+                        new PropertyValueFactory<>("Death"));
+                numberOfContactsTable.setCellValueFactory(
+                        new PropertyValueFactory<>("contactsNumber"));
+                afmTable.setCellValueFactory(
+                        new PropertyValueFactory<>("AFM"));
+                personsTable.setItems(oblist);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter an AFM");
         }
-        resultsInput.setText(String.valueOf(counter));
-
-
-        firstNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("firstName"));
-        lastNameTable.setCellValueFactory(
-                new PropertyValueFactory<>("lastName"));
-        ageTable.setCellValueFactory(
-                new PropertyValueFactory<>("age"));
-        phoneNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>("phoneNumber"));
-        dimosTable.setCellValueFactory(
-                new PropertyValueFactory<>(("dimosName")));
-        addressTable.setCellValueFactory(
-                new PropertyValueFactory<>("address"));
-        stNumberTable.setCellValueFactory(
-                new PropertyValueFactory<>(
-                "streetNumber"));
-        zipCodeTable.setCellValueFactory(
-                new PropertyValueFactory<>("zipCode"));
-        diagnosisTable.setCellValueFactory(
-                new PropertyValueFactory<>("Diagnosis"));
-        recoveryTable.setCellValueFactory(
-                new PropertyValueFactory<>("Recovery"));
-        deathTable.setCellValueFactory(
-                new PropertyValueFactory<>("Death"));
-        numberOfContactsTable.setCellValueFactory(
-                new PropertyValueFactory<>("contactsNumber"));
-        afmTable.setCellValueFactory(
-                new PropertyValueFactory<>("AFM"));
-        personsTable.setItems(oblist);
-
     }
 
 
@@ -1332,21 +1362,6 @@ public class Controller implements Initializable {
      */
     @FXML
     public void submitEditPersonClick() {
-        CaseDAO caseDao = new CaseDAO();
-        String fn = null;
-        String ln = null;
-        String pn = null;
-        String ad = null;
-        String st = null;
-        String zc = null;
-        String dd = null;
-        String rd = null;
-        String dt = null;
-        int af = 0;
-        int ag = 0;
-        int cn = 0;
-        int mun = 0;
-
         // If at least one of the "must fill" fields is empty
         // then show a message else continue the process
         if (municipalityEditInput.getSelectionModel().getSelectedIndex() == -1
@@ -1357,58 +1372,80 @@ public class Controller implements Initializable {
                 || addressEditInput.getText().isEmpty()
                 || streetEditInput.getText().isEmpty()
                 || zipCodeEditInput.getText().isEmpty()
-                || afmEditInput.getText().isEmpty()) {
+                || afmEditInput.getText().isEmpty()
+                || contactsEditInput.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Please fill all the field with *");
         } else {
             try {
-                // Initialize all the values we will need to create
-                // and insert the case in database
+                // Create the needed variables
+                String firstname = null;
+                String lastname = null;
+                String phone = null;
+                String address = null;
+                String streetnum = null;
+                String zipcode = null;
+                String diagnosi = null;
+                String recovery = null;
+                String death = null;
+                int afm = 0;
+                int age = 0;
+                int coctactsnum = 0;
+                int municip = 0;
+
+                CaseDAO caseDao = new CaseDAO();
+
+                // Initialize all the values we will need to create and
+                // insert the case in database
                 // Municipality index must be +1 in order to match
                 // the case with the right municipality in database
-                mun = municipalityEditInput.getSelectionModel()
+                municip = municipalityEditInput.getSelectionModel()
                         .getSelectedIndex() + 1;
-                fn = firstNameEditInput.getText();
-                ln = lastNameEditInput.getText();
-                ag = Integer.parseInt(ageEditInput.getText());
-                pn = phoneNumberEditInput.getText();
-                ad = addressEditInput.getText();
-                st = streetEditInput.getText();
-                zc = zipCodeEditInput.getText();
-                cn = Integer.parseInt(contactsEditInput.getText());
+                firstname = firstNameEditInput.getText();
+                lastname = lastNameEditInput.getText();
+                age = Integer.parseInt(ageEditInput.getText());
+                phone = phoneNumberEditInput.getText();
+                address = addressEditInput.getText();
+                streetnum = streetEditInput.getText();
+                zipcode = zipCodeEditInput.getText();
+                coctactsnum = Integer.parseInt(contactsEditInput.getText());
                 if (diagnosisEditInput.getValue() != null) {
-                    dd = String.valueOf(diagnosisEditInput.getValue());
+                    diagnosi = String.valueOf(diagnosisEditInput.getValue());
                 }
 
-                af = Integer.parseInt(afmEditInput.getText());
+                afm = Integer.parseInt(afmEditInput.getText());
 
                 // Recovered data and death date
-                rd = String.valueOf(recoveryEditInput.getValue());
-                dt = String.valueOf(deathEditInput.getValue());
+                recovery = String.valueOf(recoveryEditInput.getValue());
+                death = String.valueOf(deathEditInput.getValue());
 
                 // There are 3 chances (Case, Recovered Case or Dead Case)
                 if (recoveryEditInput.getValue() == null
                         && deathEditInput.getValue() == null) {
 
-                    Case krousma1 = new Case(dd, cn, af, fn, ln,
-                            ag, pn, mun, ad, st, zc);
+                    Case krousma1 = new Case(diagnosi, coctactsnum,
+                            afm, firstname, lastname, age, phone,
+                            municip, address, streetnum, zipcode);
 
-                    caseDao.updatePerson(af, krousma1);
+                    caseDao.updatePerson(afm, krousma1);
 
                 } else if (recoveryEditInput.getValue() != null
                         && deathEditInput.getValue() == null) {
 
-                    Case krousma1 = new Case(cn, dd, rd, af,
-                            fn, ln, ag, pn, mun, ad, st, zc);
+                    Case krousma1 = new Case(coctactsnum, diagnosi,
+                            recovery, afm, firstname, lastname,
+                            age, phone, municip, address,
+                            streetnum, zipcode);
 
-                    caseDao.updatePerson(af, krousma1);
+                    caseDao.updatePerson(afm, krousma1);
                 } else if (recoveryEditInput.getValue() == null
                         && deathEditInput.getValue() != null) {
 
-                    Case krousma1 = new Case(dd, dt, cn, af,
-                            fn, ln, ag, pn, mun, ad, st, zc);
+                    Case krousma1 = new Case(diagnosi, death,
+                            coctactsnum, afm, firstname, lastname, age,
+                            phone, municip, address, streetnum, zipcode);
 
-                    caseDao.updatePerson(af, krousma1);
+                    caseDao.updatePerson(afm, krousma1);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "You cant enter both recovery date and death date",
@@ -1436,43 +1473,64 @@ public class Controller implements Initializable {
      * </p>
      */
     @FXML
-    public void editPersonClick() throws Exception {
-        CaseDAO caseDao = new CaseDAO();
-        String amfInput = afmEditInput.getText();
-        try {
-            ObservableList<Case> oblist = caseDao.getPersonAfm(amfInput);
-            for (Case krousma : oblist) {
+    public void editPersonClick() {
+        if (afmEditInput.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please give an AFM to "
+                    + "proceed");
+        } else {
+            // Read the afm
+            String amfInput = afmEditInput.getText();
+            CaseDAO caseDao = new CaseDAO();
 
-                firstNameEditInput.setText(krousma.getFirstName());
-                lastNameEditInput.setText(krousma.getLastName());
-                ageEditInput.setText(String.valueOf(krousma.getAge()));
-                phoneNumberEditInput.setText(krousma.getPhoneNumber());
-                addressEditInput.setText(krousma.getAddress());
-                streetEditInput.setText(krousma.getStreetNumber());
-                zipCodeEditInput.setText(krousma.getZipCode());
-                contactsEditInput.setText(
-                        String.valueOf(krousma.getContactsNumber()));
-                municipalityEditInput.getSelectionModel()
-                        .select(krousma.getDimosID() - 1);
-                if (krousma.getDiagnosis() != null) {
-                    diagnosisEditInput.setValue(
-                            LocalDate.parse(krousma.getDiagnosis()));
-                }
-                if (krousma.getRecovery() != null) {
-                    recoveryEditInput.setValue(
-                            LocalDate.parse(krousma.getRecovery()));
-                }
-                if (krousma.getDeath() != null) {
-                    deathEditInput.setValue(
-                            LocalDate.parse(krousma.getDeath()));
-                }
+            try {
+                Case person = caseDao.getPersonByAfm(amfInput);
 
+                if (person != null) {
+                    // Set the values in the fields
+                    firstNameEditInput.setText(person.getFirstName());
+                    lastNameEditInput.setText(person.getLastName());
+                    ageEditInput.setText(String.valueOf(person.getAge()));
+                    phoneNumberEditInput.setText(person.getPhoneNumber());
+                    addressEditInput.setText(person.getAddress());
+                    streetEditInput.setText(person.getStreetNumber());
+                    zipCodeEditInput.setText(person.getZipCode());
+                    contactsEditInput.setText(
+                            String.valueOf(person.getContactsNumber()));
+                    municipalityEditInput.getSelectionModel()
+                            .select(person.getDimosID() - 1);
 
+                    if (person.getDiagnosis() != null) {
+                        diagnosisEditInput.setValue(
+                                LocalDate.parse(person.getDiagnosis()));
+                    } else {
+                        diagnosisEditInput.setValue(null);
+                    }
+
+                    if (person.getRecovery() != null) {
+                        recoveryEditInput.setValue(
+                                LocalDate.parse(person.getRecovery()));
+                    } else {
+                        recoveryEditInput.setValue(null);
+                    }
+
+                    if (person.getDeath() != null) {
+                        deathEditInput.setValue(
+                                LocalDate.parse(person.getDeath()));
+                    } else {
+                        deathEditInput.setValue(null);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Not such person "
+                            + "found");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(
+                        null, "Error: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    null, "Please do not leave the field blank.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+
         }
 
     }
@@ -1494,6 +1552,7 @@ public class Controller implements Initializable {
      */
     @FXML
     public void cancelEditPerson() {
+        clearEditPerson();
         openPanels("editProfilePanel");
     }
 
@@ -1504,88 +1563,129 @@ public class Controller implements Initializable {
 
     /**
      * <p>
-     * Here we initialize the actions in stats panel.
+     *    The action of the button in the stats panel.
      * </p>
      */
     @FXML
-    public void findStatsClick() throws Exception {
-        CaseDAO caseDao = new CaseDAO();
-        double counterCases = 0;
-        double counterActiveCase = 0;
-        double counterRecoveryCase = 0;
-        double counterDeathCase = 0;
-        double counterContacts = 0;
-        double counterSickContacts = 0;
-        double counterAllCases = 0;
-        double counterAllActiveCases = 0;
-        double counterAllRecoveryCases = 0;
-        double counterAllDeathCases = 0;
-        double counterAllContacts = 0;
-        double counterAllSickContacts = 0;
-
-        counterAllCases = caseDao.countCases();
-        counterAllActiveCases = caseDao.countActiveCases();
-        System.out.println(counterAllActiveCases);
-        counterAllRecoveryCases = caseDao.countRecoveryCases();
-        counterAllDeathCases = caseDao.countDeathCases();
-        counterAllContacts = caseDao.countContacts();
-        counterAllSickContacts = caseDao.countContactsSick();
-
-        municipalityStLabel.setText(municipalityStats.getValue());
-        counterCases = caseDao.countCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        casesStLabel.setText(String.valueOf(counterCases));
-        counterActiveCase = caseDao.countActiveCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        activeCasesStLabel.setText(String.valueOf(counterActiveCase));
-        counterRecoveryCase = caseDao.countRecoveryCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        recoveryCasesStLabel.setText(String.valueOf(counterRecoveryCase));
-        counterDeathCase = caseDao.countDeathCasesByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        deathCasesStLabel.setText(String.valueOf(counterDeathCase));
-        counterContacts = caseDao.countContactsByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        contactsStLabel.setText(String.valueOf(counterContacts));
-        counterSickContacts = caseDao.countContactsSickByDimosID(municipalityStats.getSelectionModel().getSelectedIndex() + 1);
-        contactsSickStLabel.setText(String.valueOf(counterSickContacts));
-        if (counterAllCases == 0) {
-            avCasesStLabel.setText(String.valueOf(0));
+    public void findStatsClick() {
+        if (municipalityStats.getSelectionModel().getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Please select a municipality");
         } else {
-            avCasesStLabel.setText(
-                    String.valueOf(counterCases/counterAllCases));
-        }
-        if (counterAllActiveCases == 0) {
-            avActiveCasesStLabel.setText(
-                    String.valueOf(0));
-        } else {
-            avActiveCasesStLabel.setText(
-                    String.valueOf(counterActiveCase / counterAllActiveCases));
-        }
-        if (counterAllRecoveryCases == 0) {
-            avRecoveryCasesStLabel.setText(
-                    String.valueOf(0));
-        } else {
-            avRecoveryCasesStLabel.setText(
-                String.valueOf(counterRecoveryCase / counterAllRecoveryCases));
-        }
-        if (counterAllDeathCases == 0) {
-            avDeathCasesStLabel.setText(String.valueOf(0));
-        } else {
-            avDeathCasesStLabel.setText(
-                    String.valueOf(counterDeathCase / counterAllDeathCases));
-        }
+            try {
+                CaseDAO caseDao = new CaseDAO();
+                ContactDAO contactDao = new ContactDAO();
 
-        if (counterAllContacts == 0) {
-            avContactsStLabel.setText(String.valueOf(0));
-        } else {
-            avContactsStLabel.setText(
-                    String.valueOf(counterContacts / counterAllContacts));
+                // The municipality stats variables
+                double counterCases;
+                double counterActiveCase;
+                double counterRecoveryCase;
+                double counterDeathCase;
+                double counterContacts;
+                double counterSickContacts;
+                // Total stats variables
+                double counterAllCases;
+                double counterAllActiveCases;
+                double counterAllRecoveryCases;
+                double counterAllDeathCases;
+                double counterAllContacts;
+                double counterAllSickContacts;
+
+                // Set the label equal to the municipality value
+                municipalityStLabel.setText(municipalityStats.getValue());
+
+                int municipality =
+                        municipalityStats.getSelectionModel()
+                                .getSelectedIndex() + 1;
+
+                // Set the municipality label stats
+                counterCases = caseDao.countCasesByDimosID(municipality);
+                casesStLabel.setText(String.valueOf(counterCases));
+
+                counterActiveCase = caseDao
+                        .countActiveCasesByDimosID(municipality);
+                activeCasesStLabel.setText(String.valueOf(counterActiveCase));
+
+                counterRecoveryCase = caseDao
+                        .countRecoveryCasesByDimosID(municipality);
+                recoveryCasesStLabel.setText(String.valueOf(
+                        counterRecoveryCase));
+
+                counterDeathCase = caseDao
+                        .countDeathCasesByDimosID(municipality);
+                deathCasesStLabel.setText(String.valueOf(counterDeathCase));
+
+                counterContacts = contactDao
+                        .countContactsByDimosID(municipality);
+                contactsStLabel.setText(String.valueOf(counterContacts));
+
+                counterSickContacts = contactDao
+                        .countContactsSickByDimosID(municipality);
+                contactsSickStLabel.setText(String.valueOf(
+                        counterSickContacts));
+
+                // Search for the total stats in order to make the avg stats
+                counterAllCases = caseDao.countCases();
+                counterAllActiveCases = caseDao.countActiveCases();
+                counterAllRecoveryCases = caseDao.countRecoveryCases();
+                counterAllDeathCases = caseDao.countDeathCases();
+                counterAllContacts = contactDao.countContacts();
+                counterAllSickContacts = contactDao.countContactsSick();
+
+                // Set the avg stats from the total stats (municipality/total)
+                if (counterAllCases == 0) {
+                    avCasesStLabel.setText(String.valueOf(0));
+                } else {
+                    avCasesStLabel.setText(
+                           String.valueOf((counterCases / counterAllCases) * 100
+                                   + " %"));
+                }
+                if (counterAllActiveCases == 0) {
+                    avActiveCasesStLabel.setText(
+                            String.valueOf(0));
+                } else {
+                    avActiveCasesStLabel.setText(
+                            String.valueOf((counterActiveCase
+                                    / counterAllActiveCases) * 100 + " %"));
+                }
+                if (counterAllRecoveryCases == 0) {
+                    avRecoveryCasesStLabel.setText(
+                            String.valueOf(0));
+                } else {
+                    avRecoveryCasesStLabel.setText(
+                            String.valueOf((counterRecoveryCase
+                                    / counterAllRecoveryCases) * 100 + " %"));
+                }
+                if (counterAllDeathCases == 0) {
+                    avDeathCasesStLabel.setText(String.valueOf(0));
+                } else {
+                    avDeathCasesStLabel.setText(
+                            String.valueOf((counterDeathCase
+                                    / counterAllDeathCases) * 100 + " %"));
+                }
+
+                if (counterAllContacts == 0) {
+                    avContactsStLabel.setText(String.valueOf(0));
+                } else {
+                    avContactsStLabel.setText(
+                            String.valueOf((counterContacts
+                                    / counterAllContacts) * 100 + " %"));
+                }
+
+                if (counterAllSickContacts == 0) {
+                    avContactsSickStLabel.setText(String.valueOf(0));
+                } else {
+                    avContactsSickStLabel.setText(
+                            String.valueOf((counterSickContacts
+                                    / counterAllSickContacts) * 100 + " %"));
+                }
+
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Error: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
-
-        if (counterAllSickContacts == 0) {
-            avContactsSickStLabel.setText(String.valueOf(0));
-        } else {
-            avContactsSickStLabel.setText(
-                String.valueOf(counterSickContacts / counterAllSickContacts));
-        }
-
-
     }
 
 
@@ -1728,7 +1828,7 @@ public class Controller implements Initializable {
 
 
     /*
-     * Here is the last method the initialize.
+     * Here is the implement method the initialize.
      */
 
     /**

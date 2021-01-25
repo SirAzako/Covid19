@@ -742,7 +742,7 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
+      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Label layoutX="531.0" layoutY="75.0" text="Municality:" textFill="WHITE">
                <font>
