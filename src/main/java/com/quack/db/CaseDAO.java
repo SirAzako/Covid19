@@ -656,7 +656,11 @@ public class CaseDAO {
 
     }
 
-
+    /**
+     * <p>This method get all Contacts from database and parse the values
+     * to ObservableList.</p>
+     * @return oblist
+     */
     public ObservableList<Case> getContacts() throws Exception {
         ObservableList<Case> oblist = FXCollections.observableArrayList();
         try {
@@ -708,7 +712,14 @@ public class CaseDAO {
 
     }
 
-
+    /**
+     * <p>This method returns people after filtering.</p>
+     *
+     * @param querryTable choosing table from database.
+     * @param querryColumn choosing column from datavase.
+     * @param filterInput choosing value.
+     * @return oblist
+     */
     public ObservableList<Case> getPersonFilter(
             final String querryTable,
             final String querryColumn,
@@ -841,9 +852,10 @@ public class CaseDAO {
         ObservableList<Case> oblist = FXCollections.observableArrayList();
         try {
             Connection con = DB.getConnection();
-            String querry = "SELECT Persons.* "
-                            + "FROM Persons, Contacts "
-                            + "WHERE Contacts.AFM = " + afmInput + " AND "
+            String querry = "SELECT Persons.*, D.Name dimosName "
+                            + "FROM Persons, Contacts, Dimoi D "
+                            + "WHERE Persons.DimosID = D.DimosID AND Contacts"
+                            + ".AFM " + "= " + afmInput + " AND "
                             + "Contacts.ContactID = Persons.ContactID;";
             PreparedStatement stmt = con.prepareStatement(querry);
             ResultSet rs = stmt.executeQuery();
@@ -869,7 +881,8 @@ public class CaseDAO {
                         Integer.parseInt(rs.getString("dimosID")),
                         rs.getString("address"),
                         rs.getString("streetNumber"),
-                        rs.getString("zipCode")));
+                        rs.getString("zipCode"),
+                        rs.getString("dimosName")));
             }
             rs.close();
             stmt.close();
@@ -895,7 +908,8 @@ public class CaseDAO {
      * @param afm the afm of the case that we will update
      * @param krousma the Case object with the new values
      * */
-    public void updatePerson(final int afm, final Case krousma) throws Exception {
+    public void updatePerson(
+            final int afm, final Case krousma) throws Exception {
         Connection con = null;
         String querry = "UPDATE Persons "
                         + "SET FirstName = ?, "

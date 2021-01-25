@@ -499,7 +499,7 @@
             <Button fx:id="cancelAddContactUniqButton" layoutX="730.0" layoutY="484.0" mnemonicParsing="false" onMouseClicked="#cancelAddContactUniq" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
+      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="540.0" prefWidth="1155.0">
               <columns>
@@ -742,7 +742,7 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
          <children>
             <Label layoutX="531.0" layoutY="75.0" text="Municality:" textFill="WHITE">
                <font>
@@ -840,7 +840,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox layoutX="780.0" layoutY="293.0" prefHeight="358.0" prefWidth="423.0">
+            <HBox layoutX="780.0" layoutY="293.0" prefHeight="358.0" prefWidth="467.0">
                <children>
                   <VBox prefHeight="600.0" prefWidth="304.0" spacing="20.0">
                      <children>
@@ -876,9 +876,9 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="498.0" prefWidth="100.0" spacing="20.0">
+                  <VBox prefHeight="358.0" prefWidth="267.0" spacing="20.0">
                      <children>
-                        <Label fx:id="avCasesStLabel" text="#" textFill="WHITE">
+                        <Label fx:id="avCasesStLabel" prefHeight="40.0" prefWidth="226.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -886,7 +886,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="avActiveCasesStLabel" layoutX="10.0" layoutY="10.0" text="#" textFill="WHITE">
+                        <Label fx:id="avActiveCasesStLabel" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="250.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -894,7 +894,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="avRecoveryCasesStLabel" layoutX="10.0" layoutY="50.0" text="#" textFill="WHITE">
+                        <Label fx:id="avRecoveryCasesStLabel" layoutX="10.0" layoutY="50.0" prefHeight="40.0" prefWidth="266.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -902,7 +902,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="avDeathCasesStLabel" layoutX="10.0" layoutY="90.0" text="#" textFill="WHITE">
+                        <Label fx:id="avDeathCasesStLabel" layoutX="10.0" layoutY="90.0" prefHeight="40.0" prefWidth="286.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -910,7 +910,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="avContactsStLabel" layoutX="10.0" layoutY="130.0" text="#" textFill="WHITE">
+                        <Label fx:id="avContactsStLabel" layoutX="10.0" layoutY="130.0" prefHeight="40.0" prefWidth="260.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
@@ -918,7 +918,7 @@
                               <Insets left="30.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="avContactsSickStLabel" layoutX="10.0" layoutY="170.0" text="#" textFill="WHITE">
+                        <Label fx:id="avContactsSickStLabel" layoutX="10.0" layoutY="170.0" prefHeight="40.0" prefWidth="244.0" text="#" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>

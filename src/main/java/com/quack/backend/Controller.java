@@ -4,6 +4,7 @@ package com.quack.backend;
 import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -1183,7 +1184,6 @@ public class Controller implements Initializable {
             counter++;
         }
         resultsInput.setText(String.valueOf(counter));
-        System.out.println(counter);
         try {
             caseDao.getPersons();
         } catch (Exception e) {
@@ -1282,9 +1282,6 @@ public class Controller implements Initializable {
         CaseDAO caseDao = new CaseDAO();
         int counter = 0;
         String afm = filterContactInput.getText();
-        Filters filter = new Filters();
-        String table = filter.chooseTable(chooseTableComboBox.getValue());
-        String column = filter.chooseColumn(chooseColumnComboBox.getValue());
         ObservableList<Case> oblist = caseDao.getContactsOfCase(afm);
         for (Case krousma : oblist) {
             counter++;
@@ -1513,21 +1510,22 @@ public class Controller implements Initializable {
     @FXML
     public void findStatsClick() throws Exception {
         CaseDAO caseDao = new CaseDAO();
-        int counterCases = 0;
-        int counterActiveCase = 0;
-        int counterRecoveryCase = 0;
-        int counterDeathCase = 0;
-        int counterContacts = 0;
-        int counterSickContacts = 0;
-        int counterAllCases = 0;
-        int counterAllActiveCases = 0;
-        int counterAllRecoveryCases = 0;
-        int counterAllDeathCases = 0;
-        int counterAllContacts = 0;
-        int counterAllSickContacts = 0;
+        double counterCases = 0;
+        double counterActiveCase = 0;
+        double counterRecoveryCase = 0;
+        double counterDeathCase = 0;
+        double counterContacts = 0;
+        double counterSickContacts = 0;
+        double counterAllCases = 0;
+        double counterAllActiveCases = 0;
+        double counterAllRecoveryCases = 0;
+        double counterAllDeathCases = 0;
+        double counterAllContacts = 0;
+        double counterAllSickContacts = 0;
 
         counterAllCases = caseDao.countCases();
-        counterActiveCase = caseDao.countActiveCases();
+        counterAllActiveCases = caseDao.countActiveCases();
+        System.out.println(counterAllActiveCases);
         counterAllRecoveryCases = caseDao.countRecoveryCases();
         counterAllDeathCases = caseDao.countDeathCases();
         counterAllContacts = caseDao.countContacts();
@@ -1550,7 +1548,7 @@ public class Controller implements Initializable {
             avCasesStLabel.setText(String.valueOf(0));
         } else {
             avCasesStLabel.setText(
-                    String.valueOf(counterCases / counterAllCases));
+                    String.valueOf(counterCases/counterAllCases));
         }
         if (counterAllActiveCases == 0) {
             avActiveCasesStLabel.setText(
