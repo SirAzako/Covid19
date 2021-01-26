@@ -20,6 +20,7 @@ import javafx.scene.control.DatePicker;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.decimal4j.util.DoubleRounder;
 
 import javax.swing.JOptionPane;
 
@@ -585,6 +586,37 @@ public class Controller implements Initializable {
      */
     @FXML
     private Label municipalityStLabel;
+    /**
+     * private Label casesStLabelP.
+     */
+    @FXML
+    private Label casesStLabelP;
+    /**
+     * private Label activeCasesStLabelP.
+     */
+    @FXML
+    private Label activeCasesStLabelP;
+    /**
+     * private Label recoveryCasesStLabelP.
+     */
+    @FXML
+    private Label recoveryCasesStLabelP;
+    /**
+     * private Label deathCasesStLabelP.
+     */
+    @FXML
+    private Label deathCasesStLabelP;
+    /**
+     * private Label contactsStLabelP.
+     */
+    @FXML
+    private Label contactsStLabelP;
+    /**
+     * private Label contactsSickStLabelP.
+     */
+    @FXML
+    private Label contactsSickStLabelP;
+
 
 
     /*
@@ -599,6 +631,7 @@ public class Controller implements Initializable {
      *
      * @param panel the panel that we want to clear
      */
+
     public void clearFields(final AnchorPane panel) {
         if (panel == createCasePanel) {
             firstNameInput.clear();
@@ -1003,7 +1036,7 @@ public class Controller implements Initializable {
                 || ageCoUnInput.getText().isEmpty()
                 || phoneNumberCoUnInput.getText().isEmpty()
                 || municipalityCoUnInput.getSelectionModel()
-                        .getSelectedIndex() == -1
+                .getSelectedIndex() == -1
                 || addressCoUnInput.getText().isEmpty()
                 || streetCoUnInput.getText().isEmpty()
                 || zipCodeCoUnInput.getText().isEmpty()
@@ -1230,9 +1263,9 @@ public class Controller implements Initializable {
 
         if (filterInput.getText().isEmpty()
                 || chooseTableComboBox.getSelectionModel()
-                        .getSelectedIndex() == -1
+                .getSelectedIndex() == -1
                 || chooseColumnComboBox.getSelectionModel()
-                        .getSelectedIndex() == -1) {
+                .getSelectedIndex() == -1) {
 
             JOptionPane.showMessageDialog(null, "Please insert values in the "
                     + "fielters fields");
@@ -1563,7 +1596,7 @@ public class Controller implements Initializable {
 
     /**
      * <p>
-     *    The action of the button in the stats panel.
+     * The action of the button in the stats panel.
      * </p>
      */
     @FXML
@@ -1599,29 +1632,29 @@ public class Controller implements Initializable {
 
                 // Set the municipality label stats
                 counterCases = caseDao.countCasesByDimosID(municipality);
-                casesStLabel.setText(String.valueOf(counterCases));
+                casesStLabel.setText(String.valueOf((int)counterCases));
 
                 counterActiveCase = caseDao
                         .countActiveCasesByDimosID(municipality);
-                activeCasesStLabel.setText(String.valueOf(counterActiveCase));
+                activeCasesStLabel.setText(String.valueOf((int)counterActiveCase));
 
                 counterRecoveryCase = caseDao
                         .countRecoveryCasesByDimosID(municipality);
                 recoveryCasesStLabel.setText(String.valueOf(
-                        counterRecoveryCase));
+                        (int)counterRecoveryCase));
 
                 counterDeathCase = caseDao
                         .countDeathCasesByDimosID(municipality);
-                deathCasesStLabel.setText(String.valueOf(counterDeathCase));
+                deathCasesStLabel.setText(String.valueOf((int)counterDeathCase));
 
                 counterContacts = contactDao
                         .countContactsByDimosID(municipality);
-                contactsStLabel.setText(String.valueOf(counterContacts));
+                contactsStLabel.setText(String.valueOf((int)counterContacts));
 
                 counterSickContacts = contactDao
                         .countContactsSickByDimosID(municipality);
                 contactsSickStLabel.setText(String.valueOf(
-                        counterSickContacts));
+                        (int)counterSickContacts));
 
                 // Search for the total stats in order to make the avg stats
                 counterAllCases = caseDao.countCases();
@@ -1636,47 +1669,57 @@ public class Controller implements Initializable {
                     avCasesStLabel.setText(String.valueOf(0));
                 } else {
                     avCasesStLabel.setText(
-                           String.valueOf((counterCases / counterAllCases) * 100
-                                   + " %"));
+                            String.valueOf((DoubleRounder.round(66 / counterAllCases, 2))));
+                    casesStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterCases / counterAllCases) * 100, 2)) + "%"));
                 }
                 if (counterAllActiveCases == 0) {
                     avActiveCasesStLabel.setText(
                             String.valueOf(0));
                 } else {
                     avActiveCasesStLabel.setText(
-                            String.valueOf((counterActiveCase
-                                    / counterAllActiveCases) * 100 + " %"));
+                            String.valueOf((DoubleRounder.round(66
+                                    / counterAllActiveCases, 2))));
+                    activeCasesStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterActiveCase / counterAllActiveCases) * 100, 2)) + "%"));
                 }
                 if (counterAllRecoveryCases == 0) {
                     avRecoveryCasesStLabel.setText(
                             String.valueOf(0));
                 } else {
                     avRecoveryCasesStLabel.setText(
-                            String.valueOf((counterRecoveryCase
-                                    / counterAllRecoveryCases) * 100 + " %"));
+                            String.valueOf((DoubleRounder.round(66
+                                    / counterAllRecoveryCases, 2))));
+                    recoveryCasesStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterRecoveryCase / counterAllRecoveryCases) * 100, 2)) + "%"));
                 }
                 if (counterAllDeathCases == 0) {
                     avDeathCasesStLabel.setText(String.valueOf(0));
                 } else {
                     avDeathCasesStLabel.setText(
-                            String.valueOf((counterDeathCase
-                                    / counterAllDeathCases) * 100 + " %"));
+                            String.valueOf((DoubleRounder.round(66
+                                    / counterAllDeathCases, 2))));
+                    deathCasesStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterDeathCase / counterAllDeathCases) * 100, 2)) + "%"));
                 }
 
                 if (counterAllContacts == 0) {
                     avContactsStLabel.setText(String.valueOf(0));
                 } else {
                     avContactsStLabel.setText(
-                            String.valueOf((counterContacts
-                                    / counterAllContacts) * 100 + " %"));
+                            String.valueOf((DoubleRounder.round(66
+                                    / counterAllContacts, 2))));
+                    contactsStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterContacts / counterAllContacts) * 100, 2)) + "%"));
                 }
-
                 if (counterAllSickContacts == 0) {
                     avContactsSickStLabel.setText(String.valueOf(0));
                 } else {
                     avContactsSickStLabel.setText(
-                            String.valueOf((counterSickContacts
-                                    / counterAllSickContacts) * 100 + " %"));
+                            String.valueOf((DoubleRounder.round(66
+                                    / counterAllSickContacts, 2))));
+                    contactsSickStLabelP.setText(
+                            String.valueOf((DoubleRounder.round((counterSickContacts / counterAllSickContacts) * 100, 2)) + "%"));
                 }
 
 
