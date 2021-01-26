@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -18,9 +19,13 @@ public class Main extends Application {
      * */
     @Override
     public void start(final Stage primaryStage) throws Exception {
+
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Quack - Covid19");
+        primaryStage.getIcons().add(new Image("/icons/quack.png"));
         primaryStage.setScene(new Scene(root, 1600, 1000));
+        java.net.URL url = ClassLoader.getSystemResource("/icons/editProfile" +
+                ".png");
         primaryStage.show();
     }
 

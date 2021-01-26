@@ -372,8 +372,14 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onMouseClicked="#clearAddContacts" prefHeight="45.0" prefWidth="107.0" text="Clear" />
-                  <Button mnemonicParsing="false" onMouseClicked="#cancelAddContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" />
+                  <Button mnemonicParsing="false" onMouseClicked="#clearAddContacts" prefHeight="45.0" prefWidth="107.0" text="Clear">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onMouseClicked="#cancelAddContacts" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #B33A3A;" text="Cancel" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                </children>
             </VBox>
             <Label layoutX="585.0" layoutY="76.0" text="CONTACT" textFill="WHITE">
@@ -774,7 +780,7 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;">
+      <AnchorPane fx:id="stats" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <Group layoutX="530.0" layoutY="76.0">
                <children>
@@ -1027,7 +1033,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="municipalityStLabel" layoutX="97.0" layoutY="221.0" text="Munic" textFill="WHITE">
+            <Label fx:id="municipalityStLabel" layoutX="77.0" layoutY="227.0" text="Munic" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -1038,5 +1044,48 @@
                </font>
             </Label>
          </children></AnchorPane>
+      <AnchorPane fx:id="startPanel" layoutX="277.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #000000;">
+         <children>
+            <HBox layoutX="575.0" layoutY="487.0" prefHeight="34.0" prefWidth="175.0" spacing="10.0">
+               <children>
+                  <ImageView fx:id="qIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_q_26px.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="uIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_u_26px.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="aIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_a_26px.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_c_26px.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="kIcon" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/icons8_k_26px.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <ImageView fx:id="virusIcon" fitHeight="58.0" fitWidth="60.0" layoutX="25.0" layoutY="474.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/covid.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="621.0" layoutY="645.0" mnemonicParsing="false" onAction="#play" prefHeight="41.0" prefWidth="99.0" text="PLAY">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

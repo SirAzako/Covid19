@@ -1,14 +1,19 @@
 package com.quack.backend;
 
 
+import animatefx.animation.Bounce;
+import animatefx.animation.BounceIn;
 import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
+
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -19,10 +24,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.decimal4j.util.DoubleRounder;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 /**
  * In Controller done all management for the gui.
@@ -30,7 +36,7 @@ import javax.swing.JOptionPane;
  * @version 1.0.1 11 Jan 2021
  */
 
-public class Controller implements Initializable {
+public class Controller implements Initializable{
     /**
      * private integer totalContacts.
      */
@@ -617,6 +623,27 @@ public class Controller implements Initializable {
     @FXML
     private Label contactsSickStLabelP;
 
+    //START PANEL
+    @FXML
+    private AnchorPane startPanel;
+
+    @FXML
+    private ImageView qIcon;
+
+    @FXML
+    private ImageView uIcon;
+
+    @FXML
+    private ImageView aIcon;
+
+    @FXML
+    private ImageView cIcon;
+
+    @FXML
+    private ImageView kIcon;
+
+    @FXML
+    private ImageView virusIcon;
 
 
     /*
@@ -1874,6 +1901,7 @@ public class Controller implements Initializable {
      * Here is the implement method the initialize.
      */
 
+
     /**
      * <p>
      * A method that initialize fields on the start of the app,
@@ -1932,7 +1960,9 @@ public class Controller implements Initializable {
                 "Age", "Municipality", "Address",
                 "Street Number", "Zip Code", "Diagnosis Date",
                 "Recovery Date", "Death Date");
-
+        }
+    @FXML
+    void play(ActionEvent event) {
+        new Bounce(virusIcon).play();
     }
-
 }
