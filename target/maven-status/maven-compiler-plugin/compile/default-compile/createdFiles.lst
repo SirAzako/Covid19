@@ -1,11 +1,9 @@
 com\quack\db\ContactDAO.class
 com\quack\db\CaseDAO.class
-com\quack\backend\Person.class
-com\quack\db\DB.class
-com\quack\backend\Controller.class
-com\quack\test\FiltersTest.class
-com\quack\backend\Case.class
 com\quack\frontend\Main.class
 com\quack\backend\Contact.class
-com\quack\test\CaseTest.class
+com\quack\backend\Person.class
+com\quack\db\DB.class
 com\quack\backend\Filters.class
+com\quack\backend\Controller.class
+com\quack\backend\Case.class

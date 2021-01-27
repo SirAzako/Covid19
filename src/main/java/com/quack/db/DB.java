@@ -22,7 +22,7 @@ public class DB {
     private final static String dbusername = "root";
 
     /** The password of the db. */
-    private final static String dbpassword = "040298140a";
+    private final static String dbpassword = "root";
 
     /** The connection variable that holds the connection with the db. */
     private static Connection con = null;

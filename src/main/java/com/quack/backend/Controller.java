@@ -5,6 +5,7 @@ import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -21,9 +22,11 @@ import javafx.scene.control.DatePicker;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import org.decimal4j.util.DoubleRounder;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.ImageView;
 
 /**
  * In Controller done all management for the gui.
@@ -617,8 +620,16 @@ public class Controller implements Initializable {
      */
     @FXML
     private Label contactsSickStLabelP;
-
-
+    /**
+     * private AnchorPane for app manual.
+     */
+    @FXML
+    private AnchorPane helpPanel;
+    /**
+     * private hbox
+     */
+    @FXML
+    private HBox quack;
     /*
      * Here we will initialize a method to clear automatic
      *  the fields in the panel we insert
@@ -1765,6 +1776,7 @@ public class Controller implements Initializable {
      * @param panelOpen panel we want to open and.
      */
     public void openPanels(final AnchorPane panelOpen) {
+        quack.setVisible(false); // set not visible the QUACK
         // Close all the other panels except the panel you wanna open
         if (panelOpen != createCasePanel) {
             if (createCasePanel.isVisible()) {
@@ -1817,6 +1829,15 @@ public class Controller implements Initializable {
         } else {
             statsPanel.setVisible(
                     !statsPanel.isVisible());
+        }
+
+        if (panelOpen != helpPanel) {
+            if (helpPanel.isVisible()) {
+                helpPanel.setVisible(false);
+            }
+        } else {
+            helpPanel.setVisible(
+                    !helpPanel.isVisible());
         }
 
     }
@@ -1886,6 +1907,15 @@ public class Controller implements Initializable {
         openPanels(editProfilePanel);
     }
 
+    /**
+     * <p>
+     *     Click event that opens and close the help Panel.
+     * </p>
+     */
+    @FXML
+    void helpClick() {
+        openPanels(helpPanel);
+    }
 
     /*
      * Here is the implement method the initialize.
