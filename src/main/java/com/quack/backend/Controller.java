@@ -1,8 +1,6 @@
 package com.quack.backend;
 
 
-import animatefx.animation.Bounce;
-import animatefx.animation.BounceIn;
 import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
@@ -12,8 +10,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -24,11 +20,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import org.decimal4j.util.DoubleRounder;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  * In Controller done all management for the gui.
@@ -36,7 +31,7 @@ import javax.swing.*;
  * @version 1.0.1 11 Jan 2021
  */
 
-public class Controller implements Initializable{
+public class Controller implements Initializable {
     /**
      * private integer totalContacts.
      */
@@ -623,28 +618,6 @@ public class Controller implements Initializable{
     @FXML
     private Label contactsSickStLabelP;
 
-    //START PANEL
-    @FXML
-    private AnchorPane startPanel;
-
-    @FXML
-    private ImageView qIcon;
-
-    @FXML
-    private ImageView uIcon;
-
-    @FXML
-    private ImageView aIcon;
-
-    @FXML
-    private ImageView cIcon;
-
-    @FXML
-    private ImageView kIcon;
-
-    @FXML
-    private ImageView virusIcon;
-
 
     /*
      * Here we will initialize a method to clear automatic
@@ -839,7 +812,7 @@ public class Controller implements Initializable{
     @FXML
     public void cancelNewCase() {
         clearNewCasePane();
-        createCasePanel.setVisible(false);
+        openPanels(createCasePanel);
     }
 
 
@@ -1018,7 +991,7 @@ public class Controller implements Initializable{
     public void cancelAddContacts() {
         // Clear the fields to add a new contact
         clearAddContacts();
-        openPanels("addContactsPanel");
+        openPanels(addContactsPanel);
     }
 
 
@@ -1116,7 +1089,7 @@ public class Controller implements Initializable{
     public void cancelAddContactUniq() {
         // clear the field and close the panel
         clearAddContactUniq();
-        openPanels("addContactUniquePanel");
+        openPanels(addContactUniquePanel);
     }
 
 
@@ -1286,7 +1259,7 @@ public class Controller implements Initializable{
      * </p>
      */
     @FXML
-    public void searchFilterClick() throws Exception {
+    public void searchFilterClick() {
 
         if (filterInput.getText().isEmpty()
                 || chooseTableComboBox.getSelectionModel()
@@ -1295,7 +1268,7 @@ public class Controller implements Initializable{
                 .getSelectedIndex() == -1) {
 
             JOptionPane.showMessageDialog(null, "Please insert values in the "
-                    + "fielters fields");
+                    + "filters fields");
         } else {
             try {
                 CaseDAO caseDao = new CaseDAO();
@@ -1487,7 +1460,7 @@ public class Controller implements Initializable{
                             afm, firstname, lastname, age, phone,
                             municip, address, streetnum, zipcode);
 
-                    caseDao.updatePerson(afm, krousma1);
+                    caseDao.updatePerson(krousma1);
 
                 } else if (recoveryEditInput.getValue() != null
                         && deathEditInput.getValue() == null) {
@@ -1497,7 +1470,7 @@ public class Controller implements Initializable{
                             age, phone, municip, address,
                             streetnum, zipcode);
 
-                    caseDao.updatePerson(afm, krousma1);
+                    caseDao.updatePerson(krousma1);
                 } else if (recoveryEditInput.getValue() == null
                         && deathEditInput.getValue() != null) {
 
@@ -1505,19 +1478,19 @@ public class Controller implements Initializable{
                             coctactsnum, afm, firstname, lastname, age,
                             phone, municip, address, streetnum, zipcode);
 
-                    caseDao.updatePerson(afm, krousma1);
+                    caseDao.updatePerson(krousma1);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "You cant enter both recovery date and death date",
                             "Warning", JOptionPane.WARNING_MESSAGE);
                 }
 
+                JOptionPane.showMessageDialog(null,
+                        "Case has been updated successfully!");
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null,
                         e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                JOptionPane.showMessageDialog(null,
-                        "Case has been updated successfully!");
             }
 
         }
@@ -1613,7 +1586,7 @@ public class Controller implements Initializable{
     @FXML
     public void cancelEditPerson() {
         clearEditPerson();
-        openPanels("editProfilePanel");
+        openPanels(editProfilePanel);
     }
 
 
@@ -1659,29 +1632,32 @@ public class Controller implements Initializable{
 
                 // Set the municipality label stats
                 counterCases = caseDao.countCasesByDimosID(municipality);
-                casesStLabel.setText(String.valueOf((int)counterCases));
+                casesStLabel.setText(String.valueOf((int) counterCases));
 
                 counterActiveCase = caseDao
                         .countActiveCasesByDimosID(municipality);
-                activeCasesStLabel.setText(String.valueOf((int)counterActiveCase));
+                activeCasesStLabel.setText(
+                        String.valueOf((int) counterActiveCase));
 
                 counterRecoveryCase = caseDao
                         .countRecoveryCasesByDimosID(municipality);
                 recoveryCasesStLabel.setText(String.valueOf(
-                        (int)counterRecoveryCase));
+                        (int) counterRecoveryCase));
 
                 counterDeathCase = caseDao
                         .countDeathCasesByDimosID(municipality);
-                deathCasesStLabel.setText(String.valueOf((int)counterDeathCase));
+                deathCasesStLabel.setText(
+                        String.valueOf((int) counterDeathCase));
 
                 counterContacts = contactDao
                         .countContactsByDimosID(municipality);
-                contactsStLabel.setText(String.valueOf((int)counterContacts));
+                contactsStLabel.setText(
+                        String.valueOf((int) counterContacts));
 
                 counterSickContacts = contactDao
                         .countContactsSickByDimosID(municipality);
-                contactsSickStLabel.setText(String.valueOf(
-                        (int)counterSickContacts));
+                contactsSickStLabel.setText(
+                        String.valueOf((int) counterSickContacts));
 
                 // Search for the total stats in order to make the avg stats
                 counterAllCases = caseDao.countCases();
@@ -1696,9 +1672,12 @@ public class Controller implements Initializable{
                     avCasesStLabel.setText(String.valueOf(0));
                 } else {
                     avCasesStLabel.setText(
-                            String.valueOf((DoubleRounder.round(66 / counterAllCases, 2))));
+                            String.valueOf((DoubleRounder.round(
+                                    66 / counterAllCases, 2))));
                     casesStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterCases / counterAllCases) * 100, 2)) + "%"));
+                            String.valueOf((DoubleRounder.round(
+                                    (counterCases / counterAllCases) * 100,
+                                    2)) + "%"));
                 }
                 if (counterAllActiveCases == 0) {
                     avActiveCasesStLabel.setText(
@@ -1708,7 +1687,10 @@ public class Controller implements Initializable{
                             String.valueOf((DoubleRounder.round(66
                                     / counterAllActiveCases, 2))));
                     activeCasesStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterActiveCase / counterAllActiveCases) * 100, 2)) + "%"));
+                        String.valueOf((
+                            DoubleRounder.round(
+                                    (counterActiveCase / counterAllActiveCases)
+                                            * 100, 2)) + "%"));
                 }
                 if (counterAllRecoveryCases == 0) {
                     avRecoveryCasesStLabel.setText(
@@ -1718,7 +1700,9 @@ public class Controller implements Initializable{
                             String.valueOf((DoubleRounder.round(66
                                     / counterAllRecoveryCases, 2))));
                     recoveryCasesStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterRecoveryCase / counterAllRecoveryCases) * 100, 2)) + "%"));
+                            String.valueOf((DoubleRounder.round(
+                                (counterRecoveryCase / counterAllRecoveryCases)
+                                * 100, 2)) + "%"));
                 }
                 if (counterAllDeathCases == 0) {
                     avDeathCasesStLabel.setText(String.valueOf(0));
@@ -1727,7 +1711,9 @@ public class Controller implements Initializable{
                             String.valueOf((DoubleRounder.round(66
                                     / counterAllDeathCases, 2))));
                     deathCasesStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterDeathCase / counterAllDeathCases) * 100, 2)) + "%"));
+                            String.valueOf((DoubleRounder.round(
+                                (counterDeathCase / counterAllDeathCases) * 100,
+                                            2)) + "%"));
                 }
 
                 if (counterAllContacts == 0) {
@@ -1737,7 +1723,9 @@ public class Controller implements Initializable{
                             String.valueOf((DoubleRounder.round(66
                                     / counterAllContacts, 2))));
                     contactsStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterContacts / counterAllContacts) * 100, 2)) + "%"));
+                        String.valueOf((DoubleRounder.round(
+                            (counterContacts / counterAllContacts) * 100,
+                            2)) + "%"));
                 }
                 if (counterAllSickContacts == 0) {
                     avContactsSickStLabel.setText(String.valueOf(0));
@@ -1746,7 +1734,10 @@ public class Controller implements Initializable{
                             String.valueOf((DoubleRounder.round(66
                                     / counterAllSickContacts, 2))));
                     contactsSickStLabelP.setText(
-                            String.valueOf((DoubleRounder.round((counterSickContacts / counterAllSickContacts) * 100, 2)) + "%"));
+                        String.valueOf(
+                            (DoubleRounder.round((
+                            counterSickContacts / counterAllSickContacts) * 100,
+                            2)) + "%"));
                 }
 
 
@@ -1773,61 +1764,60 @@ public class Controller implements Initializable{
      *
      * @param panelOpen panel we want to open and.
      */
-    public void openPanels(final String panelOpen) {
+    public void openPanels(final AnchorPane panelOpen) {
         // Close all the other panels except the panel you wanna open
-        if (!panelOpen.equals("createCasePanel")) {
-            if (this.createCasePanel.isVisible()) {
-                this.createCasePanel.setVisible(false);
+        if (panelOpen != createCasePanel) {
+            if (createCasePanel.isVisible()) {
+                createCasePanel.setVisible(false);
             }
         } else {
-            this.createCasePanel.setVisible(!this.createCasePanel.isVisible());
+            createCasePanel.setVisible(!this.createCasePanel.isVisible());
         }
 
-        if (!panelOpen.equals("addContactsPanel")) {
-            if (this.addContactsPanel.isVisible()) {
-                this.addContactsPanel.setVisible(false);
+        if (panelOpen != addContactsPanel) {
+            if (addContactsPanel.isVisible()) {
+                addContactsPanel.setVisible(false);
             }
         } else {
-            this.addContactsPanel.setVisible(
-                    !this.addContactsPanel.isVisible());
+            addContactsPanel.setVisible(
+                    !addContactsPanel.isVisible());
         }
 
-        if (!panelOpen.equals("addContactUniquePanel")) {
-            if (this.addContactUniquePanel.isVisible()) {
-                this.addContactUniquePanel.setVisible(false);
+        if (panelOpen != addContactUniquePanel) {
+            if (addContactUniquePanel.isVisible()) {
+                addContactUniquePanel.setVisible(false);
             }
         } else {
-            this.addContactUniquePanel.setVisible(
-                    !this.addContactUniquePanel.isVisible());
+            addContactUniquePanel.setVisible(
+                    !addContactUniquePanel.isVisible());
         }
 
-        if (!panelOpen.equals("findPersonPanel")) {
-            if (this.findPersonPanel.isVisible()) {
-                this.findPersonPanel.setVisible(false);
+        if (panelOpen != findPersonPanel) {
+            if (findPersonPanel.isVisible()) {
+                findPersonPanel.setVisible(false);
             }
         } else {
-            this.findPersonPanel.setVisible(
-                    !this.findPersonPanel.isVisible());
+            findPersonPanel.setVisible(
+                    !findPersonPanel.isVisible());
         }
 
-        if (!panelOpen.equals("editPersonPanel")) {
-            if (this.editProfilePanel.isVisible()) {
-                this.editProfilePanel.setVisible(false);
+        if (panelOpen != editProfilePanel) {
+            if (editProfilePanel.isVisible()) {
+                editProfilePanel.setVisible(false);
             }
         } else {
-            this.editProfilePanel.setVisible(
-                    !this.editProfilePanel.isVisible());
+            editProfilePanel.setVisible(
+                    !editProfilePanel.isVisible());
         }
 
-        if (!panelOpen.equals("statsPanel")) {
-            if (this.statsPanel.isVisible()) {
-                this.statsPanel.setVisible(false);
+        if (panelOpen != statsPanel) {
+            if (statsPanel.isVisible()) {
+                statsPanel.setVisible(false);
             }
         } else {
-            this.statsPanel.setVisible(
-                    !this.statsPanel.isVisible());
+            statsPanel.setVisible(
+                    !statsPanel.isVisible());
         }
-
 
     }
 
@@ -1849,7 +1839,7 @@ public class Controller implements Initializable{
      */
     @FXML
     public void menuStatsClick() {
-        openPanels("statsPanel");
+        openPanels(statsPanel);
     }
 
 
@@ -1860,7 +1850,7 @@ public class Controller implements Initializable{
      */
     @FXML
     public void menuCreateClick() {
-        openPanels("createCasePanel");
+        openPanels(createCasePanel);
     }
 
 
@@ -1871,7 +1861,7 @@ public class Controller implements Initializable{
      */
     @FXML
     public void menuFindPersonClick() {
-        openPanels("findPersonPanel");
+        openPanels(findPersonPanel);
     }
 
 
@@ -1882,7 +1872,7 @@ public class Controller implements Initializable{
      */
     @FXML
     public void menuContactClick() {
-        openPanels("addContactUniquePanel");
+        openPanels(addContactUniquePanel);
     }
 
 
@@ -1893,14 +1883,13 @@ public class Controller implements Initializable{
      */
     @FXML
     public void menuEditProfileClick() {
-        openPanels("editPersonPanel");
+        openPanels(editProfilePanel);
     }
 
 
     /*
      * Here is the implement method the initialize.
      */
-
 
     /**
      * <p>
@@ -1960,9 +1949,6 @@ public class Controller implements Initializable{
                 "Age", "Municipality", "Address",
                 "Street Number", "Zip Code", "Diagnosis Date",
                 "Recovery Date", "Death Date");
-        }
-    @FXML
-    void play(ActionEvent event) {
-        new Bounce(virusIcon).play();
     }
+
 }

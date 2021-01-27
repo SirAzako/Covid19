@@ -24,8 +24,8 @@ public class Main extends Application {
         primaryStage.setTitle("Quack - Covid19");
         primaryStage.getIcons().add(new Image("/icons/quack.png"));
         primaryStage.setScene(new Scene(root, 1600, 1000));
-        java.net.URL url = ClassLoader.getSystemResource("/icons/editProfile" +
-                ".png");
+        java.net.URL url = ClassLoader.getSystemResource("/icons/editProfile"
+                + ".png");
         primaryStage.show();
     }
 

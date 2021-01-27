@@ -8,7 +8,7 @@ public class Contact extends Person {
 
     /**
      * Constructor.
-     * @param contactID the contact id is equal to the afm and consider if
+     * @param iDofContact the contact id is equal to the afm and consider if
      *                  this person was a contact of a case
      * @param address Address name
      * @param zipCode the postal code
@@ -20,12 +20,15 @@ public class Contact extends Person {
      * @param lastName last name
      * @param phoneNumber phone number
      * */
-    public Contact(int AFM, int contactID, String firstName,
-                   String lastName, int age, String phoneNumber, int dimosID,
-                   String address, String streetNumber, String zipCode) {
+    public Contact(final int AFM, final int iDofContact,
+                   final String firstName, final String lastName,
+                   final int age, final String phoneNumber,
+                   final int dimosID, final String address,
+                   final String streetNumber, final String zipCode) {
+
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address,
                 streetNumber, zipCode);
-        this.contactID = contactID;
+        this.contactID = iDofContact;
     }
 
     /**
@@ -37,10 +40,10 @@ public class Contact extends Person {
     }
     /**
      * <p>Setting the contactID.</p>
-     * @param contactID
+     * @param iDofContact
      */
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
+    public void setContactID(final int iDofContact) {
+        this.contactID = iDofContact;
     }
 
 }

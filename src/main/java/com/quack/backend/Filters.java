@@ -48,7 +48,7 @@ public class Filters {
             case "Street Number":
                 return "StreetNumber =";
             case "Zip Code":
-                return "Zip Code =";
+                return "ZipCode =";
             case "Diagnosis Date":
                 return "Diagnosis =";
             case "Recovery Date":

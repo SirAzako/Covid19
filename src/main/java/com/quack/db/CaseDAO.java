@@ -574,7 +574,7 @@ public class CaseDAO {
     public Case getPersonByAfm(final String afmInput)
             throws Exception {
 
-        Case krousma= null;
+        Case krousma = null;
         try {
             Connection con = DB.getConnection();
             String querry = "SELECT * "
@@ -621,11 +621,9 @@ public class CaseDAO {
      * <p>
      *     A method that update the data of a person in the database.
      * </p>
-     * @param afm the afm of the case that we will update
      * @param krousma the Case object with the new values
      * */
-    public void updatePerson(
-            final int afm, final Case krousma) throws Exception {
+    public void updatePerson(final Case krousma) throws Exception {
         Connection con = null;
         String querry = "UPDATE Persons "
                         + "SET FirstName = ?, "
@@ -656,6 +654,7 @@ public class CaseDAO {
             stmt.executeUpdate();
             stmt.close();
             DB.close();
+
         } catch (Exception e) {
             throw new Exception("Error while trying to update Person "
                     + e.getMessage());

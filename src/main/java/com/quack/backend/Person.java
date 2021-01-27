@@ -36,29 +36,29 @@ public abstract class Person {
      * <p>
      *     A constructor that create person with the standard stats.
      * </p>
-     * @param address Address name
-     * @param zipCode the postal code
-     * @param streetNumber the street number
-     * @param AFM the afm of the person
-     * @param age the age
-     * @param dimosID municipality id
-     * @param firstName first name
-     * @param lastName last name
-     * @param phoneNumber phone number
+     * @param addr Address name
+     * @param postalCode the postal code
+     * @param streetNum the street number
+     * @param afm the afm of the person
+     * @param personAge the age
+     * @param municipID municipality id
+     * @param firstNam first name
+     * @param lastNam last name
+     * @param phone phone number
      * */
-    public Person(final int AFM, final String firstName, final String lastName,
-                  final int age, final String phoneNumber, final int dimosID,
-                  final String address, final String streetNumber,
-                  final String zipCode) {
-        this.AFM = AFM;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.phoneNumber = phoneNumber;
-        this.dimosID = dimosID;
-        this.address = address;
-        this.streetNumber = streetNumber;
-        this.zipCode = zipCode;
+    public Person(final int afm, final String firstNam, final String lastNam,
+                  final int personAge, final String phone, final int municipID,
+                  final String addr, final String streetNum,
+                  final String postalCode) {
+        this.AFM = afm;
+        this.firstName = firstNam;
+        this.lastName = lastNam;
+        this.age = personAge;
+        this.phoneNumber = phone;
+        this.dimosID = municipID;
+        this.address = addr;
+        this.streetNumber = streetNum;
+        this.zipCode = postalCode;
     }
 
     /**
@@ -135,74 +135,74 @@ public abstract class Person {
 
     /**
      * Setter for afm.
-     * @param AFM the new afm
+     * @param afm the new afm
      * */
-    public void setAFM(final int AFM) {
-        this.AFM = AFM;
+    public void setAFM(final int afm) {
+        this.AFM = afm;
     }
 
     /**
      * Setter for first name.
-     * @param firstName the new first name
+     * @param firstNam the new first name
      * */
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(final String firstNam) {
+        this.firstName = firstNam;
     }
 
     /**
      * Setter for last name.
-     * @param lastName the new last name
+     * @param lastNam the new last name
      * */
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
+    public void setLastName(final String lastNam) {
+        this.lastName = lastNam;
     }
 
     /**
      * Setter for age.
-     * @param age the new age
+     * @param personAge the new age
      * */
-    public void setAge(final int age) {
-        this.age = age;
+    public void setAge(final int personAge) {
+        this.age = personAge;
     }
 
     /**
      * Setter for phone number.
-     * @param phoneNumber the new phone
+     * @param phone the new phone
      * */
-    public void setPhoneNumber(final String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(final String phone) {
+        this.phoneNumber = phone;
     }
 
     /**
      * Setter for dimos id.
-     * @param dimosID the new id
+     * @param municipID the new id
      * */
-    public void setDimosID(final int dimosID) {
-        this.dimosID = dimosID;
+    public void setDimosID(final int municipID) {
+        this.dimosID = municipID;
     }
 
     /**
      * Setter for address.
-     * @param address the new address
+     * @param addr the new address
      * */
-    public void setAddress(final String address) {
-        this.address = address;
+    public void setAddress(final String addr) {
+        this.address = addr;
     }
 
     /**
      * Setter for street number.
-     * @param streetNumber the new street number
+     * @param streetNum the new street number
      * */
-    public void setStreetNumber(final String streetNumber) {
-        this.streetNumber = streetNumber;
+    public void setStreetNumber(final String streetNum) {
+        this.streetNumber = streetNum;
     }
 
     /**
      * Setter for postal code.
-     * @param zipCode the new postal code
+     * @param postalCode the new postal code
      * */
-    public void setZipCode(final String zipCode) {
-        this.zipCode = zipCode;
+    public void setZipCode(final String postalCode) {
+        this.zipCode = postalCode;
     }
 
 }

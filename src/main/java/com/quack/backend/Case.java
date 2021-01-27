@@ -1,7 +1,6 @@
 package com.quack.backend;
 
 /**
- *
  * @author paras
  */
 public class Case extends Person {
@@ -21,17 +20,17 @@ public class Case extends Person {
     private int contactsNumber;
 
     /**
-     * the name of the municipality that the case lives.
-     *  this variable is used only in the find person panel
-     *  to print the name of the municipality
+     *  The name of the municipality that the case lives.
+     *  This variable is used only in the find person panel
+     *  to print the name of the municipality.
      *  */
     private String dimosName;
 
     /**
-     * <p>The case recovered.</p>
+     * <p>A recovered case.</p>
      * @param contactsNo numbers of contacts found that date
-     * @param Diagnosis date of diagnosis
-     * @param Recovery date of recovery
+     * @param diagnosisDate date of diagnosis
+     * @param recoveryDate date of recovery
      * @param AFM the afm of case
      * @param firstName the case's first name
      * @param lastName the case's last name
@@ -42,21 +41,24 @@ public class Case extends Person {
      * @param streetNumber case's street number
      * @param zipCode case's postal code
      */
-    public Case(int contactsNo, String Diagnosis,  String Recovery, int AFM,
-                String firstName, String lastName, int age, String phoneNumber,
-                int dimosID, String address,
-                String streetNumber, String zipCode) {
+    public Case(final int contactsNo, final String diagnosisDate,
+                final String recoveryDate, final int AFM,
+                final String firstName, final String lastName,
+                final int age, final String phoneNumber,
+                final int dimosID, final String address,
+                final String streetNumber, final String zipCode) {
+
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address,
                 streetNumber, zipCode);
-        this.Diagnosis = Diagnosis;
-        this.Recovery = Recovery;
+        this.Diagnosis = diagnosisDate;
+        this.Recovery = recoveryDate;
         this.contactsNumber = contactsNo;
     }
 
     /**
-     *<p>The case died.</p>
-     * @param Diagnosis date of diagnosis
-     * @param Death date of death
+     *<p>A dead case.</p>
+     * @param diagnosisDate date of diagnosis
+     * @param deathDate date of death
      * @param contactsNo numbers of contacts found that date
      * @param AFM the afm of case
      * @param firstName the case's first name
@@ -68,21 +70,25 @@ public class Case extends Person {
      * @param streetNumber case's street number
      * @param zipCode case's postal code
      */
-    public Case(String Diagnosis, String Death, int contactsNo,int AFM,
-                String firstName, String lastName, int age, String phoneNumber,
-                int dimosID, String address, String streetNumber, String zipCode) {
+    public Case(final String diagnosisDate, final String deathDate,
+                final int contactsNo, final int AFM,
+                final String firstName, final String lastName,
+                final int age, final String phoneNumber,
+                final int dimosID, final String address,
+                final String streetNumber, final String zipCode) {
+
         super(AFM, firstName, lastName, age, phoneNumber,
                 dimosID, address, streetNumber, zipCode);
-        this.Diagnosis = Diagnosis;
-        this.Death = Death;
+        this.Diagnosis = diagnosisDate;
+        this.Death = deathDate;
         this.contactsNumber = contactsNo;
     }
 
 
     /**
-     *<p>The case is active.</p>
-     * @param Diagnosis date of diagnosis
-     * @param contactsNumber numbers of contacts found that date
+     *<p>An active case.</p>
+     * @param diagnosisDate date of diagnosis
+     * @param contactsNo numbers of contacts found that date
      * @param AFM the afm of case
      * @param firstName the case's first name
      * @param lastName the case's last name
@@ -93,22 +99,24 @@ public class Case extends Person {
      * @param streetNumber case's street number
      * @param zipCode case's postal code
      */
-    public Case(String Diagnosis, int contactsNumber, int AFM, String firstName,
-                String lastName, int age, String phoneNumber,
-                int dimosID, String address, String streetNumber,
-                String zipCode) {
+    public Case(final String diagnosisDate, final int contactsNo,
+                final int AFM, final String firstName,
+                final String lastName, final int age,
+                final String phoneNumber, final int dimosID,
+                final String address, final String streetNumber,
+                final String zipCode) {
         super(AFM, firstName, lastName, age, phoneNumber,
                 dimosID, address, streetNumber, zipCode);
-        this.Diagnosis = Diagnosis;
-        this.contactsNumber = contactsNumber;
+        this.Diagnosis = diagnosisDate;
+        this.contactsNumber = contactsNo;
     }
 
     /**
      *<p>This constructor is used for returning data from database.</p>
      * @param contactsNo numbers of contacts found that date
-     * @param Diagnosis date of diagnosis
-     * @param Death the death date
-     * @param Recovery the recovery date
+     * @param diagnosisDate date of diagnosis
+     * @param deathDate the death date
+     * @param recoveryDate the recovery date
      * @param AFM the afm of case
      * @param firstName the case's first name
      * @param lastName the case's last name
@@ -118,28 +126,32 @@ public class Case extends Person {
      * @param address case's address name
      * @param streetNumber case's street number
      * @param zipCode case's postal code
-     * @param dimosName municipality name
+     * @param municipName municipality name
      */
-    public Case(int contactsNo, String Diagnosis, String Death, String Recovery,
-                int AFM, String firstName, String lastName, int age,
-                String phoneNumber, int dimosID, String address,
-                String streetNumber, String zipCode, String dimosName) {
+    public Case(final int contactsNo, final String diagnosisDate,
+                final String deathDate, final String recoveryDate,
+                final int AFM, final String firstName,
+                final String lastName, final int age,
+                final String phoneNumber, final int dimosID,
+                final String address, final String streetNumber,
+                final String zipCode, final String municipName) {
+
         super(AFM, firstName, lastName, age, phoneNumber,
                 dimosID, address, streetNumber, zipCode);
 
-        this.dimosName = dimosName;
-        this.Diagnosis = Diagnosis;
-        this.Death = Death;
+        this.dimosName = municipName;
+        this.Diagnosis = diagnosisDate;
+        this.Death = deathDate;
         this.contactsNumber = contactsNo;
-        this.Recovery = Recovery;
+        this.Recovery = recoveryDate;
     }
 
     /**
      *<p>This constructor is used for returning data from database.</p>
      * @param contactsNo numbers of contacts found that date
-     * @param Diagnosis date of diagnosis
-     * @param Death date of death
-     * @param Recovery date of recovery
+     * @param diagnosisDate date of diagnosis
+     * @param deathDate date of death
+     * @param recoveryDate date of recovery
      * @param AFM the afm of case
      * @param firstName the case's first name
      * @param lastName the case's last name
@@ -150,17 +162,21 @@ public class Case extends Person {
      * @param streetNumber case's street number
      * @param zipCode case's postal code
      */
-    public Case(int contactsNo, String Diagnosis, String Death, String Recovery,
-                int AFM, String firstName, String lastName, int age,
-                String phoneNumber, int dimosID, String address,
-                String streetNumber, String zipCode) {
+    public Case(final int contactsNo, final String diagnosisDate,
+                final String deathDate, final String recoveryDate,
+                final int AFM, final String firstName,
+                final String lastName, final int age,
+                final String phoneNumber, final int dimosID,
+                final String address, final String streetNumber,
+                final String zipCode) {
+
         super(AFM, firstName, lastName, age, phoneNumber, dimosID, address,
                 streetNumber, zipCode);
 
-        this.Diagnosis = Diagnosis;
-        this.Death = Death;
+        this.Diagnosis = diagnosisDate;
+        this.Death = deathDate;
         this.contactsNumber = contactsNo;
-        this.Recovery = Recovery;
+        this.Recovery = recoveryDate;
     }
 
     /**
@@ -172,11 +188,11 @@ public class Case extends Person {
     }
 
     /**
-     * <p>Setting value to Diagnosis</p>
-     * @param Diagnosis the new date of diagnosis
+     * <p>Setting value to Diagnosis.</p>
+     * @param diagnosisDate the new date of diagnosis
      */
-    public void setDiagnosis(String Diagnosis) {
-        this.Diagnosis = Diagnosis;
+    public void setDiagnosis(final String diagnosisDate) {
+        this.Diagnosis = diagnosisDate;
     }
     /**
      * <p>This method returning Recovery.</p>
@@ -186,11 +202,11 @@ public class Case extends Person {
         return Recovery;
     }
     /**
-     * <p>Setting value to Recovery</p>
-     * @param Recovery the new date of recovery
+     * <p>Setting value to Recovery.</p>
+     * @param recoveryDate the new date of recovery
      */
-    public void setRecovery(String Recovery) {
-        this.Recovery = Recovery;
+    public void setRecovery(final String recoveryDate) {
+        this.Recovery = recoveryDate;
     }
     /**
      * <p>This method returning Death.</p>
@@ -200,11 +216,11 @@ public class Case extends Person {
         return Death;
     }
     /**
-     * <p>Setting value to Death</p>
-     * @param Death the new date of death
+     * <p>Setting value to Death.</p>
+     * @param deathDate the new date of death
      */
-    public void setDeath(String Death) {
-        this.Death = Death;
+    public void setDeath(final String deathDate) {
+        this.Death = deathDate;
     }
     /**
      * <p>This method returning contactsNumber.</p>
@@ -214,11 +230,11 @@ public class Case extends Person {
         return contactsNumber;
     }
     /**
-     * <p>Setting value to contactsNumber</p>
-     * @param contactsNumber the new contacts number
+     * <p>Setting value to contactsNumber.</p>
+     * @param contactsNo the new contacts number
      */
-    public void setContactsNumber(int contactsNumber) {
-        this.contactsNumber = contactsNumber;
+    public void setContactsNumber(final int contactsNo) {
+        this.contactsNumber = contactsNo;
     }
     /**
      * <p>This method returning dimosName.</p>
@@ -228,11 +244,11 @@ public class Case extends Person {
         return dimosName;
     }
     /**
-     * <p>Setting value to dimosName</p>
-     * @param dimosName the new name of the municipality
+     * <p>Setting value to dimosName.</p>
+     * @param municipName the new name of the municipality
      */
-    public void setDimosName(String dimosName) {
-        this.dimosName = dimosName;
+    public void setDimosName(final String municipName) {
+        this.dimosName = municipName;
     }
 
 }
