@@ -17,29 +17,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1600.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.backend.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="811.0" prefWidth="1100.0" style="-fx-background-color: #0D102F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.quack.backend.Controller">
    <children>
-      <AnchorPane fx:id="toolBar" prefHeight="1000.0" prefWidth="58.0" style="-fx-background-color: #080A1F;">
+      <AnchorPane fx:id="toolBar" maxHeight="1.7976931348623157E308" prefHeight="800.0" prefWidth="66.0" style="-fx-background-color: #080A1F;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView layoutX="12.0" layoutY="34.0" onMouseClicked="#menuClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/menu.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="38.0" layoutX="8.0" layoutY="936.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="38.0" layoutX="12.0" layoutY="752.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.360755920410156">
                <image>
                   <Image url="@icons/quack.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuBar" layoutX="58.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false">
+      <AnchorPane fx:id="menuBar" layoutX="63.0" prefHeight="817.0" prefWidth="200.0" style="-fx-background-color: #081B33;" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.topAnchor="-8.0">
          <children>
-            <VBox layoutX="50.0" layoutY="42.0" prefHeight="801.0" prefWidth="100.0" spacing="100.0">
+            <VBox layoutX="66.0" layoutY="30.0" prefHeight="614.0" prefWidth="100.0" spacing="70.0">
                <children>
                   <Group fx:id="muneFindPersonButton" onMouseClicked="#menuFindPersonClick">
                      <children>
-                        <ImageView layoutX="14.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView layoutX="20.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/findPerson.png" />
                            </image>
@@ -112,20 +112,20 @@
                   <Point3D />
                </rotationAxis>
             </VBox>
-            <ImageView layoutX="64.0" layoutY="909.0" onMouseClicked="#helpClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView layoutX="76.0" layoutY="744.0" onMouseClicked="#helpClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/icons8_help_50px.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="createCasePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="createCasePanel" layoutX="259.0" prefHeight="810.0" prefWidth="842.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <Label layoutX="585.0" layoutY="76.0" text="CREATE CASE" textFill="WHITE">
+            <Label layoutX="583.0" layoutY="43.0" prefWidth="190.0" text="CREATE CASE" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <VBox layoutX="150.0" layoutY="140.0" prefHeight="725.0" prefWidth="344.0" spacing="30.0">
+            <VBox layoutX="123.0" layoutY="73.0" prefHeight="725.0" prefWidth="344.0" spacing="30.0">
                <children>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
                      <children>
@@ -259,7 +259,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="710.0" layoutY="360.0" spacing="20.0">
+            <VBox layoutX="635.0" layoutY="256.0" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onMouseClicked="#submitCaseClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CASE" textFill="WHITE">
                      <font>
@@ -279,9 +279,9 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactsPanel" layoutX="257.0" layoutY="-1.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactsPanel" layoutX="257.0" layoutY="-1.0" prefHeight="811.0" prefWidth="839.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <VBox layoutX="150.0" layoutY="140.0" prefHeight="479.0" prefWidth="344.0" spacing="30.0">
+            <VBox layoutX="136.0" layoutY="189.0" prefHeight="479.0" prefWidth="344.0" spacing="30.0">
                <children>
                   <HBox prefHeight="13.0" prefWidth="134.0" spacing="60.0">
                      <children>
@@ -375,7 +375,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="710.0" layoutY="360.0" spacing="20.0">
+            <VBox layoutX="624.0" layoutY="308.0" spacing="20.0">
                <children>
                   <Button fx:id="submitContactButton" mnemonicParsing="false" onMouseClicked="#submitContactClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
                      <font>
@@ -392,26 +392,26 @@
                      </font></Button>
                </children>
             </VBox>
-            <Label layoutX="585.0" layoutY="76.0" text="CONTACT" textFill="WHITE">
+            <Label layoutX="145.0" layoutY="54.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <Label fx:id="numberLabel" layoutX="831.0" layoutY="76.0" prefHeight="45.0" prefWidth="50.0" text="#" textFill="#b33a3a">
+            <Label fx:id="numberLabel" layoutX="452.0" layoutY="53.0" prefHeight="45.0" prefWidth="50.0" text="#" textFill="#b33a3a">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font></Label>
-            <Label fx:id="counterLabel" layoutX="739.0" layoutY="76.0" prefHeight="45.0" prefWidth="35.0" text="C" textFill="#4bb543">
+            <Label fx:id="counterLabel" layoutX="313.0" layoutY="54.0" prefHeight="45.0" prefWidth="35.0" text="C" textFill="#4bb543">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font></Label>
-            <Label layoutX="776.0" layoutY="74.0" text="OF" textFill="WHITE">
+            <Label layoutX="372.0" layoutY="57.0" text="OF" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="addContactUniquePanel" layoutX="258.0" prefHeight="811.0" prefWidth="842.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
             <VBox layoutX="150.0" layoutY="140.0" prefHeight="564.0" prefWidth="344.0" spacing="30.0">
                <children>
@@ -517,7 +517,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox layoutX="710.0" layoutY="360.0" spacing="20.0">
+            <VBox layoutX="596.0" layoutY="323.0" spacing="20.0">
                <children>
                   <Button fx:id="submitContactUniqueButton" mnemonicParsing="false" onMouseClicked="#submitContactUniqueClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="ADD CONTACT" textFill="WHITE">
                      <font>
@@ -536,16 +536,16 @@
                   </Button>
                </children>
             </VBox>
-            <Label layoutX="585.0" layoutY="76.0" text="CONTACT" textFill="WHITE">
+            <Label layoutX="267.0" layoutY="54.0" text="CONTACT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="findPersonPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="findPersonPanel" layoutX="267.0" layoutY="-6.0" prefHeight="820.0" prefWidth="882.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <TableView fx:id="personsTable" layoutX="187.0" layoutY="1.0" prefHeight="540.0" prefWidth="1155.0">
+            <TableView fx:id="personsTable" layoutX="8.0" layoutY="10.0" prefHeight="540.0" prefWidth="866.0" AnchorPane.bottomAnchor="274.0">
               <columns>
                 <TableColumn fx:id="afmTable" prefWidth="137.0" text="ΑΦΜ" />
                   <TableColumn fx:id="numberOfContactsTable" prefWidth="56.0" text="Contacts" />
@@ -562,18 +562,23 @@
                   <TableColumn fx:id="deathTable" minWidth="0.0" prefWidth="83.0" text="Death Date" />
               </columns>
             </TableView>
-            <Label layoutX="679.0" layoutY="560.0" text="RESULTS:" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <Label fx:id="resultsInput" layoutX="818.0" layoutY="560.0" text="#" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Label>
-            <VBox layoutY="14.0" prefHeight="152.0" prefWidth="174.0" spacing="60.0">
+            <HBox layoutX="49.0" layoutY="630.0" prefHeight="135.0" prefWidth="802.0" spacing="130.0">
                <children>
+                  <VBox prefHeight="152.0" prefWidth="174.0" spacing="15.0">
+                     <children>
+                        <Label text="CONTACTS OF:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="filterContactInput" prefHeight="25.0" prefWidth="174.0" promptText="ΑΦΜ" />
+                        <Button fx:id="searchContactFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterContactClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEE CONTACTS" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
                   <VBox prefHeight="122.0" prefWidth="135.0" spacing="20.0">
                      <children>
                         <Button fx:id="allPersonsButton" mnemonicParsing="false" onMouseClicked="#allPersonsClick" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: DCDC65;" text="ALL PERSONS">
@@ -605,28 +610,27 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox layoutX="10.0" layoutY="195.0" prefHeight="152.0" prefWidth="174.0" spacing="15.0">
-                     <children>
-                        <Label text="CONTACTS OF:" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="filterContactInput" prefHeight="25.0" prefWidth="174.0" promptText="ΑΦΜ" />
-                        <Button fx:id="searchContactFilterButton" mnemonicParsing="false" onMouseClicked="#searchFilterContactClick" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4bb543;" text="SEE CONTACTS" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                  </VBox>
                </children>
-            </VBox>
+            </HBox>
+            <HBox layoutX="380.0" layoutY="555.0" prefHeight="58.0" prefWidth="221.0" spacing="30.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="321.0">
+               <children>
+                  <Label text="RESULTS:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="resultsInput" text="#" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="editProfilePanel" layoutX="258.0" prefHeight="811.0" prefWidth="848.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <VBox layoutX="150.0" layoutY="140.0" prefHeight="660.0" prefWidth="344.0" spacing="30.0">
+            <VBox layoutX="107.0" layoutY="75.0" prefHeight="660.0" prefWidth="344.0" spacing="30.0">
                <children>
                   <HBox prefHeight="25.0" prefWidth="361.0" spacing="15.0">
                      <children>
@@ -770,7 +774,7 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Label>
-            <VBox layoutX="710.0" layoutY="360.0" spacing="20.0">
+            <VBox layoutX="619.0" layoutY="330.0" spacing="20.0">
                <children>
                   <Button fx:id="submitEditPersonButton" mnemonicParsing="false" onMouseClicked="#submitEditPersonClick" prefHeight="45.0" prefWidth="107.0" style="-fx-background-color: #4bb543;" text="EDIT PERSON" textFill="WHITE">
                      <font>
@@ -790,9 +794,9 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="statsPanel" layoutX="258.0" prefHeight="800.0" prefWidth="923.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <Group layoutX="530.0" layoutY="76.0">
+            <Group layoutX="260.0" layoutY="68.0">
                <children>
                   <HBox layoutX="165.0" layoutY="10.0" prefHeight="41.0" prefWidth="244.0" spacing="20.0">
                      <children>
@@ -811,9 +815,9 @@
                   </Label>
                </children>
             </Group>
-            <HBox layoutX="77.0" layoutY="314.0" prefHeight="358.0" prefWidth="530.0">
+            <HBox layoutX="77.0" layoutY="314.0" prefHeight="392.0" prefWidth="475.0">
                <children>
-                  <VBox prefHeight="600.0" prefWidth="304.0" spacing="20.0">
+                  <VBox prefHeight="392.0" prefWidth="249.0" spacing="30.0">
                      <children>
                         <Label text="Cases:" textFill="#ebebeb">
                            <font>
@@ -847,7 +851,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="358.0" prefWidth="106.0" spacing="20.0">
+                  <VBox prefHeight="358.0" prefWidth="106.0" spacing="30.0">
                      <children>
                         <Label fx:id="casesStLabel" text="#" textFill="WHITE">
                            <font>
@@ -899,7 +903,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox layoutX="314.0" layoutY="10.0" prefHeight="358.0" prefWidth="127.0" spacing="20.0">
+                  <VBox layoutX="314.0" layoutY="10.0" prefHeight="358.0" prefWidth="127.0" spacing="30.0">
                      <children>
                         <Label fx:id="casesStLabelP" prefHeight="40.0" prefWidth="129.0" text="#" textFill="WHITE">
                            <font>
@@ -953,9 +957,9 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox layoutX="682.0" layoutY="303.0" prefHeight="358.0" prefWidth="552.0">
+            <HBox layoutX="591.0" layoutY="313.0" prefHeight="392.0" prefWidth="401.0">
                <children>
-                  <VBox prefHeight="600.0" prefWidth="304.0" spacing="20.0">
+                  <VBox prefHeight="358.0" prefWidth="243.0" spacing="30.0">
                      <children>
                         <Label text="Cases" textFill="#ebebeb">
                            <font>
@@ -989,7 +993,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="358.0" prefWidth="267.0" spacing="20.0">
+                  <VBox prefHeight="392.0" prefWidth="126.0" spacing="30.0">
                      <children>
                         <Label fx:id="avCasesStLabel" prefHeight="40.0" prefWidth="285.0" text="#" textFill="WHITE">
                            <font>
@@ -1043,7 +1047,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Label fx:id="municipalityStLabel" layoutX="77.0" layoutY="227.0" text="Munic" textFill="WHITE">
+            <Label fx:id="municipalityStLabel" layoutX="77.0" layoutY="227.0" prefHeight="40.0" prefWidth="413.0" text="Munic" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
@@ -1054,9 +1058,9 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="helpPanel" layoutX="258.0" prefHeight="1000.0" prefWidth="1342.0" style="-fx-background-color: #0D102F;" visible="false">
+      <AnchorPane fx:id="helpPanel" layoutX="258.0" prefHeight="813.0" prefWidth="870.0" style="-fx-background-color: #0D102F;" visible="false">
          <children>
-            <VBox layoutX="214.0" layoutY="100.0" prefHeight="785.0" prefWidth="1068.0" spacing="100.0">
+            <VBox layoutX="112.0" layoutY="32.0" prefHeight="735.0" prefWidth="758.0" spacing="45.0">
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
@@ -1176,7 +1180,7 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <HBox fx:id="quack" layoutX="675.0" layoutY="485.0" prefHeight="31.0" prefWidth="250.0" spacing="30.0">
+      <HBox fx:id="quack" layoutX="512.0" layoutY="350.0" prefHeight="31.0" prefWidth="250.0" spacing="30.0">
          <children>
             <ImageView pickOnBounds="true" preserveRatio="true">
                <image>

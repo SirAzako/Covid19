@@ -23,7 +23,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Quack - Covid19");
         primaryStage.getIcons().add(new Image("/icons/quack.png"));
-        primaryStage.setScene(new Scene(root, 1600, 1000));
+        primaryStage.setScene(new Scene(root, 1200, 800));
         java.net.URL url = ClassLoader.getSystemResource("/icons/editProfile"
                 + ".png");
         primaryStage.show();
@@ -33,11 +33,9 @@ public class Main extends Application {
     /**
      * The main.
      *
-     * @param args
+     * @param args arrrrrrr
      * */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         launch(args);
     }
 }
-
-

@@ -18,6 +18,7 @@ public class ContactDAO {
      * @param contact Object instance of Contact class
      * */
     public void createContact(final Contact contact) throws Exception {
+        int counter = 1;
         Connection con = null;
         String querry = "INSERT INTO Persons(AFM, ContactID, FirstName, "
                             + "LastName, Age, PhoneNumber, DimosID, Address, "
@@ -26,16 +27,16 @@ public class ContactDAO {
         try {
             con = DB.getConnection();
             PreparedStatement stmt = con.prepareStatement(querry);
-            stmt.setInt(1, contact.getAFM());
-            stmt.setInt(2, contact.getContactID());
-            stmt.setString(3, contact.getFirstName());
-            stmt.setString(4, contact.getLastName());
-            stmt.setInt(5, contact.getAge());
-            stmt.setString(6, contact.getPhoneNumber());
-            stmt.setInt(7, contact.getDimosID());
-            stmt.setString(8, contact.getAddress());
-            stmt.setString(9, contact.getStreetNumber());
-            stmt.setString(10, contact.getZipCode());
+            stmt.setInt(counter++, contact.getAFM());
+            stmt.setInt(counter++, contact.getContactID());
+            stmt.setString(counter++, contact.getFirstName());
+            stmt.setString(counter++, contact.getLastName());
+            stmt.setInt(counter++, contact.getAge());
+            stmt.setString(counter++, contact.getPhoneNumber());
+            stmt.setInt(counter++, contact.getDimosID());
+            stmt.setString(counter++, contact.getAddress());
+            stmt.setString(counter++, contact.getStreetNumber());
+            stmt.setString(counter++, contact.getZipCode());
             stmt.executeUpdate();
             stmt.close();
             DB.close();

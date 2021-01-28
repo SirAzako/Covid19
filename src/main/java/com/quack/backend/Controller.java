@@ -5,7 +5,6 @@ import com.quack.db.CaseDAO;
 import com.quack.db.ContactDAO;
 
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -26,7 +25,6 @@ import javafx.scene.layout.HBox;
 import org.decimal4j.util.DoubleRounder;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.html.ImageView;
 
 /**
  * In Controller done all management for the gui.
@@ -626,7 +624,7 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane helpPanel;
     /**
-     * private hbox
+     * private hbox.
      */
     @FXML
     private HBox quack;
@@ -1943,8 +1941,8 @@ public class Controller implements Initializable {
         // Initialize the chooses that the comboBox will have
         municipalityInput.getItems().addAll("Αθηναίων", "Βύρωνος", "Γαλατσίου",
                 "Δάφνης – Υμηττού", "Ζωγράφου", "Ηλιουπόλεως",
-                "Καισαριανής", "Φιλαδελφείας – ",
-                "Χαλκηδόνος", "Αγίας Παρασκευής", "Αμαρουσίου",
+                "Καισαριανής", "Φιλαδελφείας – Χαλκηδόνος",
+                "Αγίας Παρασκευής", "Αμαρουσίου",
                 "Βριλησσίων", "Ηρακλείου", "Κηφισιάς",
                 "Λυκόβρυσης – Πεύκης", "Μεταμορφώσεως", "Νέας Ιωνίας",
                 "Παπάγου – Χολαργού", "Πεντέλης",
@@ -1957,7 +1955,8 @@ public class Controller implements Initializable {
                 "Βάρης – Βούλας – Βουλιαγμένης", "Διονύσου", "Κρωπίας",
                 "Λαυρεωτικής", "Μαραθώνα", "Μαρκοπούλου Μεσογαίας",
                 "Παιανίας", "Παλλήνης",
-                "Ραφήνας – Πικερμίου", "Σαρωνικού", "Σπάτων", "Ωρωπού",
+                "Ραφήνας – Πικερμίου", "Σαρωνικού",
+                "Σπάτων – Αρτέμιδος", "Ωρωπού",
                 "Ελευσίνας", "Ασπροπύργου",
                 "Μάνδρας – Ειδυλλίας", "Μεγαρέων", "Φυλής", "Πειραιώς",
                 "Κερατσινίου – Δραπετσώνας",
