@@ -42,7 +42,7 @@ public class Filters {
             case "Phone Number":
                 return "PhoneNumber =";
             case "Municipality":
-                return "DimosID =";
+                return "D.Name =";
             case "Address":
                 return "Address =";
             case "Street Number":
